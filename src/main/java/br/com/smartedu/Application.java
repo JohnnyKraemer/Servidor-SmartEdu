@@ -17,6 +17,7 @@ import java.util.TreeSet;
 public class Application {
 
     public static void main(String[] args) {
+        //Teste
         SpringApplication.run(Application.class, args);
     }
 
