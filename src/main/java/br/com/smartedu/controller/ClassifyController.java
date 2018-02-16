@@ -102,6 +102,7 @@ public class ClassifyController {
         List<Variable> variablesList = retorno.getVariables();
         List<Course> coursesList = retorno.getCourses();
 
+        int period_calculation = testClassifierRepository.findMaxPeriodCalculation();
         for (Course course : coursesList) {
             System.out.println("\n\n-------------------------- NOVA CLASSIFICACAO --------------------------");
             System.out.println("Curso: " + course.getName());
@@ -112,7 +113,7 @@ public class ClassifyController {
                     System.out.println("Classificador: " + classificador.getClass().getSimpleName());
 
                     Instances dataSet = dataBaseController.getDataSet(variablesList, course.getId());
-                    Classificador(classificador, dataSet, dataSet, course, variablesList, 2);
+                    Classificador(classificador, dataSet, dataSet, course, variablesList, TestClassifier.TEST_SINGLE, period_calculation + 1);
                 }
             }
 
@@ -127,6 +128,8 @@ public class ClassifyController {
         List<Course> coursesList = courseRepository.findByUseClassifier(1);
 
         List combinations = Combinations(variablesList);
+
+        int period_calculation = testClassifierRepository.findMaxPeriodCalculation();
 
         //System.out.println(combinations);
         System.out.println("Quantidade de possibilidades: " + combinations.size());
@@ -153,7 +156,7 @@ public class ClassifyController {
                         System.out.println("Variaveis: " + newVariables.toString());
 
                         Instances dataSet = dataBaseController.getDataSet(newVariables, course.getId());
-                        Classificador(classificador, dataSet, dataSet, course, variablesList, 1);
+                        Classificador(classificador, dataSet, dataSet, course, variablesList, TestClassifier.TEST_ALL, period_calculation + 1);
                     }
 
                 }
@@ -206,6 +209,8 @@ public class ClassifyController {
         List<Variable> variablesList = variableRepository.findByUseClassifier(1);
         List<Course> coursesList = courseRepository.findByUseClassifier(1);
 
+        int period_calculation = testClassifierRepository.findMaxPeriodCalculation();
+
         for (Course course : coursesList) {
             System.out.println("\n\n-------------------------- NOVA CLASSIFICACAO --------------------------");
             System.out.println("Curso: " + course.getName());
@@ -215,27 +220,33 @@ public class ClassifyController {
                 if (classificador != null) {
                     System.out.println("\n\nClassificador: " + classificador.getClass().getSimpleName());
                     for (Variable variable : variablesList) {
-                        System.out.println("\n\nVariavel: "+variable.getName());
+                        System.out.println("\n\nVariavel: " + variable.getName());
                         List<Variable> variables = new ArrayList<>();
                         variables.add(variable);
 
                         Instances dataSet = dataBaseController.getDataSet(variables, course.getId());
-                        Classificador(classificador, dataSet, dataSet, course, variables, 0);
+                        Classificador(classificador, dataSet, dataSet, course, variables, TestClassifier.TEST_BASE, period_calculation + 1);
                     }
                 }
             }
             System.out.println("\n\n\n\n------------------------------ RESULTADO:");
-            List<TestClassifier> test_classifier = testClassifierRepository.findTop10ByCourseOrderBySuccessDesc(course);
+            /*List<TestClassifier> test_classifier = testClassifierRepository.findTop3ByCourseOrderBySuccessDesc(course);
             for (TestClassifier test : test_classifier) {
                 System.out.println("\n\nClassificador: " + test.getClassifier());
                 System.out.println("Sucesso: " + test.getSuccess());
                 System.out.println("Variaveis: " + test.getVariable());
             }
+             */
+
+            List<br.com.smartedu.model.Classifier> best_classifiers = classifierRepository.findTop3ClassifiersByCourse(course.getId());
+            System.out.println(best_classifiers);
+            
+            //course.setTest_classifier(test_classifier);
         }
         return new ResponseEntity(1, HttpStatus.OK);
     }
 
-    public void Classificador(weka.classifiers.Classifier tree, Instances dataSet, Instances dataSet1, Course curso, List<Variable> variaveis, int type) throws Exception {
+    public void Classificador(weka.classifiers.Classifier tree, Instances dataSet, Instances dataSet1, Course curso, List<Variable> variaveis, int type, int period_calculation) throws Exception {
 
         Instances dataSetTeste = new Instances(dataSet);
         dataSetTeste.deleteAttributeAt(0);
@@ -261,15 +272,15 @@ public class ClassifyController {
 
         Date start_test_classifier = new Date();
         System.out.println("Incicio: " + start_test_classifier);
-        
-        if(testClassifierRepository.existsByPeriodCalculation("01/01/0001")){
-            TestClassifier test_classifier_error = testClassifierRepository.findByPeriodCalculation("01/01/0001");
-            test_classifier_error.setPeriodCalculation("Error");
+
+        if (testClassifierRepository.existsByPeriodCalculation(1)) {
+            TestClassifier test_classifier_error = testClassifierRepository.findByPeriodCalculation(1);
+            test_classifier_error.setPeriodCalculation(0);
             testClassifierRepository.save(test_classifier_error);
         }
 
         TestClassifier test_classifier_before = new TestClassifier();
-        test_classifier_before.setPeriodCalculation("01/01/0001");
+        test_classifier_before.setPeriodCalculation(1);
         test_classifier_before.setVariable(variaveis);
         test_classifier_before.setClassifier(classificador);
         test_classifier_before.setCourse(curso);
@@ -322,7 +333,7 @@ public class ClassifyController {
                 probabilidade.setProbability_evasion(probEvasao[i]);
                 probabilidade.setState(situacao[i]);
 
-                TestClassifier testeClassificadorDurante = testClassifierRepository.findByPeriodCalculation("01/01/0001");
+                TestClassifier testeClassificadorDurante = testClassifierRepository.findByPeriodCalculation(1);
                 probabilidade.setTestClassifier(test_classifier_before);
                 probabilidade = probabilityRepository.save(probabilidade);
 
@@ -338,8 +349,8 @@ public class ClassifyController {
             long horas = (start_test_classifier.getTime() - end_test_classifier.getTime()) / 3600000;
             long minutos = (start_test_classifier.getTime() - end_test_classifier.getTime() - horas * 3600000) / 60000;
             long segundos = (start_test_classifier.getTime() - end_test_classifier.getTime() - minutos * 3600000) / 60000;
-            
-            TestClassifier test_classifier_after = testClassifierRepository.findByPeriodCalculation("01/01/0001");
+
+            TestClassifier test_classifier_after = testClassifierRepository.findByPeriodCalculation(1);
             test_classifier_after.setSuccess((acertoEvadido + acertoNEvadido));
             test_classifier_after.setFailure((erroEvadido + erroNEvadido));
             test_classifier_after.setSeccess_evaded(acertoEvadido);
@@ -349,13 +360,13 @@ public class ClassifyController {
             test_classifier_after.setEnd(end_test_classifier);
             test_classifier_after.setTime_seconds((int) segundos);
             test_classifier_after.setResult(1);
-            
+
             System.out.println("Fim: " + end_test_classifier);
             System.out.println("Tempo percorrido: " + segundos + " segundos.");
 
             Calendar datetime = Calendar.getInstance();
 
-            test_classifier_after.setPeriodCalculation(datetime.get(Calendar.DAY_OF_MONTH) + "-" + datetime.get(Calendar.MONTH) + "-" + datetime.get(Calendar.YEAR));
+            test_classifier_after.setPeriodCalculation(period_calculation);
             testClassifierRepository.save(test_classifier_after);
         } catch (Exception e) {
             Date end_classifier = new Date();
@@ -363,8 +374,8 @@ public class ClassifyController {
             long minutos = (end_classifier.getTime() - start_test_classifier.getTime() - horas * 3600000) / 60000;
             long segundos = (end_classifier.getTime() - start_test_classifier.getTime() - minutos * 3600000) / 60000;
 
-            TestClassifier test_classifier_error = testClassifierRepository.findByPeriodCalculation("01/01/0001");
-            test_classifier_error.setPeriodCalculation("Error");
+            TestClassifier test_classifier_error = testClassifierRepository.findByPeriodCalculation(1);
+            test_classifier_error.setPeriodCalculation(0);
             test_classifier_error.setEnd(end_classifier);
             test_classifier_error.setTime_seconds((int) segundos);
             testClassifierRepository.save(test_classifier_error);
