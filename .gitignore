@@ -3,3 +3,6 @@ target/
 /target/
 DatabaseUtils.props
 application.properties
+target/classes/application.properties
+DatabaseUtils.props
+src/main/resources/application.properties
