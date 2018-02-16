@@ -31,7 +31,7 @@ public class TestClassifier implements Serializable {
     private Long id;
 
     @Column(name = "period_calculation")
-    private String periodCalculation;
+    private int periodCalculation;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "classifier_id", referencedColumnName = "id")

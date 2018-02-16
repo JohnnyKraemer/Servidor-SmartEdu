@@ -205,7 +205,13 @@ public class ClassifyController {
         List<br.com.smartedu.model.Classifier> classifiersList = classifierRepository.findByUseClassify(1);
         List<Variable> variablesList = variableRepository.findByUseClassifier(1);
         List<Course> coursesList = courseRepository.findByUseClassifier(1);
-
+        
+        TestClassifier periodo_calculation = testClassifierRepository.findTop1OrderByPeriodCalculationDesc();
+        if(periodo_calculation == null){
+            periodo_calculation = new TestClassifier();
+            periodo_calculation.setPeriodCalculation(1);
+        }
+        
         for (Course course : coursesList) {
             System.out.println("\n\n-------------------------- NOVA CLASSIFICACAO --------------------------");
             System.out.println("Curso: " + course.getName());
@@ -225,12 +231,14 @@ public class ClassifyController {
                 }
             }
             System.out.println("\n\n\n\n------------------------------ RESULTADO:");
-            List<TestClassifier> test_classifier = testClassifierRepository.findTop10ByCourseOrderBySuccessDesc(course);
+            List<TestClassifier> test_classifier = testClassifierRepository.findTop3ByCourseOrderBySuccessDesc(course);
             for (TestClassifier test : test_classifier) {
                 System.out.println("\n\nClassificador: " + test.getClassifier());
                 System.out.println("Sucesso: " + test.getSuccess());
                 System.out.println("Variaveis: " + test.getVariable());
             }
+            
+            //course.setTest_classifier(test_classifier);
         }
         return new ResponseEntity(1, HttpStatus.OK);
     }
