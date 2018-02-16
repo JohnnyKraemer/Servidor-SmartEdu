@@ -20,8 +20,8 @@ public class DataBaseController {
     public InstanceQuery ConectaBanco() throws Exception {
         DatabaseUtils databaseUtils = new DatabaseUtils(new File("/DatabaseUtils.props"));
         InstanceQuery query = new InstanceQuery();
-        query.setUsername("root");
-        query.setPassword("");
+        query.setUsername("smartedu");
+        query.setPassword("smartedu");
         return query;
     }
 

@@ -11,7 +11,7 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     Course findByName(String name);
     
-    List<Course> findByUseClassifier(int useClassifier);
+    List<Course> findByUseClassify(int useClassify);
 
     List<Course> findAllByOrderByIdAsc();
 

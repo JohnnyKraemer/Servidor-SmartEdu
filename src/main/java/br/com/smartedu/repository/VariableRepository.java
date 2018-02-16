@@ -8,7 +8,7 @@ public interface VariableRepository extends JpaRepository<Variable, Long>{
         
 	Variable findByName(String name);
         
-        List<Variable> findByUseClassifier(int useClassifier);
+        List<Variable> findByUseClassify(int useClassify);
         
         List<Variable> findAllByOrderByIdAsc();
         

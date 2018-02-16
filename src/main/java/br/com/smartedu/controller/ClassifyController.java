@@ -125,8 +125,8 @@ public class ClassifyController {
     @PostMapping("/all")
     public ResponseEntity classificarAll() throws Exception {
         List<br.com.smartedu.model.Classifier> classifiersList = classifierRepository.findByUseClassify(1);
-        List<Variable> variablesList = variableRepository.findByUseClassifier(1);
-        List<Course> coursesList = courseRepository.findByUseClassifier(1);
+        List<Variable> variablesList = variableRepository.findByUseClassify(1);
+        List<Course> coursesList = courseRepository.findByUseClassify(1);
 
         List combinations = Combinations(variablesList);
 
@@ -207,8 +207,8 @@ public class ClassifyController {
     @PostMapping("/base")
     public ResponseEntity classificarAllNew() throws Exception {
         List<br.com.smartedu.model.Classifier> classifiersList = classifierRepository.findByUseClassify(1);
-        List<Variable> variablesList = variableRepository.findByUseClassifier(1);
-        List<Course> coursesList = courseRepository.findByUseClassifier(1);
+        List<Variable> variablesList = variableRepository.findByUseClassify(1);
+        List<Course> coursesList = courseRepository.findByUseClassify(1);
 
         int period_calculation = testClassifierRepository.findMaxPeriodCalculation();
 
@@ -274,7 +274,7 @@ public class ClassifyController {
         Date start_test_classifier = new Date();
         System.out.println("Incicio: " + start_test_classifier);
 
-        if (testClassifierRepository.existsByPeriodCalculation(1)) {
+        if (testClassifierRepository.findByPeriodCalculation(1) != null) {
             TestClassifier test_classifier_error = testClassifierRepository.findByPeriodCalculation(1);
             test_classifier_error.setPeriodCalculation(0);
             testClassifierRepository.save(test_classifier_error);

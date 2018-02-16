@@ -9,18 +9,18 @@ import org.springframework.data.repository.query.Param;
 
 public interface TestClassifierRepository extends JpaRepository<TestClassifier, Long> {
 
-    @Query(value = "SELECT IFNULL(MAX(t.period_calculation),1) as period_calculation FROM test_classifier t")
+    @Query(value = "SELECT IFNULL(MAX(t.period_calculation),1) as period_calculation FROM test_classifier t", nativeQuery = true)
     int findMaxPeriodCalculation();
     
     TestClassifier findByPeriodCalculation(int periodCalculation);
 
-    boolean existsByPeriodCalculation(int periodCalculation);
+    //boolean existsByPeriodCalculation(int periodCalculation);
 
     List<TestClassifier> findAllByOrderByIdAsc();
 
     List<TestClassifier> findAllByOrderByIdDesc();
     
-    TestClassifier findTop1OrderByPeriodCalculationDesc();
+    //TestClassifier findTop1OrderByPeriodCalculationDesc();
 
     List<TestClassifier> findTop3ByCourseOrderBySuccessDesc(Course course);
 
