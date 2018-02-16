@@ -25,6 +25,9 @@ import lombok.ToString;
 public class TestClassifier implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    public static final int TEST_BASE = 0;
+    public static final int TEST_ALL = 1;
+    public static final int TEST_SINGLE = 2;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
