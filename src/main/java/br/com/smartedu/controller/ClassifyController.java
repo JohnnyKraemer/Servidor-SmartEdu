@@ -237,7 +237,7 @@ public class ClassifyController {
                 System.out.println("Sucesso: " + test.getSuccess());
                 System.out.println("Variaveis: " + test.getVariable());
             }
-             */
+            */
 
             List<br.com.smartedu.model.Classifier> best_classifiers = classifierRepository.findTop3ClassifiersByCourse(course.getId());
             System.out.println(best_classifiers);
