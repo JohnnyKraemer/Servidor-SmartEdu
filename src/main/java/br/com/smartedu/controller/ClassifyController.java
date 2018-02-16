@@ -103,6 +103,7 @@ public class ClassifyController {
         List<Course> coursesList = retorno.getCourses();
 
         int period_calculation = testClassifierRepository.findMaxPeriodCalculation();
+
         for (Course course : coursesList) {
             System.out.println("\n\n-------------------------- NOVA CLASSIFICACAO --------------------------");
             System.out.println("Curso: " + course.getName());
