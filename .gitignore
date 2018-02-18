@@ -1,7 +1,2 @@
-DatabaseUtils.props
-src/main/resources/application.properties
-target/
-/target
-/target/
-target/classes/application.properties
+target
 *.properties
