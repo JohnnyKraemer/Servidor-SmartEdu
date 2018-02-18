@@ -12,7 +12,7 @@
 jdbcDriver=org.gjt.mm.mysql.Driver
 
 # database URL
-jdbcURL=jdbc:mysql://192.168.2.2:3306/smartedu
+jdbcURL=jdbc:mysql://160.153.77.130:3306/smartedu
 
 # specific data types
 # string, getString() = 0;    --> nominal
