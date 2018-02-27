@@ -62,8 +62,8 @@ public class Student implements Serializable {
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     private Course course;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Probability> probability;
+    //@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    //private Set<Probability> probability;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Detail> detail;

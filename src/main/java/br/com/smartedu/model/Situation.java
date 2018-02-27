@@ -18,8 +18,10 @@ public class Situation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String situation_short;
-    private String situation_long;
+    private String situationShort;
+    
+    private String situationLong;
+    
     private String description;
 
 }

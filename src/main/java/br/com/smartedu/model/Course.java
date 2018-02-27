@@ -46,5 +46,5 @@ public class Course implements Serializable {
     private Campus campus;
     
     @ManyToMany()
-    private List<TestClassifier> test_classifier;
+    private List<Classify> classify;
 }

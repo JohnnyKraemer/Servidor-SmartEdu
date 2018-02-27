@@ -11,7 +11,7 @@ public interface SituationRepository extends JpaRepository<Situation, Long> {
 
     //Situation findBySituacaoResumida(String situacaoResumida);
 
-    //Situation findBySituacaoCompleta(String situacaoCompleta);
+    Situation findBySituationLong(String situationLong);
 
     List<Situation> findAllByOrderByIdAsc();
 

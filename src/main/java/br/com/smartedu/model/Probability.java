@@ -31,5 +31,8 @@ public class Probability implements Serializable {
     @JoinColumn(name = "test_classifier_id", referencedColumnName = "id")
     private TestClassifier testClassifier;
     
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    private Student student;
     
 }
