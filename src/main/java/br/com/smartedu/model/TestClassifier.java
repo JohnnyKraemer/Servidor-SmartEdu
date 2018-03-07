@@ -61,9 +61,9 @@ public class TestClassifier implements Serializable {
 
     private int failure;
 
-    private int seccess_evaded;
+    private int success_evaded;
 
-    private int seccess_not_evaded;
+    private int success_not_evaded;
 
     private int failure_evaded;
 

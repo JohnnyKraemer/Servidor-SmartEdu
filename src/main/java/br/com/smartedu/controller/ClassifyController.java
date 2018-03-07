@@ -97,16 +97,6 @@ public class ClassifyController {
     private ClassifierController classifierController = new ClassifierController();
     private DataBaseController dataBaseController = new DataBaseController();
 
-    @PostMapping("/test2")
-    public void teste(@RequestBody Retorno retorno) throws Exception {
-        System.out.println(retorno.toString());
-
-        //JSONObject jsonObj = new JSONObject(retorno);
-        //System.out.println(jsonObj);
-        //System.out.println(jsonObj.get("courses"));
-        System.out.println(retorno.getClassifiers().get(0).getName());
-    }
-
     @PostMapping("/")
     public ResponseEntity classificar(@RequestBody Retorno retorno) throws Exception {
         List<br.com.smartedu.model.Classifier> classifiersList = retorno.getClassifiers();
@@ -537,8 +527,8 @@ public class ClassifyController {
             TestClassifier test_classifier_after = testClassifierRepository.findByPeriodCalculation(1);
             test_classifier_after.setSuccess((acertoEvadido + acertoNEvadido));
             test_classifier_after.setFailure((erroEvadido + erroNEvadido));
-            test_classifier_after.setSeccess_evaded(acertoEvadido);
-            test_classifier_after.setSeccess_not_evaded(acertoNEvadido);
+            test_classifier_after.setSuccess_evaded(acertoEvadido);
+            test_classifier_after.setSuccess_not_evaded(acertoNEvadido);
             test_classifier_after.setFailure_evaded(erroEvadido);
             test_classifier_after.setFailure_not_evaded(erroNEvadido);
             test_classifier_after.setEnd(end_test_classifier);
