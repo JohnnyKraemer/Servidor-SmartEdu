@@ -124,7 +124,7 @@ public class ClassifyController {
         return new ResponseEntity(1, HttpStatus.OK);
     }
 
-    @PostMapping("/all")
+    @GetMapping("/all")
     public ResponseEntity classificarAll() throws Exception {
         List<br.com.smartedu.model.Classifier> classifiersList = classifierRepository.findByUseClassify(1);
         List<Variable> variablesList = variableRepository.findByUseClassify(1);
@@ -207,8 +207,81 @@ public class ClassifyController {
         return allCombList;
     }
 
+    // 1ª PASSO
+    // GERA OS TESTES COM TODAS OS CLASSIFICADORES E TODAS AS VARIAVEIS
+    @GetMapping("/base")
+    public ResponseEntity base() throws Exception {
+        List<br.com.smartedu.model.Classifier> classifiersList = classifierRepository.findByUseClassify(1);
+        List<Variable> variablesList = variableRepository.findByUseClassify(1);
+        List<Course> coursesList = courseRepository.findByUseClassify(1);
+
+        int period_calculation = testClassifierRepository.findMaxPeriodCalculation();
+
+        for (Course course : coursesList) {
+            System.out.println("\n\n-------------------------- NOVA CLASSIFICACAO --------------------------");
+            System.out.println("Curso: " + course.getName());
+            Classifier[] classificadores = classifierController.GeraClassificadores(classifiersList);
+            List<Student> students = studentRepository.findByCourse(course.getId());
+
+            for (Classifier classificador : classificadores) {
+                if (classificador != null) {
+                    System.out.println("\n\nClassificador: " + classificador.getClass().getSimpleName());
+                    for (Variable variable : variablesList) {
+                        System.out.println("\n\nVariavel: " + variable.getName());
+                        List<Variable> variables = new ArrayList<>();
+                        variables.add(variable);
+
+                        Instances dataSet = dataBaseController.getDataSet(variables, course.getId());
+                        Classificador(classificador, dataSet, students, course, variables, TestClassifier.TEST_BASE, period_calculation + 1, 0);
+                    }
+                }
+            }
+        }
+        return new ResponseEntity(1, HttpStatus.OK);
+    }
+
+    // 2ª PASSO
+    // SELECIONA OS 3 CLASSIFICADORES E AS 3 MELHORES VARIAVEIS E SETA COMO PADRÕES DE TEST
+    @GetMapping("/setpattern")
+    public ResponseEntity setPattern() throws Exception {
+        base();
+
+        List<Course> coursesList = courseRepository.findByUseClassify(1);
+
+        int period_calculation = classifyRepository.findMaxPeriodCalculation();
+
+        for (Course course : coursesList) {
+            List<Classify> classifys = course.getClassify();
+
+            List<br.com.smartedu.model.Classifier> best_classifiers = classifierRepository.findTop3ClassifiersByCourse(course.getId());
+            System.out.println(best_classifiers);
+
+            for (br.com.smartedu.model.Classifier classifier : best_classifiers) {
+                Classify classify = new Classify();
+
+                List<Variable> best_variable_by_classifier = variableRepository.findTopXVariableByCourseAndClassifier(course.getId(), classifier.getId(), 3);
+                System.out.println(best_variable_by_classifier);
+
+                classify.setClassifier(classifier);
+                classify.setVariable(best_variable_by_classifier);
+                classify.setPeriodCalculation(period_calculation + 1);
+                classify = classifyRepository.save(classify);
+                classifys.add(classify);
+            }
+
+            course.setClassify(classifys);
+            courseRepository.save(course);
+        }
+
+        return new ResponseEntity(1, HttpStatus.OK);
+    }
+
+    // 3ª PASSO
+    // GERA OS TESTE COM AS VARIAVEIS E CLASSIFICADORES QUE SÃO PADRÃO
     @GetMapping("/pattern")
     public ResponseEntity classificarAllPattern() throws Exception {
+        setPattern();
+        
         //List<br.com.smartedu.model.Classifier> classifiersList = classifierRepository.findByUseClassify(1);
         //List<Variable> variablesList = variableRepository.findByUseClassify(1);
         List<Course> coursesList = courseRepository.findByUseClassify(1);
@@ -246,7 +319,7 @@ public class ClassifyController {
                         System.out.println("Variaveis: " + newVariables.toString());
 
                         Instances dataSet = dataBaseController.getDataSet(newVariables, course.getId());
-                        Classificador(classificador, dataSet, students, course, newVariables, TestClassifier.TEST_ALL, period_calculation + 1, 0);
+                        Classificador(classificador, dataSet, students, course, newVariables, TestClassifier.TEST_PATTERN, period_calculation + 1, 0);
                     }
                 }
             }
@@ -254,69 +327,8 @@ public class ClassifyController {
         return new ResponseEntity(1, HttpStatus.OK);
     }
 
-    @PostMapping("/base")
-    public ResponseEntity base() throws Exception {
-        List<br.com.smartedu.model.Classifier> classifiersList = classifierRepository.findByUseClassify(1);
-        List<Variable> variablesList = variableRepository.findByUseClassify(1);
-        List<Course> coursesList = courseRepository.findByUseClassify(1);
-
-        int period_calculation = testClassifierRepository.findMaxPeriodCalculation();
-
-        for (Course course : coursesList) {
-            System.out.println("\n\n-------------------------- NOVA CLASSIFICACAO --------------------------");
-            System.out.println("Curso: " + course.getName());
-            Classifier[] classificadores = classifierController.GeraClassificadores(classifiersList);
-            List<Student> students = studentRepository.findByCourse(course.getId());
-
-            for (Classifier classificador : classificadores) {
-                if (classificador != null) {
-                    System.out.println("\n\nClassificador: " + classificador.getClass().getSimpleName());
-                    for (Variable variable : variablesList) {
-                        System.out.println("\n\nVariavel: " + variable.getName());
-                        List<Variable> variables = new ArrayList<>();
-                        variables.add(variable);
-
-                        Instances dataSet = dataBaseController.getDataSet(variables, course.getId());
-                        Classificador(classificador, dataSet, students, course, variables, TestClassifier.TEST_BASE, period_calculation + 1, 0);
-                    }
-                }
-            }
-        }
-        return new ResponseEntity(1, HttpStatus.OK);
-    }
-
-    @GetMapping("/setpattern")
-    public ResponseEntity setPattern() throws Exception {
-        List<Course> coursesList = courseRepository.findByUseClassify(1);
-
-        int period_calculation = classifyRepository.findMaxPeriodCalculation();
-
-        for (Course course : coursesList) {
-            List<Classify> classifys = course.getClassify();
-
-            List<br.com.smartedu.model.Classifier> best_classifiers = classifierRepository.findTop3ClassifiersByCourse(course.getId());
-            System.out.println(best_classifiers);
-
-            for (br.com.smartedu.model.Classifier classifier : best_classifiers) {
-                Classify classify = new Classify();
-
-                List<Variable> best_variable_by_classifier = variableRepository.findTop3VariableByCourseAndClassifier(course.getId(), classifier.getId());
-                System.out.println(best_variable_by_classifier);
-
-                classify.setClassifier(classifier);
-                classify.setVariable(best_variable_by_classifier);
-                classify.setPeriodCalculation(period_calculation + 1);
-                classify = classifyRepository.save(classify);
-                classifys.add(classify);
-            }
-
-            course.setClassify(classifys);
-            courseRepository.save(course);
-        }
-
-        return new ResponseEntity(1, HttpStatus.OK);
-    }
-
+    // 1ª PASSO
+    // GERA OS TESTES COM TODAS OS CLASSIFICADORES E TODAS AS VARIAVEIS
     @GetMapping("/base-period")
     public ResponseEntity basePeriod() throws Exception {
         List<br.com.smartedu.model.Classifier> classifiersList = classifierRepository.findByUseClassify(1);
@@ -371,8 +383,12 @@ public class ClassifyController {
         return new ResponseEntity(1, HttpStatus.OK);
     }
 
+    // 2ª PASSO
+    // SELECIONA OS 3 CLASSIFICADORES E AS 3 MELHORES VARIAVEIS E SETA COMO PADRÕES DE TEST
     @GetMapping("/set-pattern-period")
     public ResponseEntity setPatternPeriod() throws Exception {
+        basePeriod();
+
         List<Course> coursesList = courseRepository.findByUseClassify(1);
 
         for (Course course : coursesList) {
@@ -387,7 +403,7 @@ public class ClassifyController {
                 for (br.com.smartedu.model.Classifier classifier : best_classifiers) {
                     Classify classify = new Classify();
 
-                    List<Variable> best_variable_by_classifier = variableRepository.findTop3VariableByCourseAndClassifierAndPeriod(course.getId(), classifier.getId(), period);
+                    List<Variable> best_variable_by_classifier = variableRepository.findTopXVariableByCourseAndClassifierAndPeriod(course.getId(), classifier.getId(), period, 3);
                     System.out.println(best_variable_by_classifier);
 
                     classify.setClassifier(classifier);

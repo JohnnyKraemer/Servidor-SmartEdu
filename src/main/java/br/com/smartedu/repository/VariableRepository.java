@@ -33,8 +33,8 @@ public interface VariableRepository extends JpaRepository<Variable, Long> {
             + "AND classifier.id = :classifier_id\n"
             + "GROUP BY variable.name\n"
             + "ORDER BY SUM(test_classifier.success) DESC\n"
-            + "LIMIT 5;", nativeQuery = true)
-    List<Variable> findTop3VariableByCourseAndClassifier(@Param("course_id") Long course_id, @Param("classifier_id") Long classifier_id);
+            + "LIMIT :limit ;", nativeQuery = true)
+    List<Variable> findTopXVariableByCourseAndClassifier(@Param("course_id") Long course_id, @Param("classifier_id") Long classifier_id,  @Param("limit") int limit);
 
         @Query(value = "SELECT variable.*\n"
             + "FROM test_classifier\n"
@@ -50,8 +50,8 @@ public interface VariableRepository extends JpaRepository<Variable, Long> {
             + "AND classifier.id = :classifier_id\n"
             + "GROUP BY variable.name\n"
             + "ORDER BY SUM(test_classifier.success) DESC\n"
-            + "LIMIT 5;", nativeQuery = true)
-    List<Variable> findTop3VariableByCourseAndClassifierAndPeriod(@Param("course_id") Long course_id, @Param("classifier_id") Long classifier_id, @Param("period") int period);
+            + "LIMIT :limit ;", nativeQuery = true)
+    List<Variable> findTopXVariableByCourseAndClassifierAndPeriod(@Param("course_id") Long course_id, @Param("classifier_id") Long classifier_id, @Param("period") int period,  @Param("limit") int limit);
 
     
     
