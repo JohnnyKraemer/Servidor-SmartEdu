@@ -25,28 +25,30 @@ import lombok.ToString;
 public class TestClassifier implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     public static final int TEST_BASE = 0;
     public static final int TEST_ALL = 1;
     public static final int TEST_SINGLE = 2;
     public static final int TEST_PATTERN = 3;
-    
+
     public static final int TEST_PERIOD_BASE = 4;
     public static final int TEST_PERIOD_ALL = 5;
     public static final int TEST_PERIOD_SINGLE = 6;
     public static final int TEST_PERIOD_PATTERN = 7;
-    
+
+    public static final int PATTERN_TEST = 8;
+    public static final int PATTERN_RESULT = 9;
+
     public static final int RESULT_ERROR = 0;
     public static final int RESULT_SUCCESS = 1;
-    
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "period_calculation")
     private int periodCalculation;
-    
+
     private int period;
 
     @ManyToOne(fetch = FetchType.EAGER)

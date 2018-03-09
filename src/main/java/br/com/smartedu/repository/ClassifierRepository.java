@@ -24,8 +24,8 @@ public interface ClassifierRepository extends JpaRepository<Classifier, Long> {
             + "AND test_classifier.course_id = :course_id\n"
             + "GROUP BY classifier.name\n"
             + "ORDER BY SUM(test_classifier.success) DESC\n"
-            + "LIMIT 3;", nativeQuery = true)
-    List<Classifier> findTop3ClassifiersByCourse(@Param("course_id") Long course_id);
+            + "LIMIT :limit ;", nativeQuery = true)
+    List<Classifier> findTopXClassifiersByCourse(@Param("course_id") Long course_id, @Param("limit") int limit);
     
     @Query(value = "SELECT classifier.*\n"
             + "FROM test_classifier\n"

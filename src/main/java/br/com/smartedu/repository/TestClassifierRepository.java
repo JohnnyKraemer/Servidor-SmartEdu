@@ -17,6 +17,17 @@ public interface TestClassifierRepository extends JpaRepository<TestClassifier, 
             + "WHERE test_classifier.course_id = :course_id;", nativeQuery = true)
     int findMaxPeriodCalculationByCourse(@Param("course_id") Long course_id);
     
+    @Query(value = "SELECT IFNULL(MAX(test_classifier.period_calculation),1) as period_calculation\n"
+            + "FROM test_classifier\n"
+            + "WHERE test_classifier.type = :type ;", nativeQuery = true)
+    int findMaxPeriodCalculationByType(@Param("type") int type);
+    
+    @Query(value = "SELECT IFNULL(MAX(test_classifier.period_calculation),1) as period_calculation\n"
+            + "FROM test_classifier\n"
+            + "WHERE test_classifier.type = :type\n"
+            + "AND test_classifier.course_id = :course_id ;", nativeQuery = true)
+    int findMaxPeriodCalculationByTypeAndCourse(@Param("type") int type, @Param("course_id") Long course_id);
+    
     @Query(value = "SELECT IFNULL(MAX(test_classifier.period_calculation),1)\n"
             + "FROM test_classifier\n"
             + "WHERE test_classifier.course_id = :course_id\n"
@@ -35,7 +46,9 @@ public interface TestClassifierRepository extends JpaRepository<TestClassifier, 
     List<TestClassifier> findAllByOrderByIdDesc();
     
     //TestClassifier findTop1OrderByPeriodCalculationDesc();
-
+    
+    TestClassifier findTop1ByCourseAndPeriodCalculationOrderBySuccessDesc(Course course, int periodCalculation);
+    
     List<TestClassifier> findTop3ByCourseOrderBySuccessDesc(Course course);
 
     List<TestClassifier> findTop10ByCourseOrderBySuccessDesc(Course course);

@@ -4,8 +4,6 @@ import br.com.smartedu.model.Course;
 import br.com.smartedu.model.Probability;
 import br.com.smartedu.model.Student;
 import br.com.smartedu.model.TestClassifier;
-import br.com.smartedu.model.Classify;
-import br.com.smartedu.model.Situation;
 import br.com.smartedu.model.Variable;
 import br.com.smartedu.repository.ClassifierRepository;
 import br.com.smartedu.repository.CourseRepository;
@@ -19,17 +17,11 @@ import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.core.Instances;
 import br.com.smartedu.repository.TestClassifierRepository;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -37,34 +29,10 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import javax.swing.JOptionPane;
 import lombok.Data;
 import lombok.ToString;
-import org.json.JSONObject;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import br.com.smartedu.repository.ClassifyRepository;
 import br.com.smartedu.repository.SituationRepository;
-
-@Data
-@ToString
-class Retorno {
-
-    @Getter
-    @Setter
-    private List<Variable> variables;
-
-    @Getter
-    @Setter
-    private List<br.com.smartedu.model.Classifier> classifiers;
-
-    @Getter
-    @Setter
-    private List<Course> courses;
-
-}
 
 @RestController
 @RequestMapping("/classify")
@@ -97,333 +65,55 @@ public class ClassifyController {
     private ClassifierController classifierController = new ClassifierController();
     private DataBaseController dataBaseController = new DataBaseController();
 
-    @PostMapping("/")
-    public ResponseEntity classificar(@RequestBody Retorno retorno) throws Exception {
-        List<br.com.smartedu.model.Classifier> classifiersList = retorno.getClassifiers();
-        List<Variable> variablesList = retorno.getVariables();
-        List<Course> coursesList = retorno.getCourses();
+    public void ClassifyTest(TestClassifier testClassifier, weka.classifiers.Classifier tree, Instances dataSetTraining, Instances dataSetTest, List<Student> students) throws Exception {
+        Instances dataSetTeste = new Instances(dataSetTest);
+        dataSetTeste.deleteAttributeAt(0);
 
-        int period_calculation = testClassifierRepository.findMaxPeriodCalculation();
+        Instances dataSetTreino = new Instances(dataSetTraining);
+        dataSetTreino.deleteAttributeAt(0);
 
-        for (Course course : coursesList) {
-            System.out.println("\n\n-------------------------- NOVA CLASSIFICACAO --------------------------");
-            System.out.println("Curso: " + course.getName());
-            Classifier[] classificadores = classifierController.GeraClassificadores(classifiersList);
-            List<Student> students = studentRepository.findByCourse(course.getId());
-
-            for (Classifier classificador : classificadores) {
-                if (classificador != null) {
-                    System.out.println("Classificador: " + classificador.getClass().getSimpleName());
-
-                    Instances dataSet = dataBaseController.getDataSet(variablesList, course.getId());
-                    Classificador(classificador, dataSet, students, course, variablesList, TestClassifier.TEST_SINGLE, period_calculation + 1, 0);
-                }
-            }
-
-        }
-        return new ResponseEntity(1, HttpStatus.OK);
-    }
-
-    @GetMapping("/all")
-    public ResponseEntity classificarAll() throws Exception {
-        List<br.com.smartedu.model.Classifier> classifiersList = classifierRepository.findByUseClassify(1);
-        List<Variable> variablesList = variableRepository.findByUseClassify(1);
-        List<Course> coursesList = courseRepository.findByUseClassify(1);
-
-        List combinations = Combinations(variablesList);
-
-        int period_calculation = testClassifierRepository.findMaxPeriodCalculation();
-
-        //System.out.println(combinations);
-        System.out.println("Quantidade de possibilidades: " + combinations.size());
-
-        for (Course course : coursesList) {
-            System.out.println("\n\n-------------------------- NOVA CLASSIFICACAO --------------------------");
-            System.out.println("Curso: " + course.getName());
-            Classifier[] classificadores = classifierController.GeraClassificadores(classifiersList);
-            List<Student> students = studentRepository.findByCourse(course.getId());
-
-            for (Classifier classificador : classificadores) {
-                if (classificador != null) {
-                    System.out.println("\n\n-------- Classificador: " + classificador.getClass().getSimpleName() + " --------");
-
-                    for (int p = 0; p < combinations.size(); p++) {
-                        List<Variable> newVariables = new ArrayList<>();
-
-                        Date start_combination = new Date();
-                        System.out.println("\n\n-- Combinação " + (p + 1) + " de " + (combinations.size() + 1) + ".");
-
-                        String[] s_combinations = combinations.get(p).toString().replace("[", "").replace("]", "").replace(" ", "").split(",");
-                        for (int t = 0; t < s_combinations.length; t++) {
-                            newVariables.add(variableRepository.findOne(Long.parseLong(s_combinations[t])));
-                        }
-                        System.out.println("Variaveis: " + newVariables.toString());
-
-                        Instances dataSet = dataBaseController.getDataSet(newVariables, course.getId());
-                        Classificador(classificador, dataSet, students, course, variablesList, TestClassifier.TEST_ALL, period_calculation + 1, 0);
-                    }
-
-                }
-            }
-
-        }
-        return new ResponseEntity(1, HttpStatus.OK);
-    }
-
-    public List Combinations(List<Variable> variables) {
-        List<SortedSet<Comparable>> allCombList = new ArrayList<SortedSet<Comparable>>(); //aqui vai ficar a resposta
-
-        for (Variable nstatus : variables) {
-            allCombList.add(new TreeSet<Comparable>(Arrays.asList(nstatus.getId()))); //insiro a combinação "1 a 1" de cada item
-        }
-
-        for (int nivel = 1; nivel < variables.size(); nivel++) {
-            List<SortedSet<Comparable>> statusAntes = new ArrayList<SortedSet<Comparable>>(allCombList); //crio uma cópia para poder não iterar sobre o que já foi
-
-            for (Set<Comparable> antes : statusAntes) {
-                SortedSet<Comparable> novo = new TreeSet<Comparable>(antes); //para manter ordenado os objetos dentro do set
-                novo.add(variables.get(nivel).getId());
-                if (!allCombList.contains(novo)) { //testo para ver se não está repetido
-                    allCombList.add(novo);
-                }
-            }
-        }
-
-        Collections.sort(allCombList, new Comparator<SortedSet<Comparable>>() { //aqui só para organizar a saída de modo "bonitinho"
-            @Override
-            public int compare(SortedSet<Comparable> o1, SortedSet<Comparable> o2) {
-                int sizeComp = o1.size() - o2.size();
-                if (sizeComp == 0) {
-                    Iterator<Comparable> o1iIterator = o1.iterator();
-                    Iterator<Comparable> o2iIterator = o2.iterator();
-                    while (sizeComp == 0 && o1iIterator.hasNext()) {
-                        sizeComp = o1iIterator.next().compareTo(o2iIterator.next());
-                    }
-                }
-                return sizeComp;
-            }
-        });
-
-        return allCombList;
-    }
-
-    // 1ª PASSO
-    // GERA OS TESTES COM TODAS OS CLASSIFICADORES E TODAS AS VARIAVEIS
-    @GetMapping("/base")
-    public ResponseEntity base() throws Exception {
-        List<br.com.smartedu.model.Classifier> classifiersList = classifierRepository.findByUseClassify(1);
-        List<Variable> variablesList = variableRepository.findByUseClassify(1);
-        List<Course> coursesList = courseRepository.findByUseClassify(1);
-
-        int period_calculation = testClassifierRepository.findMaxPeriodCalculation();
-
-        for (Course course : coursesList) {
-            System.out.println("\n\n-------------------------- NOVA CLASSIFICACAO --------------------------");
-            System.out.println("Curso: " + course.getName());
-            Classifier[] classificadores = classifierController.GeraClassificadores(classifiersList);
-            List<Student> students = studentRepository.findByCourse(course.getId());
-
-            for (Classifier classificador : classificadores) {
-                if (classificador != null) {
-                    System.out.println("\n\nClassificador: " + classificador.getClass().getSimpleName());
-                    for (Variable variable : variablesList) {
-                        System.out.println("\n\nVariavel: " + variable.getName());
-                        List<Variable> variables = new ArrayList<>();
-                        variables.add(variable);
-
-                        Instances dataSet = dataBaseController.getDataSet(variables, course.getId());
-                        Classificador(classificador, dataSet, students, course, variables, TestClassifier.TEST_BASE, period_calculation + 1, 0);
-                    }
-                }
-            }
-        }
-        return new ResponseEntity(1, HttpStatus.OK);
-    }
-
-    // 2ª PASSO
-    // SELECIONA OS 3 CLASSIFICADORES E AS 3 MELHORES VARIAVEIS E SETA COMO PADRÕES DE TEST
-    @GetMapping("/setpattern")
-    public ResponseEntity setPattern() throws Exception {
-        base();
-
-        List<Course> coursesList = courseRepository.findByUseClassify(1);
-
-        int period_calculation = classifyRepository.findMaxPeriodCalculation();
-
-        for (Course course : coursesList) {
-            List<Classify> classifys = course.getClassify();
-
-            List<br.com.smartedu.model.Classifier> best_classifiers = classifierRepository.findTop3ClassifiersByCourse(course.getId());
-            System.out.println(best_classifiers);
-
-            for (br.com.smartedu.model.Classifier classifier : best_classifiers) {
-                Classify classify = new Classify();
-
-                List<Variable> best_variable_by_classifier = variableRepository.findTopXVariableByCourseAndClassifier(course.getId(), classifier.getId(), 3);
-                System.out.println(best_variable_by_classifier);
-
-                classify.setClassifier(classifier);
-                classify.setVariable(best_variable_by_classifier);
-                classify.setPeriodCalculation(period_calculation + 1);
-                classify = classifyRepository.save(classify);
-                classifys.add(classify);
-            }
-
-            course.setClassify(classifys);
-            courseRepository.save(course);
-        }
-
-        return new ResponseEntity(1, HttpStatus.OK);
-    }
-
-    // 3ª PASSO
-    // GERA OS TESTE COM AS VARIAVEIS E CLASSIFICADORES QUE SÃO PADRÃO
-    @GetMapping("/pattern")
-    public ResponseEntity classificarAllPattern() throws Exception {
-        setPattern();
+        int num_instances = dataSetTeste.numInstances();
+        List<Probability> probabilitys = new ArrayList<>();
         
-        //List<br.com.smartedu.model.Classifier> classifiersList = classifierRepository.findByUseClassify(1);
-        //List<Variable> variablesList = variableRepository.findByUseClassify(1);
-        List<Course> coursesList = courseRepository.findByUseClassify(1);
-
-        int period_calculation = testClassifierRepository.findMaxPeriodCalculation();
-
-        for (Course course : coursesList) {
-            System.out.println("\n\n-------------------------- NOVA CLASSIFICACAO --------------------------");
-            System.out.println("Curso: " + course.getName());
-
-            List<Classify> classifys = classifyRepository.findByCourseAndMaxPeriodCalcularion(course.getId());
-            List<Student> students = studentRepository.findByCourse(course.getId());
-
-            System.out.println("\n\nClassifys: " + classifys);
-
-            for (Classify classify : classifys) {
-                Classifier classificador = classifierController.NewClassifier(classify.getClassifier());
-
-                List combinations = Combinations(classify.getVariable());
-                System.out.println("Quantidade de possibilidades: " + combinations.size());
-
-                if (classificador != null) {
-                    System.out.println("\n\n-------- Classificador: " + classificador.getClass().getSimpleName() + " --------");
-
-                    for (int p = 0; p < combinations.size(); p++) {
-                        List<Variable> newVariables = new ArrayList<>();
-
-                        Date start_combination = new Date();
-                        System.out.println("\n\n-- Combinação " + (p + 1) + " de " + combinations.size() + ".");
-
-                        String[] s_combinations = combinations.get(p).toString().replace("[", "").replace("]", "").replace(" ", "").split(",");
-                        for (int t = 0; t < s_combinations.length; t++) {
-                            newVariables.add(variableRepository.findOne(Long.parseLong(s_combinations[t])));
-                        }
-                        System.out.println("Variaveis: " + newVariables.toString());
-
-                        Instances dataSet = dataBaseController.getDataSet(newVariables, course.getId());
-                        Classificador(classificador, dataSet, students, course, newVariables, TestClassifier.TEST_PATTERN, period_calculation + 1, 0);
-                    }
-                }
-            }
-        }
-        return new ResponseEntity(1, HttpStatus.OK);
-    }
-
-    // 1ª PASSO
-    // GERA OS TESTES COM TODAS OS CLASSIFICADORES E TODAS AS VARIAVEIS
-    @GetMapping("/base-period")
-    public ResponseEntity basePeriod() throws Exception {
-        List<br.com.smartedu.model.Classifier> classifiersList = classifierRepository.findByUseClassify(1);
-        List<Variable> variablesList = variableRepository.findByUseClassify(1);
-        List<Course> coursesList = courseRepository.findByUseClassify(1);
-
-        Situation situation = situationRepository.findBySituationLong("Regular");
-        situation.setSituationShort("Não Evadido");
-        situationRepository.save(situation);
-
         try {
-            for (Course course : coursesList) {
-                System.out.println("\n\n-------------------------- NOVA CLASSIFICACAO --------------------------");
-                System.out.println("Curso: " + course.getName());
-                Classifier[] classificadores = classifierController.GeraClassificadores(classifiersList);
+            System.out.println(num_instances-1);
+            for (int i = 0; i <= (num_instances - 1); i++) {
+                
+                Instances training = new Instances(dataSetTreino);
+                tree.buildClassifier(training);
+                Evaluation eval1 = new Evaluation(training);
+                double ed = eval1.evaluateModelOnceAndRecordPrediction(tree, dataSetTeste.instance(i));
 
-                for (int period = 1; period <= course.getTotal_periodos(); period++) {
-                    List<Student> students = studentRepository.findByCourseAndPeriod(course.getId(), period);
-                    int period_calculation = testClassifierRepository.findMaxPeriodCalculationByCourseAndPeriod(course.getId(), period);
-
-                    if (period == course.getTotal_periodos()) {
-                        situation.setSituationShort("Outros");
-                        situationRepository.save(situation);
-                    }
-
-                    for (Classifier classificador : classificadores) {
-                        if (classificador != null) {
-                            System.out.println("\n\nClassificador: " + classificador.getClass().getSimpleName());
-                            for (Variable variable : variablesList) {
-                                if (!"periodo".equals(variable.getName_database())) {
-                                    System.out.println("\n\nVariavel: " + variable.getName());
-                                    List<Variable> variables = new ArrayList<>();
-                                    variables.add(variable);
-
-                                    Instances dataSet = dataBaseController.getDataSetByPeriod(variables, course.getId(), period);
-
-                                    System.out.println("\n\nRegistros Normal: " + students.size() + " Weka: " + dataSet.size());
-                                    Classificador(classificador, dataSet, students, course, variables, TestClassifier.TEST_PERIOD_BASE, period_calculation + 1, period);
-                                }
-                            }
-                        }
-                    }
-                }
+                String evadir = String.valueOf(eval1.predictions().toArray()[0]);
+                String[] arrayValores = evadir.split(" ");
+                
+                Probability probabilidade = new Probability();
+                probabilidade.setProbability_evasion(Double.parseDouble(arrayValores[4]));
+                probabilidade.setState("Não Evadido");
+                probabilidade.setTestClassifier(testClassifier);
+                probabilidade.setStudent(students.get(i));
+                probabilitys.add(probabilidade);
+                
+                System.out.println(i);
             }
+            
+            System.out.println(probabilitys);
+            List<Probability> probs = probabilityRepository.save(probabilitys);
+            
+            System.out.println(probs);
+            
+            for(Probability prob : probs){
+                System.out.println("\nNome: "+prob.getStudent().getNome()+"\nProb: "+prob.getProbability_evasion()+"\n\n");
+            }
+            
+            
+
         } catch (Exception e) {
-            System.err.println(e);
-            situation = situationRepository.findBySituationLong("Regular");
-            situation.setSituationShort("Outros");
-            situationRepository.save(situation);
+            System.out.println(e.getMessage());
         }
-
-        return new ResponseEntity(1, HttpStatus.OK);
     }
 
-    // 2ª PASSO
-    // SELECIONA OS 3 CLASSIFICADORES E AS 3 MELHORES VARIAVEIS E SETA COMO PADRÕES DE TEST
-    @GetMapping("/set-pattern-period")
-    public ResponseEntity setPatternPeriod() throws Exception {
-        basePeriod();
-
-        List<Course> coursesList = courseRepository.findByUseClassify(1);
-
-        for (Course course : coursesList) {
-            for (int period = 1; period <= course.getTotal_periodos(); period++) {
-                int period_calculation = testClassifierRepository.findMaxPeriodCalculationByCourseAndPeriod(course.getId(), period);
-
-                List<Classify> classifys = course.getClassify();
-
-                List<br.com.smartedu.model.Classifier> best_classifiers = classifierRepository.findTop3ClassifiersByCourseByPeriod(course.getId(), period);
-                System.out.println(best_classifiers);
-
-                for (br.com.smartedu.model.Classifier classifier : best_classifiers) {
-                    Classify classify = new Classify();
-
-                    List<Variable> best_variable_by_classifier = variableRepository.findTopXVariableByCourseAndClassifierAndPeriod(course.getId(), classifier.getId(), period, 3);
-                    System.out.println(best_variable_by_classifier);
-
-                    classify.setClassifier(classifier);
-                    classify.setPeriod(period);
-                    classify.setVariable(best_variable_by_classifier);
-                    classify.setPeriodCalculation(period_calculation + 1);
-                    classify = classifyRepository.save(classify);
-                    classifys.add(classify);
-                }
-
-                course.setClassify(classifys);
-                courseRepository.save(course);
-            }
-
-        }
-
-        return new ResponseEntity(1, HttpStatus.OK);
-    }
-
-    public void Classificador(weka.classifiers.Classifier tree, Instances dataSet, List<Student> students, Course curso, List<Variable> variaveis, int type, int period_calculation, int period) throws Exception {
+    public void ClassifyTraining(weka.classifiers.Classifier tree, Instances dataSet, List<Student> students, Course curso, List<Variable> variaveis, int type, int period_calculation, int period) throws Exception {
         Instances dataSetTeste = new Instances(dataSet);
         dataSetTeste.deleteAttributeAt(0);
 
@@ -573,4 +263,42 @@ public class ClassifyController {
             testClassifierRepository.save(test_classifier_error);
         }
     }
+
+    public List Combinations(List<Variable> variables) {
+        List<SortedSet<Comparable>> allCombList = new ArrayList<SortedSet<Comparable>>(); //aqui vai ficar a resposta
+
+        for (Variable nstatus : variables) {
+            allCombList.add(new TreeSet<Comparable>(Arrays.asList(nstatus.getId()))); //insiro a combinação "1 a 1" de cada item
+        }
+
+        for (int nivel = 1; nivel < variables.size(); nivel++) {
+            List<SortedSet<Comparable>> statusAntes = new ArrayList<SortedSet<Comparable>>(allCombList); //crio uma cópia para poder não iterar sobre o que já foi
+
+            for (Set<Comparable> antes : statusAntes) {
+                SortedSet<Comparable> novo = new TreeSet<Comparable>(antes); //para manter ordenado os objetos dentro do set
+                novo.add(variables.get(nivel).getId());
+                if (!allCombList.contains(novo)) { //testo para ver se não está repetido
+                    allCombList.add(novo);
+                }
+            }
+        }
+
+        Collections.sort(allCombList, new Comparator<SortedSet<Comparable>>() { //aqui só para organizar a saída de modo "bonitinho"
+            @Override
+            public int compare(SortedSet<Comparable> o1, SortedSet<Comparable> o2) {
+                int sizeComp = o1.size() - o2.size();
+                if (sizeComp == 0) {
+                    Iterator<Comparable> o1iIterator = o1.iterator();
+                    Iterator<Comparable> o2iIterator = o2.iterator();
+                    while (sizeComp == 0 && o1iIterator.hasNext()) {
+                        sizeComp = o1iIterator.next().compareTo(o2iIterator.next());
+                    }
+                }
+                return sizeComp;
+            }
+        });
+
+        return allCombList;
+    }
+
 }
