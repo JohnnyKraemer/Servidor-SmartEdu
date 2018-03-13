@@ -1,38 +1,14 @@
 package br.com.smartedu.controller;
 
-import br.com.smartedu.model.Course;
-import br.com.smartedu.model.Probability;
-import br.com.smartedu.model.Student;
-import br.com.smartedu.model.TestClassifier;
-import br.com.smartedu.model.Variable;
-import br.com.smartedu.repository.ClassifierRepository;
-import br.com.smartedu.repository.CourseRepository;
-import br.com.smartedu.repository.ProbabilityRepository;
-import br.com.smartedu.repository.StudentRepository;
-import br.com.smartedu.repository.VariableRepository;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-import lombok.Getter;
-import lombok.Setter;
+import br.com.smartedu.model.*;
+import br.com.smartedu.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import weka.classifiers.Evaluation;
 import weka.core.Instances;
-import br.com.smartedu.repository.TestClassifierRepository;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.SortedSet;
-import java.util.TreeSet;
-import lombok.Data;
-import lombok.ToString;
-import br.com.smartedu.repository.ClassifyRepository;
-import br.com.smartedu.repository.SituationRepository;
+
+import java.util.*;
 
 @RestController
 @RequestMapping("/classify")

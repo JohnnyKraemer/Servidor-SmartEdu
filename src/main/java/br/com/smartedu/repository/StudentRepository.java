@@ -3,10 +3,11 @@ package br.com.smartedu.repository;
 import br.com.smartedu.model.Course;
 import br.com.smartedu.model.Detail;
 import br.com.smartedu.model.Student;
-import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
 

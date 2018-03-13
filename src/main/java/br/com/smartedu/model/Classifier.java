@@ -1,12 +1,13 @@
 package br.com.smartedu.model;
 
-import java.io.Serializable;
-import java.util.Objects;
 import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Data

@@ -6,7 +6,6 @@
 package br.com.smartedu.controller;
 
 import br.com.smartedu.model.Classifier;
-import java.util.List;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import weka.classifiers.bayes.BayesNet;
@@ -25,6 +24,8 @@ import weka.classifiers.trees.J48;
 import weka.classifiers.trees.LMT;
 import weka.classifiers.trees.REPTree;
 import weka.classifiers.trees.RandomForest;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/classificador")

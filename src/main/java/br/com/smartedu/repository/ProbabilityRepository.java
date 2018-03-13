@@ -1,8 +1,9 @@
 package br.com.smartedu.repository;
 
 import br.com.smartedu.model.Probability;
-import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
 
 public interface ProbabilityRepository extends JpaRepository<Probability, Long> {
 

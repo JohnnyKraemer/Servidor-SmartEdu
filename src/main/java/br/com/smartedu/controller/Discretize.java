@@ -13,12 +13,6 @@ package br.com.smartedu.controller;
 //import required classes
 
 import weka.core.Instances;
-import weka.core.converters.ArffSaver;
-import java.io.File;
-import weka.core.converters.ConverterUtils;
-import weka.core.converters.ConverterUtils.DataSource;
-import weka.experiment.DatabaseUtils;
-import weka.experiment.InstanceQuery;
 import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.*;
 

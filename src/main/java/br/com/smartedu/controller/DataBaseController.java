@@ -6,13 +6,13 @@
 package br.com.smartedu.controller;
 
 import br.com.smartedu.model.Variable;
-import java.io.File;
-import java.util.List;
-import java.util.Set;
 import org.springframework.stereotype.Controller;
 import weka.core.Instances;
 import weka.experiment.DatabaseUtils;
 import weka.experiment.InstanceQuery;
+
+import java.io.File;
+import java.util.List;
 
 @Controller
 public class DataBaseController {
