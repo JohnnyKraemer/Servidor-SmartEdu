@@ -71,8 +71,11 @@ public class TestClassifierController {
     private ClassifyController classifyController = new ClassifyController();
 
     @GetMapping("/")
-    public ResponseEntity classify(@RequestBody Retorno retorno) throws Exception {
-
+    public ResponseEntity classify() throws Exception {
+        base();
+        setBestBase();
+        classifyBestBase();
+        setPattern();
         return new ResponseEntity(1, HttpStatus.OK);
     }
 
@@ -80,39 +83,54 @@ public class TestClassifierController {
     // GERA OS TESTES COM TODAS OS CLASSIFICADORES E TODAS AS VARIAVEIS
     @GetMapping("/base")
     public ResponseEntity base() throws Exception {
+        System.out.println("\n\n-----------------------------------------------------------");
+        System.out.println("------------------------------ TEST BASE --------------------------");
+        System.out.println("---------------------------------------------------------------");
+
         List<br.com.smartedu.model.Classifier> classifiersList = classifierRepository.findByUseClassify(1);
         List<Variable> variablesList = variableRepository.findByUseClassify(1);
         List<Course> coursesList = courseRepository.findByUseClassify(1);
 
         int period_calculation = testClassifierRepository.findMaxPeriodCalculationByType(TestClassifier.TEST_BASE);
 
+        int position_course = 1;
+        int position_variable = 1;
+        int position_classifier = 1;
+
         for (Course course : coursesList) {
-            System.out.println("\n\n-------------------------- NOVA CLASSIFICACAO --------------------------");
-            System.out.println("Curso: " + course.getName());
             Classifier[] classificadores = classifierController.GeraClassificadores(classifiersList);
             List<Student> students = studentRepository.findByCourse(course.getId());
 
             for (Classifier classificador : classificadores) {
                 if (classificador != null) {
-                    System.out.println("\n\nClassificador: " + classificador.getClass().getSimpleName());
+
                     for (Variable variable : variablesList) {
-                        System.out.println("\n\nVariavel: " + variable.getName());
+                        System.out.println("\n\nCourse "+position_course+" of "+coursesList.size()+" : " + course.getName());
+                        System.out.println("Classifier "+position_classifier+" of "+classificadores.length+" : " + classificador.getClass().getSimpleName());
+                        System.out.println("Variable "+position_variable+" of "+variablesList.size()+" : " + variable.getName());
                         List<Variable> variables = new ArrayList<>();
                         variables.add(variable);
 
                         Instances dataSet = dataBaseController.getDataSet(variables, course.getId(), dataBaseController.TRAINING);
-                        classifyController.ClassifyTraining(classificador, dataSet, students, course, variables, TestClassifier.TEST_BASE, period_calculation + 1, 0);
+                        classifyController.ClassifyTraining(classifiersList.get(position_classifier-1) ,classificador, dataSet, students, course, variables, TestClassifier.TEST_BASE, period_calculation + 1, 0);
+                        position_variable++;
                     }
                 }
+                position_classifier++;
             }
+            position_course++;
         }
         return new ResponseEntity(1, HttpStatus.OK);
     }
 
     // 2ª PASSO
     // SELECIONA OS 3 CLASSIFICADORES E AS 3 MELHORES VARIAVEIS E SETA COMO PADRÕES DE TEST
-    @GetMapping("/set-pattern-test")
-    public ResponseEntity setPatternTest() throws Exception {
+    @GetMapping("/set-best-base")
+    public ResponseEntity setBestBase() throws Exception {
+        System.out.println("\n\n-----------------------------------------------------------");
+        System.out.println("------------------------------ SET BESTS BASE --------------------------");
+        System.out.println("---------------------------------------------------------------");
+
         List<Course> coursesList = courseRepository.findByUseClassify(1);
 
         int period_calculation = testClassifierRepository.findMaxPeriodCalculationByType(TestClassifier.TEST_BASE);
@@ -144,46 +162,48 @@ public class TestClassifierController {
 
     // 3ª PASSO
     // GERA OS TESTE COM AS VARIAVEIS E CLASSIFICADORES QUE SÃO PADRÃO
-    @GetMapping("/pattern-test")
-    public ResponseEntity classificarAllPatternTest() throws Exception {
+    @GetMapping("/classify-best-base")
+    public ResponseEntity classifyBestBase() throws Exception {
+        System.out.println("\n\n-----------------------------------------------------------");
+        System.out.println("------------------------------ CLASSIFY BEST BASE --------------------------");
+        System.out.println("---------------------------------------------------------------");
+
         List<Course> coursesList = courseRepository.findByUseClassify(1);
 
         int period_calculation = testClassifierRepository.findMaxPeriodCalculationByType(TestClassifier.TEST_PATTERN);
 
+        int position_course = 1;
+        int position_combination = 1;
+        int position_classifier = 1;
+
         for (Course course : coursesList) {
-            System.out.println("\n\n-------------------------- NOVA CLASSIFICACAO --------------------------");
-            System.out.println("Curso: " + course.getName());
             List<Classify> classifys = classifyRepository.findByCourseAndMaxPeriodCalcularion(course.getId());
             List<Student> students = studentRepository.findByCourse(course.getId());
 
-            System.out.println("\n\nClassifys: " + classifys);
-
             for (Classify classify : classifys) {
                 Classifier classificador = classifierController.NewClassifier(classify.getClassifier());
-
                 List combinations = classifyController.Combinations(classify.getVariable());
-                System.out.println("Quantidade de possibilidades: " + combinations.size());
-
                 if (classificador != null) {
-                    System.out.println("\n\n-------- Classificador: " + classificador.getClass().getSimpleName() + " --------");
-
                     for (int p = 0; p < combinations.size(); p++) {
                         List<Variable> newVariables = new ArrayList<>();
-
-                        Date start_combination = new Date();
-                        System.out.println("\n\n-- Combinação " + (p + 1) + " de " + combinations.size() + ".");
 
                         String[] s_combinations = combinations.get(p).toString().replace("[", "").replace("]", "").replace(" ", "").split(",");
                         for (int t = 0; t < s_combinations.length; t++) {
                             newVariables.add(variableRepository.findOne(Long.parseLong(s_combinations[t])));
                         }
-                        System.out.println("Variaveis: " + newVariables.toString());
+
+                        System.out.println("\n\nCourse "+position_course+" of "+coursesList.size()+" : " + course.getName());
+                        System.out.println("Classifier "+position_classifier+" of "+classifys.size()+" : " + classificador.getClass().getSimpleName());
+                        System.out.println("Combination "+position_combination+" of "+combinations.size()+" : " + newVariables.toString());
 
                         Instances dataSet = dataBaseController.getDataSet(newVariables, course.getId(), dataBaseController.TRAINING);
-                        classifyController.ClassifyTraining(classificador, dataSet, students, course, newVariables, TestClassifier.TEST_PATTERN, period_calculation + 1, 0);
+                        classifyController.ClassifyTraining(classify.getClassifier(),classificador, dataSet, students, course, newVariables, TestClassifier.TEST_PATTERN, period_calculation + 1, 0);
+                        position_combination++;
                     }
                 }
+                position_classifier++;
             }
+            position_course++;
         }
         return new ResponseEntity(1, HttpStatus.OK);
     }
@@ -192,6 +212,10 @@ public class TestClassifierController {
     // SETAR MELHOR TESTE
     @GetMapping("/set-pattern")
     public ResponseEntity setPattern() throws Exception {
+        System.out.println("\n\n-----------------------------------------------------------");
+        System.out.println("------------------------------ SET PATTERN --------------------------");
+        System.out.println("---------------------------------------------------------------");
+
         List<Course> coursesList = courseRepository.findByUseClassify(1);
         int period_calculation = testClassifierRepository.findMaxPeriodCalculationByType(TestClassifier.TEST_PATTERN);
 
@@ -199,7 +223,7 @@ public class TestClassifierController {
             TestClassifier testClassifier = testClassifierRepository.findTop1ByCourseAndPeriodCalculationOrderBySuccessDesc(course, period_calculation);
             //testClassifier.setType(TestClassifier.PATTERN_TEST);
             
-            System.out.println("Id: " + testClassifier.getId());
+            System.out.println("\n\nId: " + testClassifier.getId());
             System.out.println("Curso: " + course.getName());
             System.out.println("Classificador: " + testClassifier.getClassifier().getName());
             System.out.println("Sucesso: " + testClassifier.getSuccess());
@@ -211,8 +235,6 @@ public class TestClassifierController {
             
             List<Student> students = studentRepository.findByCourseTest(course.getId());
             
-            
-            System.out.println("\n\nStudens: "+students.size() + " --- dataSetTest: "+dataSetTest.size() + " --- dataSetTraining: "+dataSetTraining.size());
             classifyController.ClassifyTest(testClassifier, classificador, dataSetTraining, dataSetTest, students);
 
             testClassifier.setType(TestClassifier.PATTERN_RESULT);
@@ -222,6 +244,7 @@ public class TestClassifierController {
         return new ResponseEntity(1, HttpStatus.OK);
     }
 
+    /*
     @GetMapping("/test-one")
     public ResponseEntity classificarOneTest(@RequestBody Retorno retorno) throws Exception {
         List<br.com.smartedu.model.Classifier> classifiersList = retorno.getClassifiers();
@@ -293,4 +316,5 @@ public class TestClassifierController {
         }
         return new ResponseEntity(1, HttpStatus.OK);
     }
+    */
 }

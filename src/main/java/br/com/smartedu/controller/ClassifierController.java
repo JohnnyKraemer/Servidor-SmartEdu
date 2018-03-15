@@ -34,7 +34,7 @@ public class ClassifierController {
     private int num_Classificadores = 0;
 
     public weka.classifiers.Classifier[] GeraClassificadores(List<Classifier> selecionados) throws Exception {
-        weka.classifiers.Classifier[] classificadores = new weka.classifiers.Classifier[50];
+        weka.classifiers.Classifier[] classificadores = new weka.classifiers.Classifier[selecionados.size()];
 
         for (Classifier classificador : selecionados) {
             if ("BayesNet".equals(classificador.getName())) {

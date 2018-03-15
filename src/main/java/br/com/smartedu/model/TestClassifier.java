@@ -21,10 +21,10 @@ public class TestClassifier implements Serializable {
     public static final int TEST_SINGLE = 2;
     public static final int TEST_PATTERN = 3;
 
-    public static final int TEST_PERIOD_BASE = 4;
-    public static final int TEST_PERIOD_ALL = 5;
-    public static final int TEST_PERIOD_SINGLE = 6;
-    public static final int TEST_PERIOD_PATTERN = 7;
+    //public static final int TEST_PERIOD_BASE = 4;
+    //public static final int TEST_PERIOD_ALL = 5;
+    //public static final int TEST_PERIOD_SINGLE = 6;
+    //public static final int TEST_PERIOD_PATTERN = 7;
 
     public static final int PATTERN_TEST = 8;
     public static final int PATTERN_RESULT = 9;

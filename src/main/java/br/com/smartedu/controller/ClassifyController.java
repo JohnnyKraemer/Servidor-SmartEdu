@@ -50,11 +50,11 @@ public class ClassifyController {
 
         int num_instances = dataSetTeste.numInstances();
         List<Probability> probabilitys = new ArrayList<>();
-        
+
         try {
-            System.out.println(num_instances-1);
+            System.out.println(num_instances - 1);
             for (int i = 0; i <= (num_instances - 1); i++) {
-                
+
                 Instances training = new Instances(dataSetTreino);
                 tree.buildClassifier(training);
                 Evaluation eval1 = new Evaluation(training);
@@ -62,34 +62,33 @@ public class ClassifyController {
 
                 String evadir = String.valueOf(eval1.predictions().toArray()[0]);
                 String[] arrayValores = evadir.split(" ");
-                
+
                 Probability probabilidade = new Probability();
                 probabilidade.setProbability_evasion(Double.parseDouble(arrayValores[4]));
                 probabilidade.setState("Não Evadido");
                 probabilidade.setTestClassifier(testClassifier);
                 probabilidade.setStudent(students.get(i));
                 probabilitys.add(probabilidade);
-                
+
                 System.out.println(i);
             }
-            
+
             System.out.println(probabilitys);
             List<Probability> probs = probabilityRepository.save(probabilitys);
-            
+
             System.out.println(probs);
-            
-            for(Probability prob : probs){
-                System.out.println("\nNome: "+prob.getStudent().getNome()+"\nProb: "+prob.getProbability_evasion()+"\n\n");
-            }
-            
-            
+
+            //for (Probability prob : probs) {
+            //    System.out.println("\nNome: " + prob.getStudent().getNome() + "\nProb: " + prob.getProbability_evasion() + "\n\n");
+            //}
+
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void ClassifyTraining(weka.classifiers.Classifier tree, Instances dataSet, List<Student> students, Course curso, List<Variable> variaveis, int type, int period_calculation, int period) throws Exception {
+    public void ClassifyTraining(br.com.smartedu.model.Classifier classificador, weka.classifiers.Classifier tree, Instances dataSet, List<Student> students, Course curso, List<Variable> variaveis, int type, int period_calculation, int period) throws Exception {
         Instances dataSetTeste = new Instances(dataSet);
         dataSetTeste.deleteAttributeAt(0);
 
@@ -99,7 +98,6 @@ public class ClassifyController {
         int num_instances = dataSetTeste.numInstances();
         double[] probEvasao = new double[num_instances];
         String[] situacao = new String[num_instances];
-        String[] resultado = new String[num_instances];
         int acertoEvadido = 0;
         int erroEvadido = 0;
         int acertoNEvadido = 0;
@@ -110,10 +108,12 @@ public class ClassifyController {
         String[] arrayClassificador = st_Classificador.split(";");
         st_Classificador = arrayClassificador[3];
 
-        br.com.smartedu.model.Classifier classificador = classifierRepository.findByName(st_Classificador);
+        System.out.println(st_Classificador);
+
+        //br.com.smartedu.model.Classifier classificador = classifierRepository.findByName(st_Classificador);
 
         Date start_test_classifier = new Date();
-        System.out.println("Incicio: " + start_test_classifier);
+        //System.out.println("Incicio: " + start_test_classifier);
 
         if (testClassifierRepository.findByPeriodCalculation(1) != null) {
             TestClassifier test_classifier_error = testClassifierRepository.findByPeriodCalculation(1);
@@ -148,29 +148,25 @@ public class ClassifyController {
 
                 probEvasao[i] = Double.parseDouble(arrayValores[4]);
 
-                if ("V1".equals(String.valueOf(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1))) || "Evadido".equals(String.valueOf(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1)))) {
+                if ("Evadido".equals(String.valueOf(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1)))) {
                     if (probEvasao[i] > 0.5) {
                         acertoEvadido++;
-                        resultado[i] = "Acerto"; // Sucesso
                         situacao[i] = "Evadido";
                     } else if (probEvasao[i] <= 0.5) {
                         erroEvadido++;
-                        resultado[i] = "Erro"; //Insucesso
                         situacao[i] = "Evadido";
                     }
-
-                } else if ("V3".equals(String.valueOf(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1))) || "'Não Evadido'".equals(String.valueOf(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1)))) {
+                } else if ("'Formado'".equals(String.valueOf(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1)))) {
                     if (probEvasao[i] <= 0.5) {
                         acertoNEvadido++;
-                        resultado[i] = "Acerto"; //Sucesso
-                        situacao[i] = "Não Evadido";
+                        situacao[i] = "Formado";
                     } else if (probEvasao[i] > 0.5) {
                         erroNEvadido++;
-                        resultado[i] = "Erro"; //Insucesso
-                        situacao[i] = "Não Evadido";
+                        situacao[i] = "Formado";
                     }
-                } else if ("V2".equals(String.valueOf(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1))) || "Outro".equals(String.valueOf(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1)))) {
-                    resultado[i] = "Outro";
+                } else if ("'Não Evadido'".equals(String.valueOf(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1)))) {
+                    situacao[i] = "Não Evadido";
+                } else if ("Outro".equals(String.valueOf(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1)))) {
                     situacao[i] = "Outro";
                 }
                 Probability probabilidade = new Probability();
@@ -217,8 +213,8 @@ public class ClassifyController {
             test_classifier_after.setTime_seconds((int) segundos);
             test_classifier_after.setResult(TestClassifier.RESULT_SUCCESS);
 
-            System.out.println("Fim: " + end_test_classifier);
-            System.out.println("Tempo percorrido: " + segundos + " segundos.");
+            //System.out.println("Fim: " + end_test_classifier);
+            //System.out.println("Tempo percorrido: " + segundos + " segundos.");
 
             Calendar datetime = Calendar.getInstance();
 
