@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="825652f9-f399-4ffa-8f3e-537fe946386e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/ClassifyController.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/ClassifyController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierController.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierController.java" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/smartedu/controller/ClassifyController$1.class" afterPath="$PROJECT_DIR$/target/classes/br/com/smartedu/controller/ClassifyController$1.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/smartedu/controller/ClassifyController.class" afterPath="$PROJECT_DIR$/target/classes/br/com/smartedu/controller/ClassifyController.class" />
-    </list>
+    <list default="true" id="825652f9-f399-4ffa-8f3e-537fe946386e" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -92,6 +86,12 @@
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="13" />
+    <option name="y" value="-19" />
+    <option name="width" value="1346" />
+    <option name="height" value="698" />
   </component>
   <component name="ProjectView">
     <navigator currentView="PackagesPane" proportions="" version="1">
@@ -297,15 +297,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1521206521116</updated>
-      <workItem from="1521206522789" duration="2378000" />
+      <workItem from="1521206522789" duration="2977000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2378000" />
+    <option name="totallyTimeSpent" value="2977000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
