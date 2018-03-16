@@ -68,7 +68,10 @@ public class TestClassifierController {
 
     private ClassifierController classifierController = new ClassifierController();
     private DataBaseController dataBaseController = new DataBaseController();
-    private ClassifyController classifyController = new ClassifyController();
+
+    @Autowired
+    private ClassifyController classifyController;
+    //private ClassifyController classifyController = new ClassifyController();
 
     @GetMapping("/")
     public ResponseEntity classify() throws Exception {
@@ -92,18 +95,16 @@ public class TestClassifierController {
         List<Course> coursesList = courseRepository.findByUseClassify(1);
 
         int period_calculation = testClassifierRepository.findMaxPeriodCalculationByType(TestClassifier.TEST_BASE);
-
         int position_course = 1;
-        int position_variable = 1;
-        int position_classifier = 1;
+        Classifier[] classificadores = classifierController.GeraClassificadores(classifiersList);
 
         for (Course course : coursesList) {
-            Classifier[] classificadores = classifierController.GeraClassificadores(classifiersList);
+            int position_classifier = 1;
             List<Student> students = studentRepository.findByCourse(course.getId());
 
             for (Classifier classificador : classificadores) {
                 if (classificador != null) {
-
+                    int position_variable = 1;
                     for (Variable variable : variablesList) {
                         System.out.println("\n\nCourse "+position_course+" of "+coursesList.size()+" : " + course.getName());
                         System.out.println("Classifier "+position_classifier+" of "+classificadores.length+" : " + classificador.getClass().getSimpleName());
@@ -173,17 +174,16 @@ public class TestClassifierController {
         int period_calculation = testClassifierRepository.findMaxPeriodCalculationByType(TestClassifier.TEST_PATTERN);
 
         int position_course = 1;
-        int position_combination = 1;
-        int position_classifier = 1;
 
         for (Course course : coursesList) {
             List<Classify> classifys = classifyRepository.findByCourseAndMaxPeriodCalcularion(course.getId());
             List<Student> students = studentRepository.findByCourse(course.getId());
-
+            int position_classifier = 1;
             for (Classify classify : classifys) {
                 Classifier classificador = classifierController.NewClassifier(classify.getClassifier());
                 List combinations = classifyController.Combinations(classify.getVariable());
                 if (classificador != null) {
+                    int position_combination = 1;
                     for (int p = 0; p < combinations.size(); p++) {
                         List<Variable> newVariables = new ArrayList<>();
 

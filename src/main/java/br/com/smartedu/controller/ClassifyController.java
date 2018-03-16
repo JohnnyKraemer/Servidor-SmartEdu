@@ -3,6 +3,8 @@ package br.com.smartedu.controller;
 import br.com.smartedu.model.*;
 import br.com.smartedu.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import weka.classifiers.Evaluation;
@@ -10,8 +12,8 @@ import weka.core.Instances;
 
 import java.util.*;
 
-@RestController
-@RequestMapping("/classify")
+@Controller
+@Configurable
 public class ClassifyController {
 
     @Autowired
@@ -87,12 +89,7 @@ public class ClassifyController {
         String[] arrayClassificador = st_Classificador.split(";");
         st_Classificador = arrayClassificador[3];
 
-        System.out.println(st_Classificador);
-
-        //br.com.smartedu.model.Classifier classificador = classifierRepository.findByName(st_Classificador);
-
         Date start_test_classifier = new Date();
-        //System.out.println("Incicio: " + start_test_classifier);
 
         if (testClassifierRepository.findByPeriodCalculation(1) != null) {
             TestClassifier test_classifier_error = testClassifierRepository.findByPeriodCalculation(1);
