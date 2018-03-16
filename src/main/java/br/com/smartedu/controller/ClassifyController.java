@@ -18,28 +18,7 @@ public class ClassifyController {
     private ProbabilityRepository probabilityRepository;
 
     @Autowired
-    private ClassifierRepository classifierRepository;
-
-    @Autowired
-    private VariableRepository variableRepository;
-
-    @Autowired
-    private StudentRepository studentRepository;
-
-    @Autowired
     private TestClassifierRepository testClassifierRepository;
-
-    @Autowired
-    private ClassifyRepository classifyRepository;
-
-    @Autowired
-    private SituationRepository situationRepository;
-
-    @Autowired
-    private CourseRepository courseRepository;
-
-    private ClassifierController classifierController = new ClassifierController();
-    private DataBaseController dataBaseController = new DataBaseController();
 
     public void ClassifyTest(TestClassifier testClassifier, weka.classifiers.Classifier tree, Instances dataSetTraining, Instances dataSetTest, List<Student> students) throws Exception {
         Instances dataSetTeste = new Instances(dataSetTest);
