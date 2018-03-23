@@ -33,7 +33,7 @@ public class ClassifyController {
         List<Probability> probabilitys = new ArrayList<>();
 
         try {
-            System.out.println(num_instances - 1);
+            //System.out.println(num_instances - 1);
             for (int i = 0; i <= (num_instances - 1); i++) {
 
                 Instances training = new Instances(dataSetTreino);
@@ -51,13 +51,13 @@ public class ClassifyController {
                 probabilidade.setStudent(students.get(i));
                 probabilitys.add(probabilidade);
 
-                System.out.println(i);
+                //System.out.println(i);
             }
 
-            System.out.println(probabilitys);
+            //System.out.println(probabilitys);
             List<Probability> probs = probabilityRepository.save(probabilitys);
 
-            System.out.println(probs);
+            //System.out.println(probs);
 
             //for (Probability prob : probs) {
             //    System.out.println("\nNome: " + prob.getStudent().getNome() + "\nProb: " + prob.getProbability_evasion() + "\n\n");
@@ -132,7 +132,7 @@ public class ClassifyController {
                         erroEvadido++;
                         situacao[i] = "Evadido";
                     }
-                } else if ("'Formado'".equals(String.valueOf(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1)))) {
+                } else if ("Formado".equals(String.valueOf(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1)))) {
                     if (probEvasao[i] <= 0.5) {
                         acertoNEvadido++;
                         situacao[i] = "Formado";

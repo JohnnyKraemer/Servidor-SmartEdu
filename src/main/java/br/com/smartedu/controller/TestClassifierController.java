@@ -176,11 +176,14 @@ public class TestClassifierController {
         int position_course = 1;
 
         for (Course course : coursesList) {
+            System.out.println("\n\nCourse "+position_course+" of "+coursesList.size()+" : " + course.getName());
             List<Classify> classifys = classifyRepository.findByCourseAndMaxPeriodCalcularion(course.getId());
             List<Student> students = studentRepository.findByCourse(course.getId());
             int position_classifier = 1;
+
             for (Classify classify : classifys) {
                 Classifier classificador = classifierController.NewClassifier(classify.getClassifier());
+                System.out.println("Classifier "+position_classifier+" of "+classifys.size()+" : " + classificador.getClass().getSimpleName());
                 List combinations = classifyController.Combinations(classify.getVariable());
                 if (classificador != null) {
                     int position_combination = 1;
@@ -192,8 +195,8 @@ public class TestClassifierController {
                             newVariables.add(variableRepository.findOne(Long.parseLong(s_combinations[t])));
                         }
 
-                        System.out.println("\n\nCourse "+position_course+" of "+coursesList.size()+" : " + course.getName());
-                        System.out.println("Classifier "+position_classifier+" of "+classifys.size()+" : " + classificador.getClass().getSimpleName());
+
+
                         System.out.println("Combination "+position_combination+" of "+combinations.size()+" : " + newVariables.toString());
 
                         Instances dataSet = dataBaseController.getDataSet(newVariables, course.getId(), dataBaseController.TRAINING);
