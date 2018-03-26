@@ -134,18 +134,21 @@ public class TestClassifierController {
 
         List<Course> coursesList = courseRepository.findByUseClassify(1);
 
-        int period_calculation = testClassifierRepository.findMaxPeriodCalculationByType(TestClassifier.TEST_BASE);
+        int period_calculation = classifyRepository.findMaxPeriodCalculation();
+        int position_course = 1;
 
         for (Course course : coursesList) {
+            System.out.println("\n\nCourse "+position_course+" of "+coursesList.size()+" : " + course.getName());
             List<Classify> classifys = course.getClassify();
             List<br.com.smartedu.model.Classifier> best_classifiers = classifierRepository.findTopXClassifiersByCourse(course.getId(), 3);
-            System.out.println(best_classifiers);
-
+            //System.out.println(best_classifiers);
+            int position_classifier = 1;
             for (br.com.smartedu.model.Classifier classifier : best_classifiers) {
                 Classify classify = new Classify();
+                System.out.println("Classifier "+position_classifier+" of "+classifys.size()+" : " + classifier.getClass().getSimpleName());
 
                 List<Variable> best_variable_by_classifier = variableRepository.findTopXVariableByCourseAndClassifier(course.getId(), classifier.getId(), 3);
-                System.out.println(best_variable_by_classifier);
+                System.out.println("Variables: "+ best_variable_by_classifier);
 
                 classify.setClassifier(classifier);
                 classify.setVariable(best_variable_by_classifier);
