@@ -75,7 +75,8 @@ public class TestClassifierController {
     @GetMapping("/")
     public ResponseEntity classify() throws Exception {
         Situation situation = situationRepository.findBySituationLong("Formado");
-        situation.setSituationShort("Formado");
+        //situation.setSituationShort("Formado");
+        situation.setSituationShort("Não Evadido");
         situationRepository.save(situation);
 
         base();
@@ -242,14 +243,14 @@ public class TestClassifierController {
             System.out.println("Sucesso: " + testClassifier.getSuccess());
             System.out.println("Falha: " + testClassifier.getFailure());
 
-            Classifier classificador = classifierController.NewClassifier(testClassifier.getClassifier());
-            Instances dataSetTraining = dataBaseController.getDataSet(testClassifier.getVariable(), course.getId(), dataBaseController.TRAINING);
-            Instances dataSetTest = dataBaseController.getDataSet(testClassifier.getVariable(), course.getId(), dataBaseController.TEST);
+            //Classifier classificador = classifierController.NewClassifier(testClassifier.getClassifier());
+            //Instances dataSetTraining = dataBaseController.getDataSet(testClassifier.getVariable(), course.getId(), dataBaseController.TRAINING);
+            //Instances dataSetTest = dataBaseController.getDataSet(testClassifier.getVariable(), course.getId(), dataBaseController.TEST);
             
-            List<Student> students = studentRepository.findByCourseTest(course.getId());
+            //List<Student> students = studentRepository.findByCourseTest(course.getId());
 
-            System.out.println("Tamanho -- Students: "+students.size() + " -- DataSetTeste: "+dataSetTest.size() + " -- DataSetTreino: "+dataSetTraining.size());
-            classifyController.ClassifyTest(testClassifier, classificador, dataSetTraining, dataSetTest, students);
+            //System.out.println("Tamanho -- Students: "+students.size() + " -- DataSetTeste: "+dataSetTest.size() + " -- DataSetTreino: "+dataSetTraining.size());
+            //classifyController.ClassifyTest(testClassifier, classificador, dataSetTraining, dataSetTest, students);
 
             testClassifier.setType(TestClassifier.PATTERN_RESULT);
             testClassifierRepository.save(testClassifier);
