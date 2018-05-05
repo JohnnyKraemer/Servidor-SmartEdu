@@ -145,13 +145,13 @@ public class TestClassifierController {
         for (Course course : coursesList) {
             System.out.println("\n\nCourse "+position_course+" of "+coursesList.size()+" : " + course.getName());
             List<Classify> classifys = course.getClassify();
-            List<br.com.smartedu.model.Classifier> best_classifiers = classifierRepository.findTopXClassifiersByCourse(course.getId(), 3);
+            List<br.com.smartedu.model.Classifier> best_classifiers = classifierRepository.findTopXClassifiersByCourse(course.getId(), 2);
             int position_classifier = 1;
             for (br.com.smartedu.model.Classifier classifier : best_classifiers) {
                 Classify classify = new Classify();
-                System.out.println("Classifier "+position_classifier+" of "+classifys.size()+" : " + classifier.getClass().getSimpleName());
+                System.out.println("Classifier "+position_classifier+" of "+classifys.size()+" : " + classifier.getName());
 
-                List<Variable> best_variable_by_classifier = variableRepository.findTopXVariableByCourseAndClassifier(course.getId(), classifier.getId(), 7);
+                List<Variable> best_variable_by_classifier = variableRepository.findTopXVariableByCourseAndClassifier(course.getId(), classifier.getId(), 3);
                 System.out.println("Variables: "+ best_variable_by_classifier);
 
                 classify.setClassifier(classifier);
@@ -159,10 +159,12 @@ public class TestClassifierController {
                 classify.setPeriodCalculation(period_calculation + 1);
                 classify = classifyRepository.save(classify);
                 classifys.add(classify);
+                position_classifier++;
             }
 
             course.setClassify(classifys);
             courseRepository.save(course);
+            position_course++;
         }
 
         return new ResponseEntity(1, HttpStatus.OK);

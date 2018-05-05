@@ -46,7 +46,8 @@ public class ClassifyController {
 
                 double ed = eval1.evaluateModelOnceAndRecordPrediction(tree, dataSetTeste.instance(i));
 
-                System.out.println("\n\n"+eval1.getHeader().attribute(1).value((int) ed));
+                //System.out.println("\n\n"+eval1.getHeader().attribute(1).value((int) ed));
+                System.out.println("\n\n"+eval1.getHeader().attribute(eval1.getHeader().numAttributes()-1).value((int) ed));
                 System.out.println("Predição do classificador: "+ed);
                 System.out.println("Resultado: "+eval1.correct());
 
@@ -54,11 +55,10 @@ public class ClassifyController {
                 String[] arrayValores = evadir.split(" ");
 
                 System.out.println(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1) + ": " +arrayValores[0] + " - "+ arrayValores[1] + " - " + arrayValores[2] + " - " + arrayValores[3] + " - " + arrayValores[4] + " - " + arrayValores[5]);
-                System.out.println(eval1.getHeader().attribute(1).value(0));
 
                 Probability probabilidade = new Probability();
 
-                if(eval1.getHeader().attribute(1).value(0) == "Evadido" ){
+                if(eval1.getHeader().attribute(eval1.getHeader().numAttributes()-1).value(0) == "Evadido" ){
                     probabilidade.setProbability_evasion(Double.parseDouble(arrayValores[4]));
                 }else{
                     probabilidade.setProbability_evasion(Double.parseDouble(arrayValores[5]));
@@ -80,9 +80,9 @@ public class ClassifyController {
 
             //System.out.println(probs);
 
-            for (Probability prob : probs) {
-                System.out.println("\nNome: " + prob.getStudent().getName() + "\nProb: " + prob.getProbability_evasion() + "\n\n");
-            }
+            //for (Probability prob : probs) {
+            //    System.out.println("\nNome: " + prob.getStudent().getName() + "\nProb: " + prob.getProbability_evasion() + "\n\n");
+            //}
 
 
         } catch (Exception e) {
@@ -142,7 +142,7 @@ public class ClassifyController {
                 Evaluation eval1 = new Evaluation(training);
                 double ed = eval1.evaluateModelOnceAndRecordPrediction(tree, dataSetTeste.instance(i));
 
-                //System.out.println("\n\n"+eval1.getHeader().attribute(1).value((int) ed));
+                //System.out.println("\n\n"+eval1.getHeader().attribute(eval1.getHeader().numAttributes()-1).value((int) ed));
                 //System.out.println("Predição do classificador: "+ed);
                 //System.out.println("Resultado: "+eval1.correct());
 
@@ -152,7 +152,7 @@ public class ClassifyController {
                 //System.out.println(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1) + ": " +arrayValores[0] + " - "+ arrayValores[1] + " - " + arrayValores[2] + " - " + arrayValores[3] + " - " + arrayValores[4] + " - " + arrayValores[5]);
 
                 //System.out.println(eval1.getHeader().attribute(1).value(0));
-                if(eval1.getHeader().attribute(1).value(0) == "Evadido" ){
+                if(eval1.getHeader().attribute(eval1.getHeader().numAttributes()-1).value(0) == "Evadido" ){
                     probEvasao[i] = Double.parseDouble(arrayValores[4]);
                 }else{
                     probEvasao[i] = Double.parseDouble(arrayValores[5]);
