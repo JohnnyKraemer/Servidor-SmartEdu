@@ -14,8 +14,6 @@ import java.util.List;
 @ToString
 public class TestClassifier implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     public static final int TEST_BASE = 0;
     public static final int TEST_ALL = 1;
     public static final int TEST_SINGLE = 2;
@@ -39,7 +37,7 @@ public class TestClassifier implements Serializable {
     @Column(name = "period_calculation")
     private int periodCalculation;
 
-    private int period;
+    //private int period;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "classifier_id", referencedColumnName = "id")
@@ -50,15 +48,15 @@ public class TestClassifier implements Serializable {
     private Course course;
 
     private int success;
-
-    private int failure;
-
     private int success_evaded;
-
     private int success_not_evaded;
 
-    private int failure_evaded;
+    private int neuter;
+    private int neuter_evaded;
+    private int neuter_not_evaded;
 
+    private int failure;
+    private int failure_evaded;
     private int failure_not_evaded;
 
     @Temporal(TemporalType.TIMESTAMP)

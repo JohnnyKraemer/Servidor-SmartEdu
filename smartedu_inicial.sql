@@ -163,7 +163,7 @@ CREATE TABLE `course_classify` (
 
 CREATE TABLE `detail` (
   `id` int(10) UNSIGNED NOT NULL,
-  `periodo_carga` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `loading_period` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `periodo` smallint(6) DEFAULT NULL,
   `matriz` smallint(6) DEFAULT NULL,
   `idade_situacao` smallint(6) DEFAULT NULL,

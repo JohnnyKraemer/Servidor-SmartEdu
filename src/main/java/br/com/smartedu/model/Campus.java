@@ -11,15 +11,15 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-@Data @EqualsAndHashCode @ToString
+@Data
+@EqualsAndHashCode
+@ToString
 public class Campus implements Serializable {
-
-    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String city;
+    private int useClassify;
 }

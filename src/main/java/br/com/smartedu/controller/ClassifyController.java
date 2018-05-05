@@ -5,8 +5,6 @@ import br.com.smartedu.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import weka.classifiers.Evaluation;
 import weka.core.Instances;
 
@@ -22,6 +20,9 @@ public class ClassifyController {
     @Autowired
     private TestClassifierRepository testClassifierRepository;
 
+    @Autowired
+    private SituationRepository situationRepository;
+
     public void ClassifyTest(TestClassifier testClassifier, weka.classifiers.Classifier tree, Instances dataSetTraining, Instances dataSetTest, List<Student> students) throws Exception {
         Instances dataSetTeste = new Instances(dataSetTest);
         dataSetTeste.deleteAttributeAt(0);
@@ -34,19 +35,39 @@ public class ClassifyController {
 
         try {
             //System.out.println(num_instances - 1);
-            for (int i = 0; i <= (num_instances - 1); i++) {
+            //Instances training = new Instances(dataSetTreino);
+            //tree.buildClassifier(training);
+           // Evaluation eval1 = new Evaluation(training);
 
+            for (int i = 0; i <= (num_instances - 1); i++) {
                 Instances training = new Instances(dataSetTreino);
                 tree.buildClassifier(training);
                 Evaluation eval1 = new Evaluation(training);
+
                 double ed = eval1.evaluateModelOnceAndRecordPrediction(tree, dataSetTeste.instance(i));
+
+                System.out.println("\n\n"+eval1.getHeader().attribute(1).value((int) ed));
+                System.out.println("Predição do classificador: "+ed);
+                System.out.println("Resultado: "+eval1.correct());
 
                 String evadir = String.valueOf(eval1.predictions().toArray()[0]);
                 String[] arrayValores = evadir.split(" ");
 
+                System.out.println(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1) + ": " +arrayValores[0] + " - "+ arrayValores[1] + " - " + arrayValores[2] + " - " + arrayValores[3] + " - " + arrayValores[4] + " - " + arrayValores[5]);
+                System.out.println(eval1.getHeader().attribute(1).value(0));
+
                 Probability probabilidade = new Probability();
-                probabilidade.setProbability_evasion(Double.parseDouble(arrayValores[4]));
-                probabilidade.setState("Não Evadido");
+
+                if(eval1.getHeader().attribute(1).value(0) == "Evadido" ){
+                    probabilidade.setProbability_evasion(Double.parseDouble(arrayValores[4]));
+                }else{
+                    probabilidade.setProbability_evasion(Double.parseDouble(arrayValores[5]));
+                }
+
+
+                //Situation situation = situationRepository.findBySituationShort("Não evadido");
+                probabilidade.setSituation("Não evadido");
+
                 probabilidade.setTestClassifier(testClassifier);
                 probabilidade.setStudent(students.get(i));
                 probabilitys.add(probabilidade);
@@ -59,9 +80,9 @@ public class ClassifyController {
 
             //System.out.println(probs);
 
-            //for (Probability prob : probs) {
-            //    System.out.println("\nNome: " + prob.getStudent().getNome() + "\nProb: " + prob.getProbability_evasion() + "\n\n");
-            //}
+            for (Probability prob : probs) {
+                System.out.println("\nNome: " + prob.getStudent().getName() + "\nProb: " + prob.getProbability_evasion() + "\n\n");
+            }
 
 
         } catch (Exception e) {
@@ -81,7 +102,9 @@ public class ClassifyController {
         String[] situacao = new String[num_instances];
         int acertoEvadido = 0;
         int erroEvadido = 0;
+        int intervaloEvadido = 0;
         int acertoNEvadido = 0;
+        int intervaloNaoEvadido = 0;
         int erroNEvadido = 0;
 
         String st_Classificador = tree.getClass().getName();
@@ -104,7 +127,7 @@ public class ClassifyController {
         test_classifier_before.setCourse(curso);
         test_classifier_before.setStart(start_test_classifier);
         test_classifier_before.setType(type);
-        test_classifier_before.setPeriod(period);
+        //test_classifier_before.setInterval(0);
         test_classifier_before.setResult(TestClassifier.RESULT_ERROR);
         testClassifierRepository.save(test_classifier_before);
 
@@ -119,35 +142,58 @@ public class ClassifyController {
                 Evaluation eval1 = new Evaluation(training);
                 double ed = eval1.evaluateModelOnceAndRecordPrediction(tree, dataSetTeste.instance(i));
 
+                //System.out.println("\n\n"+eval1.getHeader().attribute(1).value((int) ed));
+                //System.out.println("Predição do classificador: "+ed);
+                //System.out.println("Resultado: "+eval1.correct());
+
                 String evadir = String.valueOf(eval1.predictions().toArray()[0]);
                 String[] arrayValores = evadir.split(" ");
 
-                probEvasao[i] = Double.parseDouble(arrayValores[4]);
+                //System.out.println(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1) + ": " +arrayValores[0] + " - "+ arrayValores[1] + " - " + arrayValores[2] + " - " + arrayValores[3] + " - " + arrayValores[4] + " - " + arrayValores[5]);
+
+                //System.out.println(eval1.getHeader().attribute(1).value(0));
+                if(eval1.getHeader().attribute(1).value(0) == "Evadido" ){
+                    probEvasao[i] = Double.parseDouble(arrayValores[4]);
+                }else{
+                    probEvasao[i] = Double.parseDouble(arrayValores[5]);
+                }
+
 
                 if ("Evadido".equals(String.valueOf(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1)))) {
-                    if (probEvasao[i] > 0.5) {
-                        acertoEvadido++;
-                        situacao[i] = "Evadido";
-                    } else if (probEvasao[i] <= 0.5) {
+                    situacao[i] = "Evadido";
+                    if (probEvasao[i] <= 0.4) {
                         erroEvadido++;
-                        situacao[i] = "Evadido";
+                    } else if (probEvasao[i] > 0.4 && probEvasao[i] <= 0.6) {
+                        intervaloEvadido++;
+                    } else if (probEvasao[i] > 0.6) {
+                        acertoEvadido++;
                     }
                 } else if ("Formado".equals(String.valueOf(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1)))) {
-                    if (probEvasao[i] <= 0.5) {
+                    situacao[i] = "Formado";
+                    if (probEvasao[i] <= 0.4) {
                         acertoNEvadido++;
-                        situacao[i] = "Formado";
-                    } else if (probEvasao[i] > 0.5) {
+                    } else if (probEvasao[i] > 0.4 && probEvasao[i] <= 0.6) {
+                        intervaloNaoEvadido++;
+                    } else if (probEvasao[i] > 0.6) {
                         erroNEvadido++;
-                        situacao[i] = "Formado";
                     }
                 } else if ("'Não Evadido'".equals(String.valueOf(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1)))) {
                     situacao[i] = "Não Evadido";
+                    if (probEvasao[i] <= 0.4) {
+                        acertoNEvadido++;
+                    } else if (probEvasao[i] > 0.4 && probEvasao[i] <= 0.6) {
+                        intervaloNaoEvadido++;
+                    } else if (probEvasao[i] > 0.6) {
+                        erroNEvadido++;
+                    }
                 } else if ("Outro".equals(String.valueOf(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1)))) {
                     situacao[i] = "Outro";
                 }
                 Probability probabilidade = new Probability();
                 probabilidade.setProbability_evasion(probEvasao[i]);
-                probabilidade.setState(situacao[i]);
+
+                //Situation situation = situationRepository.findBySituationShort(situacao[i]);
+                probabilidade.setSituation(situacao[i]);
 
                 //TestClassifier testeClassificadorDurante = testClassifierRepository.findByPeriodCalculation(1);
                 probabilidade.setTestClassifier(test_classifier_before);
@@ -159,7 +205,8 @@ public class ClassifyController {
                 //probs.add(probabilidade);
                 probabilitys.add(probabilidade);
 
-                //System.out.println("\n\nAluno: "+students.get(i).getNome());
+                //System.out.println("\n\nAluno: " + students.get(i).getName());
+                //System.out.println("Prob: " + probabilidade.getProbability_evasion() + " - " + probabilidade.getSituation());
                 //for(Probability probability : probs){
                 //    System.out.println(probability.getId()+" - "+probability.getState());
                 //}
@@ -185,14 +232,30 @@ public class ClassifyController {
             test_classifier_after.setSuccess_not_evaded(acertoNEvadido);
             test_classifier_after.setFailure_evaded(erroEvadido);
             test_classifier_after.setFailure_not_evaded(erroNEvadido);
+            test_classifier_after.setNeuter(intervaloEvadido + intervaloNaoEvadido);
+            test_classifier_after.setNeuter_evaded(intervaloEvadido);
+            test_classifier_after.setNeuter_not_evaded(intervaloNaoEvadido);
             test_classifier_after.setEnd(end_test_classifier);
             test_classifier_after.setTime_seconds((int) segundos);
             test_classifier_after.setResult(TestClassifier.RESULT_SUCCESS);
 
+            System.out.println("\n\n");
+            System.out.println("-- Sucesso: " + test_classifier_after.getSuccess());
+            System.out.println("-- Failuere: " + test_classifier_after.getFailure());
+            System.out.println("-- Intervalo: " + test_classifier_after.getNeuter());
+            System.out.println("-- Sucesso Evadido: " + test_classifier_after.getSuccess_evaded());
+            System.out.println("-- Failuere Evadido: " + test_classifier_after.getFailure_evaded());
+            System.out.println("-- Sucesso Não Evadido: " + test_classifier_after.getSuccess_not_evaded());
+            System.out.println("-- Failuere Não Evadido: " + test_classifier_after.getFailure_not_evaded());
+            System.out.println("-- Intervalo Evadido: " + test_classifier_after.getNeuter_evaded());
+            System.out.println("-- Intervalo  Não Evadido: " + test_classifier_after.getNeuter_not_evaded());
+            System.out.println("-- Total: " + (test_classifier_after.getSuccess() + test_classifier_after.getFailure() + test_classifier_after.getNeuter()));
+
+            System.out.println("\n\n");
             //System.out.println("Fim: " + end_test_classifier);
             //System.out.println("Tempo percorrido: " + segundos + " segundos.");
 
-            Calendar datetime = Calendar.getInstance();
+            //Calendar datetime = Calendar.getInstance();
 
             test_classifier_after.setPeriodCalculation(period_calculation);
             testClassifierRepository.save(test_classifier_after);

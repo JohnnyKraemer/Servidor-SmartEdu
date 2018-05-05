@@ -71,10 +71,13 @@ public class TestClassifierController {
 
     @Autowired
     private ClassifyController classifyController;
-    //private ClassifyController classifyController = new ClassifyController();
 
     @GetMapping("/")
     public ResponseEntity classify() throws Exception {
+        Situation situation = situationRepository.findBySituationLong("Formado");
+        situation.setSituationShort("Formado");
+        situationRepository.save(situation);
+
         base();
         setBestBase();
         classifyBestBase();
@@ -113,6 +116,8 @@ public class TestClassifierController {
                         variables.add(variable);
 
                         Instances dataSet = dataBaseController.getDataSet(variables, course.getId(), dataBaseController.TRAINING);
+                        System.out.println("Tamanho -- Students: "+students.size() + " -- DataSet: "+dataSet.size());
+
                         classifyController.ClassifyTraining(classifiersList.get(position_classifier-1) ,classificador, dataSet, students, course, variables, TestClassifier.TEST_BASE, period_calculation + 1, 0);
                         position_variable++;
                     }
@@ -141,13 +146,12 @@ public class TestClassifierController {
             System.out.println("\n\nCourse "+position_course+" of "+coursesList.size()+" : " + course.getName());
             List<Classify> classifys = course.getClassify();
             List<br.com.smartedu.model.Classifier> best_classifiers = classifierRepository.findTopXClassifiersByCourse(course.getId(), 3);
-            //System.out.println(best_classifiers);
             int position_classifier = 1;
             for (br.com.smartedu.model.Classifier classifier : best_classifiers) {
                 Classify classify = new Classify();
                 System.out.println("Classifier "+position_classifier+" of "+classifys.size()+" : " + classifier.getClass().getSimpleName());
 
-                List<Variable> best_variable_by_classifier = variableRepository.findTopXVariableByCourseAndClassifier(course.getId(), classifier.getId(), 3);
+                List<Variable> best_variable_by_classifier = variableRepository.findTopXVariableByCourseAndClassifier(course.getId(), classifier.getId(), 7);
                 System.out.println("Variables: "+ best_variable_by_classifier);
 
                 classify.setClassifier(classifier);
@@ -173,9 +177,7 @@ public class TestClassifierController {
         System.out.println("---------------------------------------------------------------");
 
         List<Course> coursesList = courseRepository.findByUseClassify(1);
-
         int period_calculation = testClassifierRepository.findMaxPeriodCalculationByType(TestClassifier.TEST_PATTERN);
-
         int position_course = 1;
 
         for (Course course : coursesList) {
@@ -203,6 +205,9 @@ public class TestClassifierController {
                         System.out.println("Combination "+position_combination+" of "+combinations.size()+" : " + newVariables.toString());
 
                         Instances dataSet = dataBaseController.getDataSet(newVariables, course.getId(), dataBaseController.TRAINING);
+
+                        System.out.println("Tamanho -- Students: "+students.size() + " -- DataSet: "+dataSet.size());
+
                         classifyController.ClassifyTraining(classify.getClassifier(),classificador, dataSet, students, course, newVariables, TestClassifier.TEST_PATTERN, period_calculation + 1, 0);
                         position_combination++;
                     }
@@ -240,7 +245,8 @@ public class TestClassifierController {
             Instances dataSetTest = dataBaseController.getDataSet(testClassifier.getVariable(), course.getId(), dataBaseController.TEST);
             
             List<Student> students = studentRepository.findByCourseTest(course.getId());
-            
+
+            System.out.println("Tamanho -- Students: "+students.size() + " -- DataSetTeste: "+dataSetTest.size() + " -- DataSetTreino: "+dataSetTraining.size());
             classifyController.ClassifyTest(testClassifier, classificador, dataSetTraining, dataSetTest, students);
 
             testClassifier.setType(TestClassifier.PATTERN_RESULT);

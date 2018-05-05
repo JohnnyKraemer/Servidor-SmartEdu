@@ -51,7 +51,7 @@ public class StudentController {
 
     @GetMapping("/codigo/{codigo}")
     public ResponseEntity getByCodigo(@PathVariable("codigo") Long codigo) {
-        List<Student> object = repository.findByCodigo(codigo);
+        List<Student> object = repository.findByCode(codigo);
         if (object == null) {
             return new ResponseEntity("Não existe Aluno para este ID: " + codigo, HttpStatus.NOT_FOUND);
         }
@@ -78,5 +78,13 @@ public class StudentController {
             return new ResponseEntity("Não existe Aluno para este ID", HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity(object, HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "http://localhost")
+    @PostMapping("/upload")
+    public ResponseEntity upload(@RequestBody String data) {
+        //JsonParser(data);
+        System.out.println(data);
+        return new ResponseEntity(data, HttpStatus.OK);
     }
 }

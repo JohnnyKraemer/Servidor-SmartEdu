@@ -1,6 +1,7 @@
 package br.com.smartedu.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -10,15 +11,44 @@ import java.util.Set;
 
 @Entity
 @Data
+@EqualsAndHashCode
 @ToString
 public class Student implements Serializable {
-
-    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long codigo;
+
+    private Long code;
+    private String name;
+    private String email;
+    private String genre;
+    private Integer age;
+    private Double enem_human;
+    private Double enem_language;
+    private Double enem_math;
+    private Double enem_nature;
+    private Double enem_redaction;
+    private Double sisu;
+    private String quota;
+    private Integer year_ingress;
+    private Integer semester_ingress;
+
+    @Temporal(TemporalType.DATE)
+    private Date birth_date;
+
+    private String type_ingress;
+    private String country;
+    private String municipality_sisu;
+    private String municipality;
+    private String changed_course;
+    private String changed_course_campus;
+    private Integer entries_other_course;
+    private Integer entries_course;
+    private String state;
+    private String state_sisu;
+
+   /* private Long codigo;
     private String nome;
     private String genero;
     private Integer idade_ingresso;
@@ -31,10 +61,8 @@ public class Student implements Serializable {
     private String cota;
     private Integer ano_ingresso;
     private Integer semestre_ingresso;
-
     @Temporal(TemporalType.DATE)
     private Date data_nascimento;
-
     private String forma_ingresso;
     private String pais_nascimento;
     private String municipio_sisu;
@@ -44,7 +72,7 @@ public class Student implements Serializable {
     private Integer entradas_outro_curso;
     private Integer entradas_curso;
     private String uf;
-    private String uf_sisu;
+    private String uf_sisu;*/
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "course_id", referencedColumnName = "id")
@@ -53,6 +81,4 @@ public class Student implements Serializable {
     //@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     //private Set<Probability> probability;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Detail> detail;
 }

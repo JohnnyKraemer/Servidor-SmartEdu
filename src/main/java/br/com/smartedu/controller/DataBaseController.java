@@ -39,24 +39,15 @@ public class DataBaseController {
         sql += "\nsituation.situation_short\n";
 
         sql += "FROM student\n"
-                + "LEFT JOIN student_detail\n"
-                + "ON student.id = student_detail.student_id\n"
                 + "LEFT JOIN detail\n"
-                + "ON detail.id = student_detail.detail_id\n"
+                + "ON detail.student_id = student.id\n"
                 + "LEFT JOIN situation\n"
                 + "ON situation.id = detail.situation_id\n"
                 + "LEFT JOIN course\n"
                 + "ON course.id = student.course_id\n"
                 + "LEFT JOIN campus\n"
                 + "ON campus.id = course.campus_id\n"
-                + "WHERE detail.id = \n"
-                + "	(SELECT  max(detail.id)\n"
-                + "	FROM student s\n"
-                + "	LEFT JOIN student_detail\n"
-                + "	ON s.id = student_detail.student_id\n"
-                + "	LEFT JOIN detail\n"
-                + "	ON detail.id = student_detail.detail_id\n"
-                + "	WHERE s.id = student.id)\n"
+                + "WHERE detail.loading_period = (SELECT MAX(detail.loading_period) FROM detail WHERE detail.student_id = student.id)\n"
                 + "AND course.id =  " + idCurso + "\n"
                 + "AND (situation.situation_short LIKE 'Evadido' OR situation.situation_short LIKE 'Formado')\n"
                 + "GROUP BY student.id\n"
@@ -77,24 +68,15 @@ public class DataBaseController {
         sql += "\nsituation.situation_short\n";
 
         sql += "FROM student\n"
-                + "LEFT JOIN student_detail\n"
-                + "ON student.id = student_detail.student_id\n"
                 + "LEFT JOIN detail\n"
-                + "ON detail.id = student_detail.detail_id\n"
+                + "ON detail.student_id = student.id\n"
                 + "LEFT JOIN situation\n"
                 + "ON situation.id = detail.situation_id\n"
                 + "LEFT JOIN course\n"
                 + "ON course.id = student.course_id\n"
                 + "LEFT JOIN campus\n"
                 + "ON campus.id = course.campus_id\n"
-                + "WHERE detail.id = \n"
-                + "	(SELECT  max(detail.id)\n"
-                + "	FROM student s\n"
-                + "	LEFT JOIN student_detail\n"
-                + "	ON s.id = student_detail.student_id\n"
-                + "	LEFT JOIN detail\n"
-                + "	ON detail.id = student_detail.detail_id\n"
-                + "	WHERE s.id = student.id)\n"
+                + "WHERE detail.loading_period = (SELECT MAX(detail.loading_period) FROM detail WHERE detail.student_id = student.id)\n"
                 + "AND course.id =  " + idCurso + "\n"
                 + "AND (situation.situation_short LIKE 'Não Evadido')\n"
                 + "GROUP BY student.id\n"
@@ -104,6 +86,7 @@ public class DataBaseController {
         return sql;
     }
 
+    /*
     public String montaSQLByPeriod(List<Variable> variaveis, long idCurso, int period) throws Exception {
         //System.out.println("------------------------------------------ Data Set Teste ------------------------------------------");
 
@@ -125,16 +108,7 @@ public class DataBaseController {
                 + "ON course.id = student.course_id\n"
                 + "LEFT JOIN campus\n"
                 + "ON campus.id = course.campus_id\n"
-                + "WHERE detail.id = \n"
-                + "	(SELECT  max(detail.id)\n"
-                + "	FROM student s\n"
-                + "	LEFT JOIN student_detail\n"
-                + "	ON s.id = student_detail.student_id\n"
-                + "	LEFT JOIN detail\n"
-                + "	ON detail.id = student_detail.detail_id\n"
-                + "	WHERE  detail.periodo_carga != (SELECT MAX(detail.periodo_carga) FROM detail)\n"
-                + "     AND detail.periodo = " + period + "\n"
-                + "     AND s.id = student.id)\n"
+                + "WHERE detail.loading_period = (SELECT MAX(detail.loading_period) FROM detail WHERE detail.student_id = student.id)\n"
                 + "AND course.id =  " + idCurso + "\n"
                 + "AND (situation.situation_short LIKE 'Evadido' OR situation.situation_short LIKE 'Não Evadido')\n"
                 + "GROUP BY student.id\n"
@@ -143,6 +117,7 @@ public class DataBaseController {
         //System.out.println(sql);
         return sql;
     }
+    */
 
     public Instances getDataSet(List<Variable> variaveis, long idCurso, int type) throws Exception {
         InstanceQuery query = ConectaBanco();
@@ -184,6 +159,7 @@ public class DataBaseController {
         return dataSet;
     }
 
+    /*
     public Instances getDataSetByPeriod(List<Variable> variaveis, long idCurso, int period) throws Exception {
         InstanceQuery query = ConectaBanco();
         query.setQuery(montaSQLByPeriod(variaveis, idCurso, period));
@@ -217,4 +193,5 @@ public class DataBaseController {
         dataSet = discretize.discretize(dataSet, col_Discretize, col_NumericToNominal, false);
         return dataSet;
     }
+    */
 }

@@ -9,10 +9,10 @@ import java.util.List;
 public interface DetailRepository extends JpaRepository<Detail, Long> {
 
     
-    @Query(value = "select max(d.periodo_carga) from Detail d", nativeQuery = true)
+    @Query(value = "select max(d.loading_period) from Detail d", nativeQuery = true)
     String findMaxPeriodo_Carga();
    
-    Detail findOneByPeriodoCarga(String periodo_carga);
+    Detail findOneByLoadingPeriod(String loadingPeriod);
     
     List<Detail> findAllByOrderByIdAsc();
 
