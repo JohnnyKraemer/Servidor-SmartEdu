@@ -49,7 +49,7 @@ public class DataBaseController {
                 + "ON campus.id = course.campus_id\n"
                 + "WHERE detail.loading_period = (SELECT MAX(detail.loading_period) FROM detail WHERE detail.student_id = student.id)\n"
                 + "AND course.id =  " + idCurso + "\n"
-                + "AND (situation.situation_short LIKE 'Evadido' OR situation.situation_short LIKE 'Não Evadido')\n"
+                + "AND (situation.situation_short LIKE 'Evadido' OR situation.situation_short LIKE 'Formado')\n"
                 + "GROUP BY student.id\n"
                 + "ORDER BY student.id";
 

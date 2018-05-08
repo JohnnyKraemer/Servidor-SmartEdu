@@ -22,7 +22,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
             "LEFT JOIN detail ON student.id = detail.student_id\n" +
             "LEFT JOIN situation ON detail.situation_id = situation.id\n" +
             "WHERE detail.loading_period = (SELECT MAX(detail.loading_period) FROM detail WHERE detail.student_id = student.id)\n" +
-            "AND (situation.situation_short LIKE 'Evadido' OR situation.situation_short LIKE 'Não Evadido')\n" +
+            "AND (situation.situation_short LIKE 'Evadido' OR situation.situation_short LIKE 'Formado')\n" +
             "AND student.course_id = :course_id\n" +
             "ORDER BY student.id;", nativeQuery = true)
     List<Student> findByCourse(@Param("course_id") Long course_id);

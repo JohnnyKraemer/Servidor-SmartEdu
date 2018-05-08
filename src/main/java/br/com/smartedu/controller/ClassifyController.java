@@ -47,14 +47,14 @@ public class ClassifyController {
                 double ed = eval1.evaluateModelOnceAndRecordPrediction(tree, dataSetTeste.instance(i));
 
                 //System.out.println("\n\n"+eval1.getHeader().attribute(1).value((int) ed));
-                System.out.println("\n\n"+eval1.getHeader().attribute(eval1.getHeader().numAttributes()-1).value((int) ed));
-                System.out.println("Predição do classificador: "+ed);
-                System.out.println("Resultado: "+eval1.correct());
+                //System.out.println("\n\n"+eval1.getHeader().attribute(eval1.getHeader().numAttributes()-1).value((int) ed));
+                //System.out.println("Predição do classificador: "+ed);
+                //System.out.println("Resultado: "+eval1.correct());
 
                 String evadir = String.valueOf(eval1.predictions().toArray()[0]);
                 String[] arrayValores = evadir.split(" ");
 
-                System.out.println(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1) + ": " +arrayValores[0] + " - "+ arrayValores[1] + " - " + arrayValores[2] + " - " + arrayValores[3] + " - " + arrayValores[4] + " - " + arrayValores[5]);
+                //System.out.println(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1) + ": " +arrayValores[0] + " - "+ arrayValores[1] + " - " + arrayValores[2] + " - " + arrayValores[3] + " - " + arrayValores[4] + " - " + arrayValores[5]);
 
                 Probability probabilidade = new Probability();
 
@@ -150,14 +150,14 @@ public class ClassifyController {
                 String[] arrayValores = evadir.split(" ");
 
                 //System.out.println(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1) + ": " +arrayValores[0] + " - "+ arrayValores[1] + " - " + arrayValores[2] + " - " + arrayValores[3] + " - " + arrayValores[4] + " - " + arrayValores[5]);
+                //System.out.println(eval1.getHeader().attribute(eval1.getHeader().numAttributes()-1).value(0));
 
-                //System.out.println(eval1.getHeader().attribute(1).value(0));
-                if(eval1.getHeader().attribute(eval1.getHeader().numAttributes()-1).value(0) == "Evadido" ){
+                if("Evadido".equals(eval1.getHeader().attribute(eval1.getHeader().numAttributes()-1).value(0))){
                     probEvasao[i] = Double.parseDouble(arrayValores[4]);
                 }else{
                     probEvasao[i] = Double.parseDouble(arrayValores[5]);
                 }
-
+                //System.out.println(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1)+ " - "+probEvasao[i]);
 
                 if ("Evadido".equals(String.valueOf(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1)))) {
                     situacao[i] = "Evadido";
@@ -239,17 +239,18 @@ public class ClassifyController {
             test_classifier_after.setTime_seconds((int) segundos);
             test_classifier_after.setResult(TestClassifier.RESULT_SUCCESS);
 
-            System.out.println("\n\n");
-            System.out.println("-- Sucesso: " + test_classifier_after.getSuccess());
-            System.out.println("-- Failuere: " + test_classifier_after.getFailure());
-            System.out.println("-- Intervalo: " + test_classifier_after.getNeuter());
-            System.out.println("-- Sucesso Evadido: " + test_classifier_after.getSuccess_evaded());
-            System.out.println("-- Failuere Evadido: " + test_classifier_after.getFailure_evaded());
-            System.out.println("-- Sucesso Não Evadido: " + test_classifier_after.getSuccess_not_evaded());
-            System.out.println("-- Failuere Não Evadido: " + test_classifier_after.getFailure_not_evaded());
-            System.out.println("-- Intervalo Evadido: " + test_classifier_after.getNeuter_evaded());
-            System.out.println("-- Intervalo  Não Evadido: " + test_classifier_after.getNeuter_not_evaded());
-            System.out.println("-- Total: " + (test_classifier_after.getSuccess() + test_classifier_after.getFailure() + test_classifier_after.getNeuter()));
+            //System.out.println("\n\n");
+            System.out.println("-- Sucesso: " + test_classifier_after.getSuccess() + " - " + (float)((test_classifier_after.getSuccess()*100.00)/(test_classifier_after.getSuccess() + test_classifier_after.getFailure() + test_classifier_after.getNeuter())) + " %");
+            System.out.println("-- Failuere: " + test_classifier_after.getFailure() +" - " + (float)((test_classifier_after.getFailure()*100.00)/(test_classifier_after.getSuccess() + test_classifier_after.getFailure() + test_classifier_after.getNeuter())) + " %");
+            System.out.println("-- Intervalo: " + test_classifier_after.getNeuter() +" - " + (float)((test_classifier_after.getNeuter()*100.00)/(test_classifier_after.getSuccess() + test_classifier_after.getFailure() + test_classifier_after.getNeuter())) + " %");
+            System.out.println("-- Tempo: "+test_classifier_after.getTime_seconds());
+            //System.out.println("-- Sucesso Evadido: " + test_classifier_after.getSuccess_evaded());
+            //System.out.println("-- Failuere Evadido: " + test_classifier_after.getFailure_evaded());
+            //System.out.println("-- Sucesso Não Evadido: " + test_classifier_after.getSuccess_not_evaded());
+            //System.out.println("-- Failuere Não Evadido: " + test_classifier_after.getFailure_not_evaded());
+            //System.out.println("-- Intervalo Evadido: " + test_classifier_after.getNeuter_evaded());
+            //System.out.println("-- Intervalo  Não Evadido: " + test_classifier_after.getNeuter_not_evaded());
+            //System.out.println("-- Total: " + (test_classifier_after.getSuccess() + test_classifier_after.getFailure() + test_classifier_after.getNeuter()));
 
             System.out.println("\n\n");
             //System.out.println("Fim: " + end_test_classifier);

@@ -75,14 +75,20 @@ public class TestClassifierController {
     @GetMapping("/")
     public ResponseEntity classify() throws Exception {
         Situation situation = situationRepository.findBySituationLong("Formado");
-        //situation.setSituationShort("Formado");
-        situation.setSituationShort("Não Evadido");
+        situation.setSituationShort("Formado");
+        //situation.setSituationShort("Não Evadido");
         situationRepository.save(situation);
 
         base();
         setBestBase();
         classifyBestBase();
         setPattern();
+
+        Situation situation1 = situationRepository.findBySituationLong("Formado");
+        situation1.setSituationShort("Formado");
+        //situation.setSituationShort("Não Evadido");
+        situationRepository.save(situation1);
+
         return new ResponseEntity(1, HttpStatus.OK);
     }
 
@@ -184,14 +190,12 @@ public class TestClassifierController {
         int position_course = 1;
 
         for (Course course : coursesList) {
-            System.out.println("\n\nCourse "+position_course+" of "+coursesList.size()+" : " + course.getName());
+
             List<Classify> classifys = classifyRepository.findByCourseAndMaxPeriodCalcularion(course.getId());
             List<Student> students = studentRepository.findByCourse(course.getId());
             int position_classifier = 1;
-
             for (Classify classify : classifys) {
                 Classifier classificador = classifierController.NewClassifier(classify.getClassifier());
-                System.out.println("Classifier "+position_classifier+" of "+classifys.size()+" : " + classificador.getClass().getSimpleName());
                 List combinations = classifyController.Combinations(classify.getVariable());
                 if (classificador != null) {
                     int position_combination = 1;
@@ -204,12 +208,13 @@ public class TestClassifierController {
                         }
 
 
-
+                        System.out.println("\n\nCourse "+position_course+" of "+coursesList.size()+" : " + course.getName());
+                        System.out.println("Classifier "+position_classifier+" of "+classifys.size()+" : " + classificador.getClass().getSimpleName());
                         System.out.println("Combination "+position_combination+" of "+combinations.size()+" : " + newVariables.toString());
 
                         Instances dataSet = dataBaseController.getDataSet(newVariables, course.getId(), dataBaseController.TRAINING);
 
-                        System.out.println("Tamanho -- Students: "+students.size() + " -- DataSet: "+dataSet.size());
+                        //System.out.println("Tamanho -- Students: "+students.size() + " -- DataSet: "+dataSet.size());
 
                         classifyController.ClassifyTraining(classify.getClassifier(),classificador, dataSet, students, course, newVariables, TestClassifier.TEST_PATTERN, period_calculation + 1, 0);
                         position_combination++;
@@ -243,14 +248,14 @@ public class TestClassifierController {
             System.out.println("Sucesso: " + testClassifier.getSuccess());
             System.out.println("Falha: " + testClassifier.getFailure());
 
-            //Classifier classificador = classifierController.NewClassifier(testClassifier.getClassifier());
-            //Instances dataSetTraining = dataBaseController.getDataSet(testClassifier.getVariable(), course.getId(), dataBaseController.TRAINING);
-            //Instances dataSetTest = dataBaseController.getDataSet(testClassifier.getVariable(), course.getId(), dataBaseController.TEST);
+            Classifier classificador = classifierController.NewClassifier(testClassifier.getClassifier());
+            Instances dataSetTraining = dataBaseController.getDataSet(testClassifier.getVariable(), course.getId(), dataBaseController.TRAINING);
+            Instances dataSetTest = dataBaseController.getDataSet(testClassifier.getVariable(), course.getId(), dataBaseController.TEST);
             
-            //List<Student> students = studentRepository.findByCourseTest(course.getId());
+            List<Student> students = studentRepository.findByCourseTest(course.getId());
 
-            //System.out.println("Tamanho -- Students: "+students.size() + " -- DataSetTeste: "+dataSetTest.size() + " -- DataSetTreino: "+dataSetTraining.size());
-            //classifyController.ClassifyTest(testClassifier, classificador, dataSetTraining, dataSetTest, students);
+            System.out.println("Tamanho -- Students: "+students.size() + " -- DataSetTeste: "+dataSetTest.size() + " -- DataSetTreino: "+dataSetTraining.size());
+            classifyController.ClassifyTest(testClassifier, classificador, dataSetTraining, dataSetTest, students);
 
             testClassifier.setType(TestClassifier.PATTERN_RESULT);
             testClassifierRepository.save(testClassifier);
