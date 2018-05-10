@@ -158,7 +158,7 @@ public class TestClassifierController {
                 Classify classify = new Classify();
                 System.out.println("Classifier "+position_classifier+" of "+classifys.size()+" : " + classifier.getName());
 
-                List<Variable> best_variable_by_classifier = variableRepository.findTopXVariableByCourseAndClassifier(course.getId(), classifier.getId(), 3);
+                List<Variable> best_variable_by_classifier = variableRepository.findTopXVariableByCourseAndClassifier(course.getId(), classifier.getId(), 6);
                 System.out.println("Variables: "+ best_variable_by_classifier);
 
                 classify.setClassifier(classifier);
