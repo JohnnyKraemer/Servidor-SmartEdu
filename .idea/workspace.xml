@@ -3,8 +3,24 @@
   <component name="ChangeListManager">
     <list default="true" id="db961e4a-4b80-4aab-b457-1bfb5626c7d5" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/SmartEdu.iml" afterPath="$PROJECT_DIR$/SmartEdu.iml" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/ClassifyController.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/ClassifyController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/DataBaseController.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/DataBaseController.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierController.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/ClassifierRepository.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/ClassifierRepository.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/ProbabilityRepository.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/ProbabilityRepository.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/TestClassifierRepository.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/TestClassifierRepository.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/VariableRepository.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/VariableRepository.java" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/smartedu/controller/ClassifyController$1.class" afterPath="$PROJECT_DIR$/target/classes/br/com/smartedu/controller/ClassifyController$1.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/smartedu/controller/ClassifyController.class" afterPath="$PROJECT_DIR$/target/classes/br/com/smartedu/controller/ClassifyController.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/smartedu/controller/DataBaseController.class" afterPath="$PROJECT_DIR$/target/classes/br/com/smartedu/controller/DataBaseController.class" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/com/smartedu/controller/TestClassifierController.class" afterPath="$PROJECT_DIR$/target/classes/br/com/smartedu/controller/TestClassifierController.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/smartedu/repository/ClassifierRepository.class" afterPath="$PROJECT_DIR$/target/classes/br/com/smartedu/repository/ClassifierRepository.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/smartedu/repository/ProbabilityRepository.class" afterPath="$PROJECT_DIR$/target/classes/br/com/smartedu/repository/ProbabilityRepository.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/smartedu/repository/TestClassifierRepository.class" afterPath="$PROJECT_DIR$/target/classes/br/com/smartedu/repository/TestClassifierRepository.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/smartedu/repository/VariableRepository.class" afterPath="$PROJECT_DIR$/target/classes/br/com/smartedu/repository/VariableRepository.class" />
+      <change beforePath="$PROJECT_DIR$/teste.sql" afterPath="$PROJECT_DIR$/teste.sql" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,24 +44,171 @@
     <expand />
     <select />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="SmartEdu" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TestClassifierController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TestClassifierController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-643">
-              <caret line="139" column="79" lean-forward="false" selection-start-line="139" selection-start-column="79" selection-end-line="139" selection-end-column="79" />
+            <state relative-caret-position="120">
+              <caret line="117" column="61" lean-forward="true" selection-start-line="117" selection-start-column="61" selection-end-line="117" selection-end-column="61" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClassifyController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/ClassifyController.java">
+      <file leaf-file-name="Course.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/model/Course.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2635">
-              <caret line="163" column="47" lean-forward="false" selection-start-line="163" selection-start-column="47" selection-end-line="163" selection-end-column="47" />
+            <state relative-caret-position="101">
+              <caret line="18" column="43" lean-forward="true" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Evaluation.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/nz/ac/waikato/cms/weka/weka-stable/3.8.0/weka-stable-3.8.0.jar!/weka/classifiers/evaluation/Evaluation.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="43">
+              <caret line="2918" column="26" lean-forward="false" selection-start-line="2918" selection-start-column="26" selection-end-line="2918" selection-end-column="26" />
+              <folding>
+                <marker date="1521723830653" expanded="false" signature="0:104" ph="/.../" />
+                <marker date="1521723830653" expanded="false" signature="151:2180" ph="..." />
+                <marker date="1521723830653" expanded="true" signature="4669:5876" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="5933:5978" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="6058:8694" ph="{...}" />
+                <marker date="1521723830653" expanded="false" signature="8728:8739" ph=" { " />
+                <marker date="1521723830653" expanded="false" signature="8760:8766" ph=" }" />
+                <marker date="1521723830653" expanded="true" signature="8821:8962" ph="{...}" />
+                <marker date="1521723830653" expanded="false" signature="9006:9017" ph=" { " />
+                <marker date="1521723830653" expanded="false" signature="9050:9056" ph=" }" />
+                <marker date="1521723830653" expanded="false" signature="9118:9129" ph=" { " />
+                <marker date="1521723830653" expanded="false" signature="9157:9163" ph=" }" />
+                <marker date="1521723830653" expanded="true" signature="9223:9462" ph="{...}" />
+                <marker date="1521723830653" expanded="false" signature="9509:9520" ph=" { " />
+                <marker date="1521723830653" expanded="false" signature="9551:9557" ph=" }" />
+                <marker date="1521723830653" expanded="true" signature="9623:9995" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="10062:10575" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="10624:10925" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="10968:11618" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="11667:11968" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="12011:12667" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="12709:13080" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="13236:14261" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="14403:14522" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="14623:14948" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="14993:15428" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="15527:45101" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="45206:46667" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="46793:48224" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="48349:49396" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="49532:50915" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="51031:51115" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="51212:51297" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="51386:51465" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="51573:51651" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="51742:51826" ph="{...}" />
+                <marker date="1521723830653" expanded="false" signature="51874:51885" ph=" { " />
+                <marker date="1521723830653" expanded="false" signature="51946:51952" ph=" }" />
+                <marker date="1521723830653" expanded="true" signature="52054:57534" ph="{...}" />
+                <marker date="1521723830653" expanded="false" signature="57574:57585" ph=" { " />
+                <marker date="1521723830653" expanded="false" signature="57609:57615" ph=" }" />
+                <marker date="1521723830653" expanded="true" signature="57681:57804" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="57855:58002" ph="{...}" />
+                <marker date="1521723830653" expanded="false" signature="58039:58050" ph=" { " />
+                <marker date="1521723830653" expanded="false" signature="58074:58080" ph=" }" />
+                <marker date="1521723830653" expanded="false" signature="58120:58131" ph=" { " />
+                <marker date="1521723830653" expanded="false" signature="58183:58189" ph=" }" />
+                <marker date="1521723830653" expanded="false" signature="58226:58237" ph=" { " />
+                <marker date="1521723830653" expanded="false" signature="58261:58267" ph=" }" />
+                <marker date="1521723830653" expanded="false" signature="58302:58313" ph=" { " />
+                <marker date="1521723830653" expanded="false" signature="58356:58362" ph=" }" />
+                <marker date="1521723830653" expanded="false" signature="58397:58408" ph=" { " />
+                <marker date="1521723830653" expanded="false" signature="58430:58436" ph=" }" />
+                <marker date="1521723830653" expanded="false" signature="58474:58485" ph=" { " />
+                <marker date="1521723830653" expanded="false" signature="58535:58541" ph=" }" />
+                <marker date="1521723830653" expanded="false" signature="58581:58592" ph=" { " />
+                <marker date="1521723830653" expanded="false" signature="58619:58625" ph=" }" />
+                <marker date="1521723830653" expanded="false" signature="58668:58679" ph=" { " />
+                <marker date="1521723830653" expanded="false" signature="58734:58740" ph=" }" />
+                <marker date="1521723830653" expanded="true" signature="58778:59042" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="59076:60120" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="60188:61037" ph="{...}" />
+                <marker date="1521723830653" expanded="false" signature="61082:61093" ph=" { " />
+                <marker date="1521723830653" expanded="false" signature="61160:61166" ph=" }" />
+                <marker date="1521723830653" expanded="true" signature="61217:61312" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="61379:61499" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="61548:61642" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="61696:61802" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="61855:61981" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="62039:62539" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="62598:62819" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="62882:63146" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="63213:63469" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="63512:63630" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="63677:63814" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="63858:63958" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="64006:64149" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="64191:64335" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="64381:64570" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="64646:65513" ph="{...}" />
+                <marker date="1521723830653" expanded="false" signature="65550:65561" ph=" { " />
+                <marker date="1521723830653" expanded="false" signature="65600:65606" ph=" }" />
+                <marker date="1521723830653" expanded="true" signature="65677:65769" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="65854:78903" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="78957:79030" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="79096:81278" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="81338:81427" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="81499:90964" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="91017:91259" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="91312:91737" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="91784:92385" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="92438:92823" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="92876:93443" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="93490:94091" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="94145:94536" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="94590:95163" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="95211:95816" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="95870:96261" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="96315:96888" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="96936:97541" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="97608:98095" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="98145:98813" ph="{...}" />
+                <marker date="1521723830653" expanded="false" signature="98855:98866" ph=" { " />
+                <marker date="1521723830653" expanded="false" signature="98907:98913" ph=" }" />
+                <marker date="1521723830653" expanded="false" signature="98949:98960" ph=" { " />
+                <marker date="1521723830653" expanded="false" signature="98999:99005" ph=" }" />
+                <marker date="1521723830653" expanded="true" signature="99051:99476" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="99516:100116" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="100161:100373" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="100412:101008" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="101054:101348" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="101394:101728" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="101790:103580" ph="{...}" />
+                <marker date="1521723830653" expanded="false" signature="103618:103629" ph=" { " />
+                <marker date="1521723830653" expanded="false" signature="103655:103661" ph=" }" />
+                <marker date="1521723830653" expanded="true" signature="103728:104326" ph="{...}" />
+                <marker date="1521723830653" expanded="false" signature="104357:104368" ph=" { " />
+                <marker date="1521723830653" expanded="false" signature="104391:104397" ph=" }" />
+                <marker date="1521723830653" expanded="true" signature="104437:106516" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="106606:114588" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="114672:115454" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="115527:115925" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="115990:116360" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="116474:120153" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="120295:121624" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="121786:122134" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="122238:123770" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="123869:124348" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="124441:125405" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="125481:126534" ph="{...}" />
+                <marker date="1521723830653" expanded="true" signature="126584:126827" ph="{...}" />
+                <marker date="1521723830653" expanded="false" signature="126860:126871" ph=" { " />
+                <marker date="1521723830653" expanded="false" signature="126922:126928" ph=" }" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -53,24 +216,52 @@
       <file leaf-file-name="DataBaseController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/DataBaseController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="51" column="107" lean-forward="false" selection-start-line="51" selection-start-column="107" selection-end-line="51" selection-end-column="107" />
+            <state relative-caret-position="527">
+              <caret line="230" column="50" lean-forward="false" selection-start-line="230" selection-start-column="50" selection-end-line="230" selection-end-column="50" />
+              <folding>
+                <element signature="e#0#11416#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClassifyController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/ClassifyController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1666">
+              <caret line="239" column="0" lean-forward="true" selection-start-line="239" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StudentRepository.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/StudentRepository.java">
+      <file leaf-file-name="application.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="24" column="101" lean-forward="false" selection-start-line="24" selection-start-column="101" selection-end-line="24" selection-end-column="101" />
-              <folding>
-                <marker date="1525638231487" expanded="true" signature="569:1094" ph="SELECT stude... student" />
-                <marker date="1525638231487" expanded="true" signature="811:893" ph="SELECT MAX(d... detail" />
-                <marker date="1525638231487" expanded="true" signature="1207:1687" ph="SELECT stude... student" />
-                <marker date="1525638231487" expanded="true" signature="1449:1531" ph="SELECT MAX(d... detail" />
-              </folding>
+            <state relative-caret-position="-408">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="32" column="21" lean-forward="false" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestClassifier.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/model/TestClassifier.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="74" column="28" lean-forward="false" selection-start-line="74" selection-start-column="28" selection-end-line="74" selection-end-column="28" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -79,20 +270,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>System</find>
-      <find>\n&quot;</find>
-      <find>CURSO</find>
-      <find>ClassifyTraining</find>
-      <find>course</find>
-      <find>pattern</find>
-      <find>setPattern</find>
-      <find>findByCodigo</find>
-      <find>periodo_carga</find>
-      <find>loadingPeriod</find>
-      <find>student_detail</find>
-      <find>interval</find>
-      <find>Interval</find>
-      <find>148</find>
       <find>Sucesso</find>
       <find>Resultado: 0.0</find>
       <find>Período</find>
@@ -100,13 +277,35 @@
       <find>pe</find>
       <find>Curso Superior De Tecnologia Em Alimentos</find>
       <find>Course</find>
-      <find>Sucesso:</find>
       <find>- 9</find>
+      <find>adminis</find>
+      <find>Curso Superior De Tecnologia Em Design Gráfico</find>
+      <find>Coeficiente de rendimento</find>
+      <find>admi</find>
+      <find>Administração</find>
+      <find>period_calculation</find>
+      <find>students</find>
+      <find>Sucesso:</find>
+      <find>Nota ENEM Redação</find>
+      <find>name=Coeficiente de rendimento), Variable(name=Nota ENEM Redação), Variable(name=Semestre)</find>
+      <find>- 8</find>
+      <find>- 78</find>
+      <find>'\'(0.592-0.669]\''</find>
+      <find>Formado</find>
+      <find>{'\'(-inf-21.2]\'','\'(21.2-25.4]\'','\'(25.4-29.6]\'','\'(29.6-33.8]\'','\'(33.8-38]\'','\'(38-42.2]\'','\'(42.2-46.4]\'','\'(46.4-50.6]\'','\'(50.6-54.8]\'','\'(54.8-inf)\''}</find>
+      <find>{'\'(-inf-0.094]\'','\'(0.094-0.188]\'','\'(0.188-0.282]\'','\'(0.282-0.376]\'','\'(0.376-0.47]\'','\'(0.47-0.564]\'','\'(0.564-0.658]\'','\'(0.658-0.752]\'','\'(0.752-0.846]\'','\'(0.846-inf)\''}</find>
+      <find>'\'(0.564-0.658]\''</find>
+      <find>'\'(38-42.2]\''</find>
+      <find>Não Evadido:</find>
+      <find>evaluateModel</find>
+      <find>System.out.println</find>
+      <find>Tempo:</find>
     </findStrings>
     <replaceStrings>
       <replace>loadingPeriod</replace>
       <replace>loading_period</replace>
       <replace>Neuter</replace>
+      <replace>students_not_evaded</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -135,10 +334,15 @@
         <option value="$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/DetailRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/smartedu/model/Detail.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/smartedu/model/Student.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/StudentRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/VariableRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/ClassifierRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/TestClassifierRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/smartedu/model/TestClassifier.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/ProbabilityRepository.java" />
         <option value="$PROJECT_DIR$/teste.sql" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/DataBaseController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/StudentRepository.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/ClassifyController.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierController.java" />
       </list>
@@ -161,7 +365,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="67" />
     <option name="y" value="-12" />
     <option name="width" value="1346" />
@@ -183,7 +387,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -265,9 +471,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -436,15 +640,20 @@
       <workItem from="1525468841161" duration="7111000" />
       <workItem from="1525482716942" duration="18717000" />
       <workItem from="1525616997898" duration="50929000" />
-      <workItem from="1525955563515" duration="922000" />
+      <workItem from="1525955563515" duration="21362000" />
+      <workItem from="1526005866181" duration="18011000" />
+      <workItem from="1526061959332" duration="1461000" />
+      <workItem from="1526067464496" duration="10182000" />
+      <workItem from="1526137401215" duration="7552000" />
+      <workItem from="1526299016526" duration="18611000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="217996000" />
+    <option name="totallyTimeSpent" value="294253000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -458,20 +667,20 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32868218" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279743" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="1.0" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="1.0" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33509833" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27912253" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -479,6 +688,39 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329582" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12846482" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279743" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45016077" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27912253" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329582" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -491,35 +733,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/ClassifyController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="42" lean-forward="true" selection-start-line="26" selection-start-column="42" selection-end-line="26" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/ClassifierRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/ClassifyRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="11" lean-forward="true" selection-start-line="31" selection-start-column="11" selection-end-line="31" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/model/Campus.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -597,22 +810,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="uml://JAVA/br.com.smartedu.model.Course">
       <provider selected="true" editor-type-id="UmlEditorProvider">
         <state>
@@ -668,7 +865,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="67">
           <caret line="66" column="0" lean-forward="false" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -684,7 +880,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="19" column="20" lean-forward="true" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -695,28 +890,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/model/Course.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="18" column="43" lean-forward="true" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/model/Classify.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/model/Probability.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="22" column="29" lean-forward="true" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
           <folding />
         </state>
       </provider>
@@ -751,53 +928,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="9" column="35" lean-forward="false" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/ClassifierRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="26" column="60" lean-forward="false" selection-start-line="26" selection-start-column="60" selection-end-line="26" selection-end-column="60" />
-          <folding>
-            <marker date="1521723617032" expanded="true" signature="510:1067" ph="SELECT class... test_classifier" />
-            <marker date="1521723617032" expanded="true" signature="760:870" ph="SELECT IFNUL... test_classifier" />
-            <marker date="1521723617032" expanded="true" signature="1230:1832" ph="SELECT class... test_classifier" />
-            <marker date="1521723617032" expanded="true" signature="1480:1638" ph="SELECT IFNUL... test_classifier" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/ClassifyRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="23" column="19" lean-forward="false" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
-          <folding>
-            <marker date="1521723617040" expanded="true" signature="370:455" ph="SELECT IFNUL... classify" />
-            <marker date="1521723617040" expanded="true" signature="535:992" ph="SELECT class... course" />
-            <marker date="1521723617040" expanded="true" signature="906:991" ph="SELECT IFNUL... classify" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/ProbabilityRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/VariableRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="27" column="36" lean-forward="false" selection-start-line="27" selection-start-column="36" selection-end-line="27" selection-end-column="36" />
-          <folding>
-            <marker date="1521723617163" expanded="true" signature="604:1437" ph="SELECT varia... test_classifier" />
-            <marker date="1521723617163" expanded="true" signature="1102:1189" ph="SELECT IFNUL... test_classifier" />
-            <marker date="1521723617163" expanded="true" signature="1653:2512" ph="SELECT varia... test_classifier" />
-            <marker date="1521723617163" expanded="true" signature="2151:2263" ph="SELECT IFNUL... test_classifier" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -812,29 +942,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="93">
           <caret line="79" column="0" lean-forward="true" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/TestClassifierRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="10" column="72" lean-forward="false" selection-start-line="10" selection-start-column="72" selection-end-line="10" selection-end-column="72" />
-          <folding>
-            <marker date="1521723617105" expanded="true" signature="425:512" ph="SELECT IFNUL... test_classifier" />
-            <marker date="1521723617105" expanded="true" signature="596:776" ph="SELECT IFNUL... test_classifier" />
-            <marker date="1521723617105" expanded="true" signature="903:1073" ph="SELECT IFNUL... test_classifier" />
-            <marker date="1521723617105" expanded="true" signature="1188:1419" ph="SELECT IFNUL... test_classifier" />
-            <marker date="1521723617105" expanded="true" signature="1579:1792" ph="SELECT IFNUL... test_classifier" />
-            <marker date="1521723617105" expanded="true" signature="2095:2134" ph="SELECT t.* F... test_classifier" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/teste.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -850,7 +957,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="33">
           <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -858,9 +964,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="14" column="56" lean-forward="true" selection-start-line="14" selection-start-column="56" selection-end-line="14" selection-end-column="56" />
-          <folding>
-            <marker date="1523998873601" expanded="true" signature="313:355" ph="select max(d... Detail" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -868,7 +971,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -876,51 +978,286 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="9" column="33" lean-forward="false" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/VariableRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="36" column="19" lean-forward="false" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/ClassifierRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="26" column="60" lean-forward="true" selection-start-line="26" selection-start-column="60" selection-end-line="26" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/ClassifyRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="23" column="19" lean-forward="false" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/model/Probability.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="27" column="26" lean-forward="false" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/TestClassifierRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="62" column="49" lean-forward="false" selection-start-line="62" selection-start-column="49" selection-end-line="62" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/ProbabilityRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="12" column="45" lean-forward="false" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/StudentRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="37" column="18" lean-forward="false" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/nz/ac/waikato/cms/weka/weka-stable/3.8.0/weka-stable-3.8.0.jar!/weka/filters/unsupervised/attribute/RemoveByName.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="37" column="33" lean-forward="true" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/src.zip!/java/lang/System.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="109" column="36" lean-forward="false" selection-start-line="109" selection-start-column="36" selection-end-line="109" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/nz/ac/waikato/cms/weka/weka-stable/3.8.0/weka-stable-3.8.0.jar!/weka/classifiers/Evaluation.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="33">
+          <caret line="112" column="0" lean-forward="false" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/model/TestClassifier.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="42" column="40" lean-forward="false" selection-start-line="42" selection-start-column="40" selection-end-line="42" selection-end-column="40" />
+        <state relative-caret-position="243">
+          <caret line="74" column="28" lean-forward="false" selection-start-line="74" selection-start-column="28" selection-end-line="74" selection-end-column="28" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/nz/ac/waikato/cms/weka/weka-stable/3.8.0/weka-stable-3.8.0.jar!/weka/classifiers/evaluation/Evaluation.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="43">
+          <caret line="2918" column="26" lean-forward="false" selection-start-line="2918" selection-start-column="26" selection-end-line="2918" selection-end-column="26" />
+          <folding>
+            <marker date="1521723830653" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1521723830653" expanded="false" signature="151:2180" ph="..." />
+            <marker date="1521723830653" expanded="true" signature="4669:5876" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="5933:5978" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="6058:8694" ph="{...}" />
+            <marker date="1521723830653" expanded="false" signature="8728:8739" ph=" { " />
+            <marker date="1521723830653" expanded="false" signature="8760:8766" ph=" }" />
+            <marker date="1521723830653" expanded="true" signature="8821:8962" ph="{...}" />
+            <marker date="1521723830653" expanded="false" signature="9006:9017" ph=" { " />
+            <marker date="1521723830653" expanded="false" signature="9050:9056" ph=" }" />
+            <marker date="1521723830653" expanded="false" signature="9118:9129" ph=" { " />
+            <marker date="1521723830653" expanded="false" signature="9157:9163" ph=" }" />
+            <marker date="1521723830653" expanded="true" signature="9223:9462" ph="{...}" />
+            <marker date="1521723830653" expanded="false" signature="9509:9520" ph=" { " />
+            <marker date="1521723830653" expanded="false" signature="9551:9557" ph=" }" />
+            <marker date="1521723830653" expanded="true" signature="9623:9995" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="10062:10575" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="10624:10925" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="10968:11618" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="11667:11968" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="12011:12667" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="12709:13080" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="13236:14261" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="14403:14522" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="14623:14948" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="14993:15428" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="15527:45101" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="45206:46667" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="46793:48224" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="48349:49396" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="49532:50915" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="51031:51115" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="51212:51297" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="51386:51465" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="51573:51651" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="51742:51826" ph="{...}" />
+            <marker date="1521723830653" expanded="false" signature="51874:51885" ph=" { " />
+            <marker date="1521723830653" expanded="false" signature="51946:51952" ph=" }" />
+            <marker date="1521723830653" expanded="true" signature="52054:57534" ph="{...}" />
+            <marker date="1521723830653" expanded="false" signature="57574:57585" ph=" { " />
+            <marker date="1521723830653" expanded="false" signature="57609:57615" ph=" }" />
+            <marker date="1521723830653" expanded="true" signature="57681:57804" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="57855:58002" ph="{...}" />
+            <marker date="1521723830653" expanded="false" signature="58039:58050" ph=" { " />
+            <marker date="1521723830653" expanded="false" signature="58074:58080" ph=" }" />
+            <marker date="1521723830653" expanded="false" signature="58120:58131" ph=" { " />
+            <marker date="1521723830653" expanded="false" signature="58183:58189" ph=" }" />
+            <marker date="1521723830653" expanded="false" signature="58226:58237" ph=" { " />
+            <marker date="1521723830653" expanded="false" signature="58261:58267" ph=" }" />
+            <marker date="1521723830653" expanded="false" signature="58302:58313" ph=" { " />
+            <marker date="1521723830653" expanded="false" signature="58356:58362" ph=" }" />
+            <marker date="1521723830653" expanded="false" signature="58397:58408" ph=" { " />
+            <marker date="1521723830653" expanded="false" signature="58430:58436" ph=" }" />
+            <marker date="1521723830653" expanded="false" signature="58474:58485" ph=" { " />
+            <marker date="1521723830653" expanded="false" signature="58535:58541" ph=" }" />
+            <marker date="1521723830653" expanded="false" signature="58581:58592" ph=" { " />
+            <marker date="1521723830653" expanded="false" signature="58619:58625" ph=" }" />
+            <marker date="1521723830653" expanded="false" signature="58668:58679" ph=" { " />
+            <marker date="1521723830653" expanded="false" signature="58734:58740" ph=" }" />
+            <marker date="1521723830653" expanded="true" signature="58778:59042" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="59076:60120" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="60188:61037" ph="{...}" />
+            <marker date="1521723830653" expanded="false" signature="61082:61093" ph=" { " />
+            <marker date="1521723830653" expanded="false" signature="61160:61166" ph=" }" />
+            <marker date="1521723830653" expanded="true" signature="61217:61312" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="61379:61499" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="61548:61642" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="61696:61802" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="61855:61981" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="62039:62539" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="62598:62819" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="62882:63146" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="63213:63469" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="63512:63630" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="63677:63814" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="63858:63958" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="64006:64149" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="64191:64335" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="64381:64570" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="64646:65513" ph="{...}" />
+            <marker date="1521723830653" expanded="false" signature="65550:65561" ph=" { " />
+            <marker date="1521723830653" expanded="false" signature="65600:65606" ph=" }" />
+            <marker date="1521723830653" expanded="true" signature="65677:65769" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="65854:78903" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="78957:79030" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="79096:81278" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="81338:81427" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="81499:90964" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="91017:91259" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="91312:91737" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="91784:92385" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="92438:92823" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="92876:93443" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="93490:94091" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="94145:94536" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="94590:95163" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="95211:95816" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="95870:96261" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="96315:96888" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="96936:97541" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="97608:98095" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="98145:98813" ph="{...}" />
+            <marker date="1521723830653" expanded="false" signature="98855:98866" ph=" { " />
+            <marker date="1521723830653" expanded="false" signature="98907:98913" ph=" }" />
+            <marker date="1521723830653" expanded="false" signature="98949:98960" ph=" { " />
+            <marker date="1521723830653" expanded="false" signature="98999:99005" ph=" }" />
+            <marker date="1521723830653" expanded="true" signature="99051:99476" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="99516:100116" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="100161:100373" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="100412:101008" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="101054:101348" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="101394:101728" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="101790:103580" ph="{...}" />
+            <marker date="1521723830653" expanded="false" signature="103618:103629" ph=" { " />
+            <marker date="1521723830653" expanded="false" signature="103655:103661" ph=" }" />
+            <marker date="1521723830653" expanded="true" signature="103728:104326" ph="{...}" />
+            <marker date="1521723830653" expanded="false" signature="104357:104368" ph=" { " />
+            <marker date="1521723830653" expanded="false" signature="104391:104397" ph=" }" />
+            <marker date="1521723830653" expanded="true" signature="104437:106516" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="106606:114588" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="114672:115454" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="115527:115925" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="115990:116360" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="116474:120153" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="120295:121624" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="121786:122134" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="122238:123770" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="123869:124348" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="124441:125405" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="125481:126534" ph="{...}" />
+            <marker date="1521723830653" expanded="true" signature="126584:126827" ph="{...}" />
+            <marker date="1521723830653" expanded="false" signature="126860:126871" ph=" { " />
+            <marker date="1521723830653" expanded="false" signature="126922:126928" ph=" }" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/DataBaseController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="51" column="107" lean-forward="false" selection-start-line="51" selection-start-column="107" selection-end-line="51" selection-end-column="107" />
+        <state relative-caret-position="527">
+          <caret line="230" column="50" lean-forward="false" selection-start-line="230" selection-start-column="50" selection-end-line="230" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#11416#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-408">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/repository/StudentRepository.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="24" column="101" lean-forward="false" selection-start-line="24" selection-start-column="101" selection-end-line="24" selection-end-column="101" />
-          <folding>
-            <marker date="1525638231487" expanded="true" signature="569:1094" ph="SELECT stude... student" />
-            <marker date="1525638231487" expanded="true" signature="811:893" ph="SELECT MAX(d... detail" />
-            <marker date="1525638231487" expanded="true" signature="1207:1687" ph="SELECT stude... student" />
-            <marker date="1525638231487" expanded="true" signature="1449:1531" ph="SELECT MAX(d... detail" />
-          </folding>
+        <state relative-caret-position="442">
+          <caret line="32" column="21" lean-forward="false" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/ClassifyController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2635">
-          <caret line="163" column="47" lean-forward="false" selection-start-line="163" selection-start-column="47" selection-end-line="163" selection-end-column="47" />
+        <state relative-caret-position="1666">
+          <caret line="239" column="0" lean-forward="true" selection-start-line="239" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-643">
-          <caret line="139" column="79" lean-forward="false" selection-start-line="139" selection-start-column="79" selection-end-line="139" selection-end-column="79" />
+        <state relative-caret-position="120">
+          <caret line="117" column="61" lean-forward="true" selection-start-line="117" selection-start-column="61" selection-end-line="117" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/model/Course.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="101">
+          <caret line="18" column="43" lean-forward="true" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
           <folding />
         </state>
       </provider>

@@ -28,7 +28,7 @@ public interface VariableRepository extends JpaRepository<Variable, Long> {
             + "LEFT JOIN variable\n"
             + "ON variable.id = test_classifier_variable.variable_id\n"
             + "WHERE test_classifier.period_calculation = \n"
-            + "    (SELECT IFNULL(MAX(t.period_calculation),0) as period_calculation FROM test_classifier t)\n"
+            + "    (SELECT IFNULL(MAX(t.period_calculation),0) as period_calculation FROM test_classifier t WHERE t.type = 0)\n"
             + "AND test_classifier.course_id = :course_id\n"
             + "AND classifier.id = :classifier_id\n"
             + "GROUP BY variable.name\n"

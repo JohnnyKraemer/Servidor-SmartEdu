@@ -1,7 +1,9 @@
 package br.com.smartedu.repository;
 
+import br.com.smartedu.model.Classifier;
 import br.com.smartedu.model.Course;
 import br.com.smartedu.model.TestClassifier;
+import br.com.smartedu.model.Variable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -49,11 +51,15 @@ public interface TestClassifierRepository extends JpaRepository<TestClassifier, 
     //TestClassifier findTop1OrderByPeriodCalculationDesc();
     
     TestClassifier findTop1ByCourseAndPeriodCalculationOrderBySuccessDesc(Course course, int periodCalculation);
-    
+
+    TestClassifier findByCourseAndClassifierAndVariableAndPeriodCalculationAndType(Course course, Classifier classifier, List<Variable> variable, int periodCalculation, int type);
+
     List<TestClassifier> findTop3ByCourseOrderBySuccessDesc(Course course);
 
     List<TestClassifier> findTop10ByCourseOrderBySuccessDesc(Course course);
 
     List<TestClassifier> findTop10ByOrderByIdDesc();
+    List<TestClassifier> findByIdBetween(Long endId, Long startId);
+    List<TestClassifier> findByIdGreaterThan(Long id);
 
 }

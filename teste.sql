@@ -1,15 +1,6 @@
-
-
-
-Id: 2
-Curso: Administração
-Classificador: BayesNet
-Sucesso: 404
-Falha: 689
-Tamanho -- Students: 130 -- DataSetTeste: 689 -- DataSetTreino: 1093
-Index: 130, Size: 130
-
-
+DELETE FROM probability WHERE test_classifier_id > 560;
+DELETE FROM test_classifier_variable WHERE test_classifier_id > 560;
+DELETE FROM test_classifier WHERE id > 560;
 
 SELECT student.*
 FROM student

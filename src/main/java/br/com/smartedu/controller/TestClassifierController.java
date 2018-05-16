@@ -110,22 +110,22 @@ public class TestClassifierController {
 
         for (Course course : coursesList) {
             int position_classifier = 1;
-            List<Student> students = studentRepository.findByCourse(course.getId());
+            //List<Student> students = studentRepository.findByCourse(course.getId());
 
             for (Classifier classificador : classificadores) {
                 if (classificador != null) {
                     int position_variable = 1;
                     for (Variable variable : variablesList) {
-                        System.out.println("\n\nCourse "+position_course+" of "+coursesList.size()+" : " + course.getName());
-                        System.out.println("Classifier "+position_classifier+" of "+classificadores.length+" : " + classificador.getClass().getSimpleName());
-                        System.out.println("Variable "+position_variable+" of "+variablesList.size()+" : " + variable.getName());
+                        System.out.println("\n\nCourse " + position_course + " of " + coursesList.size() + " : " + course.getName());
+                        System.out.println("Classifier " + position_classifier + " of " + classificadores.length + " : " + classificador.getClass().getSimpleName());
+                        System.out.println("Variable " + position_variable + " of " + variablesList.size() + " : " + variable.getName());
                         List<Variable> variables = new ArrayList<>();
                         variables.add(variable);
 
                         Instances dataSet = dataBaseController.getDataSet(variables, course.getId(), dataBaseController.TRAINING);
-                        System.out.println("Tamanho -- Students: "+students.size() + " -- DataSet: "+dataSet.size());
+                        //System.out.println("Tamanho -- Students: " + students.size() + " -- DataSet: " + dataSet.size());
 
-                        classifyController.ClassifyTraining(classifiersList.get(position_classifier-1) ,classificador, dataSet, students, course, variables, TestClassifier.TEST_BASE, period_calculation + 1, 0);
+                        classifyController.ClassifyTraining(classifiersList.get(position_classifier - 1), classificador, dataSet, course, variables, TestClassifier.TEST_BASE, period_calculation + 1, 0);
                         position_variable++;
                     }
                 }
@@ -150,16 +150,17 @@ public class TestClassifierController {
         int position_course = 1;
 
         for (Course course : coursesList) {
-            System.out.println("\n\nCourse "+position_course+" of "+coursesList.size()+" : " + course.getName());
+            System.out.println("\n\nCourse " + position_course + " of " + coursesList.size() + " : " + course.getName());
             List<Classify> classifys = course.getClassify();
-            List<br.com.smartedu.model.Classifier> best_classifiers = classifierRepository.findTopXClassifiersByCourse(course.getId(), 2);
+            List<br.com.smartedu.model.Classifier> best_classifiers = classifierRepository.findTopXClassifiersByCourse(course.getId(), 3);
             int position_classifier = 1;
+
             for (br.com.smartedu.model.Classifier classifier : best_classifiers) {
                 Classify classify = new Classify();
-                System.out.println("Classifier "+position_classifier+" of "+classifys.size()+" : " + classifier.getName());
+                System.out.println("Classifier " + position_classifier + " of " + best_classifiers.size() + " : " + classifier.getName());
 
-                List<Variable> best_variable_by_classifier = variableRepository.findTopXVariableByCourseAndClassifier(course.getId(), classifier.getId(), 6);
-                System.out.println("Variables: "+ best_variable_by_classifier);
+                List<Variable> best_variable_by_classifier = variableRepository.findTopXVariableByCourseAndClassifier(course.getId(), classifier.getId(), 7);
+                System.out.println("Variables: " + best_variable_by_classifier);
 
                 classify.setClassifier(classifier);
                 classify.setVariable(best_variable_by_classifier);
@@ -187,16 +188,17 @@ public class TestClassifierController {
 
         List<Course> coursesList = courseRepository.findByUseClassify(1);
         int period_calculation = testClassifierRepository.findMaxPeriodCalculationByType(TestClassifier.TEST_PATTERN);
+        int period_calculation_base = testClassifierRepository.findMaxPeriodCalculationByType(TestClassifier.TEST_BASE);
         int position_course = 1;
 
         for (Course course : coursesList) {
 
             List<Classify> classifys = classifyRepository.findByCourseAndMaxPeriodCalcularion(course.getId());
-            List<Student> students = studentRepository.findByCourse(course.getId());
+            //List<Student> students = studentRepository.findByCourse(course.getId());
             int position_classifier = 1;
             for (Classify classify : classifys) {
                 Classifier classificador = classifierController.NewClassifier(classify.getClassifier());
-                List combinations = classifyController.Combinations(classify.getVariable());
+                List combinations = classifyController.Combinations(classify.getVariable(), 3);
                 if (classificador != null) {
                     int position_combination = 1;
                     for (int p = 0; p < combinations.size(); p++) {
@@ -208,15 +210,36 @@ public class TestClassifierController {
                         }
 
 
-                        System.out.println("\n\nCourse "+position_course+" of "+coursesList.size()+" : " + course.getName());
-                        System.out.println("Classifier "+position_classifier+" of "+classifys.size()+" : " + classificador.getClass().getSimpleName());
-                        System.out.println("Combination "+position_combination+" of "+combinations.size()+" : " + newVariables.toString());
+                        System.out.println("\n\nCourse " + position_course + " of " + coursesList.size() + " : " + course.getName());
+                        System.out.println("Classifier " + position_classifier + " of " + classifys.size() + " : " + classificador.getClass().getSimpleName());
+                        System.out.println("Combination " + position_combination + " of " + combinations.size() + " : " + newVariables.toString());
+
+                        /*if (newVariables.size() == 1) {
+                            try {
+                                TestClassifier test = testClassifierRepository.findByCourseAndClassifierAndVariableAndPeriodCalculationAndType(course, classify.getClassifier(), newVariables, period_calculation_base, TestClassifier.TEST_BASE);
+                                if (test != null) {
+                                    test.setId(null);
+                                    test.setPeriodCalculation(period_calculation + 1);
+                                    test.setType(TestClassifier.TEST_PATTERN);
+                                    testClassifierRepository.save(test);
+                                } else {
+                                    Instances dataSet = dataBaseController.getDataSet(newVariables, course.getId(), dataBaseController.TRAINING);
+                                    classifyController.ClassifyTraining(classify.getClassifier(), classificador, dataSet, course, newVariables, TestClassifier.TEST_PATTERN, period_calculation + 1, 0);
+                                }
+                            } catch (Exception e) {
+                                Instances dataSet = dataBaseController.getDataSet(newVariables, course.getId(), dataBaseController.TRAINING);
+                                classifyController.ClassifyTraining(classify.getClassifier(), classificador, dataSet, course, newVariables, TestClassifier.TEST_PATTERN, period_calculation + 1, 0);
+                            }
+                        } else {
+                            Instances dataSet = dataBaseController.getDataSet(newVariables, course.getId(), dataBaseController.TRAINING);
+                            //System.out.println("Tamanho -- Students: "+students.size() + " -- DataSet: "+dataSet.size());
+                            classifyController.ClassifyTraining(classify.getClassifier(), classificador, dataSet, course, newVariables, TestClassifier.TEST_PATTERN, period_calculation + 1, 0);
+                        }*/
 
                         Instances dataSet = dataBaseController.getDataSet(newVariables, course.getId(), dataBaseController.TRAINING);
-
                         //System.out.println("Tamanho -- Students: "+students.size() + " -- DataSet: "+dataSet.size());
+                        classifyController.ClassifyTraining(classify.getClassifier(), classificador, dataSet, course, newVariables, TestClassifier.TEST_PATTERN, period_calculation + 1, 0);
 
-                        classifyController.ClassifyTraining(classify.getClassifier(),classificador, dataSet, students, course, newVariables, TestClassifier.TEST_PATTERN, period_calculation + 1, 0);
                         position_combination++;
                     }
                 }
@@ -241,7 +264,7 @@ public class TestClassifierController {
         for (Course course : coursesList) {
             TestClassifier testClassifier = testClassifierRepository.findTop1ByCourseAndPeriodCalculationOrderBySuccessDesc(course, period_calculation);
             //testClassifier.setType(TestClassifier.PATTERN_TEST);
-            
+
             System.out.println("\n\nId: " + testClassifier.getId());
             System.out.println("Curso: " + course.getName());
             System.out.println("Classificador: " + testClassifier.getClassifier().getName());
@@ -249,18 +272,43 @@ public class TestClassifierController {
             System.out.println("Falha: " + testClassifier.getFailure());
 
             Classifier classificador = classifierController.NewClassifier(testClassifier.getClassifier());
+
+            Instances dataSet = dataBaseController.getDataSet(testClassifier.getVariable(), course.getId(), dataBaseController.TRAINING);
+            List<Student> students = studentRepository.findByCourse(course.getId());
+            classifyController.ClassifyTestAll(testClassifier, classificador, dataSet, students);
+
+            //System.out.println("\nId: " + testClassifier.getId());
+            //System.out.println("Curso: " + course.getName());
+            //System.out.println("Classificador: " + testClassifier.getClassifier().getName());
+            //System.out.println("Sucesso: " + testClassifier.getSuccess());
+            //System.out.println("Falha: " + testClassifier.getFailure());
+
             Instances dataSetTraining = dataBaseController.getDataSet(testClassifier.getVariable(), course.getId(), dataBaseController.TRAINING);
             Instances dataSetTest = dataBaseController.getDataSet(testClassifier.getVariable(), course.getId(), dataBaseController.TEST);
-            
-            List<Student> students = studentRepository.findByCourseTest(course.getId());
+            List<Student> students_not_evaded = studentRepository.findByCourseTest(course.getId());
+            Classifier tree = classifierController.NewClassifier(testClassifier.getClassifier());
 
-            System.out.println("Tamanho -- Students: "+students.size() + " -- DataSetTeste: "+dataSetTest.size() + " -- DataSetTreino: "+dataSetTraining.size());
-            classifyController.ClassifyTest(testClassifier, classificador, dataSetTraining, dataSetTest, students);
+            System.out.println("Tamanho -- students_not_evaded: " + students_not_evaded.size() + " -- DataSetTeste: " + dataSetTest.size() + " -- DataSetTreino: " + dataSetTraining.size());
+            classifyController.ClassifyTest(testClassifier, tree, dataSetTraining, dataSetTest, students_not_evaded);
 
             testClassifier.setType(TestClassifier.PATTERN_RESULT);
             testClassifierRepository.save(testClassifier);
         }
 
+        return new ResponseEntity(1, HttpStatus.OK);
+    }
+
+    @GetMapping("/delete-tests")
+    public ResponseEntity deleteTests() throws Exception {
+        List<TestClassifier> testClassifiers = testClassifierRepository.findByIdGreaterThan( Long.parseLong("560"));
+        for(TestClassifier test : testClassifiers){
+            System.out.println(test.getId());
+            //List<Probability> probabilities = probabilityRepository.findAllByTestClassifier(test);
+            //if(probabilities != null){
+            //    probabilityRepository.delete(probabilities);
+            //}
+            testClassifierRepository.delete(test);
+        }
         return new ResponseEntity(1, HttpStatus.OK);
     }
 

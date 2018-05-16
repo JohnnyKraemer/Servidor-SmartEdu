@@ -7,16 +7,20 @@ package br.com.smartedu.controller;
 
 import br.com.smartedu.model.Variable;
 import org.springframework.stereotype.Controller;
+import weka.core.Attribute;
+import weka.core.Instance;
 import weka.core.Instances;
 import weka.experiment.DatabaseUtils;
 import weka.experiment.InstanceQuery;
+import weka.filters.Filter;
+import weka.filters.unsupervised.instance.RemoveWithValues;
 
 import java.io.File;
 import java.util.List;
 
 @Controller
 public class DataBaseController {
-    
+
     public static final int TEST = 0;
     public static final int TRAINING = 1;
 
@@ -56,7 +60,7 @@ public class DataBaseController {
         //System.out.println(sql);
         return sql;
     }
-    
+
     public String montaSQLTest(List<Variable> variaveis, long idCurso) throws Exception {
         //System.out.println("------------------------------------------ Data Set Teste ------------------------------------------");
 
@@ -79,6 +83,35 @@ public class DataBaseController {
                 + "WHERE detail.loading_period = (SELECT MAX(detail.loading_period) FROM detail WHERE detail.student_id = student.id)\n"
                 + "AND course.id =  " + idCurso + "\n"
                 + "AND (situation.situation_short LIKE 'Não Evadido')\n"
+                + "GROUP BY student.id\n"
+                + "ORDER BY student.id";
+
+        //System.out.println(sql);
+        return sql;
+    }
+
+    public String montaSQLAll(List<Variable> variaveis, long idCurso) throws Exception {
+        //System.out.println("------------------------------------------ Data Set Teste ------------------------------------------");
+
+        String sql = "SELECT student.id,";
+        for (Variable variable : variaveis) {
+            sql += " \n" + variable.getTable() + "." + variable.getName_database() + ",";
+        }
+
+        sql += "\nsituation.situation_short\n";
+
+        sql += "FROM student\n"
+                + "LEFT JOIN detail\n"
+                + "ON detail.student_id = student.id\n"
+                + "LEFT JOIN situation\n"
+                + "ON situation.id = detail.situation_id\n"
+                + "LEFT JOIN course\n"
+                + "ON course.id = student.course_id\n"
+                + "LEFT JOIN campus\n"
+                + "ON campus.id = course.campus_id\n"
+                + "WHERE detail.loading_period = (SELECT MAX(detail.loading_period) FROM detail WHERE detail.student_id = student.id)\n"
+                + "AND course.id =  " + idCurso + "\n"
+                + "AND (situation.situation_short NOT LIKE 'Outro')\n"
                 + "GROUP BY student.id\n"
                 + "ORDER BY student.id";
 
@@ -121,16 +154,16 @@ public class DataBaseController {
 
     public Instances getDataSet(List<Variable> variaveis, long idCurso, int type) throws Exception {
         InstanceQuery query = ConectaBanco();
-        
-        if(type == TEST){
-           query.setQuery(montaSQLTest(variaveis, idCurso)); 
-        }else if(type == TRAINING){
-            query.setQuery(montaSQLTraining(variaveis, idCurso)); 
-        }
-        
-        Instances dataSet = query.retrieveInstances();
+        query.setQuery(montaSQLAll(variaveis, idCurso));
 
-        dataSet.setClassIndex(dataSet.numAttributes() - 1);
+        /*if(type == TEST){
+           query.setQuery(montaSQLTest(variaveis, idCurso));
+        }else if(type == TRAINING){
+            query.setQuery(montaSQLTraining(variaveis, idCurso));
+        }*/
+
+        Instances dataSet = query.retrieveInstances();
+        //dataSet.setClassIndex(dataSet.numAttributes() - 1);
 
         String col_Discretize = "";
         String col_NumericToNominal = "";
@@ -153,10 +186,56 @@ public class DataBaseController {
             }
             position++;
         }
-
         Discretize discretize = new Discretize();
-        dataSet = discretize.discretize(dataSet, col_Discretize, col_NumericToNominal, false);
-        return dataSet;
+        Instances training = discretize.discretize(dataSet, col_Discretize, col_NumericToNominal, false);
+
+        if (type == TEST) {
+            Instances newData = new Instances(training);
+            RemoveWithValues filter_evaded = new RemoveWithValues();
+            String[] options = new String[4];
+            options[0] = "-C";
+            options[1] = "last";
+            options[2] = "-L";
+            options[3] = String.valueOf((newData.attribute(newData.numAttributes() - 1).indexOfValue("Evadido")+1));
+            filter_evaded.setOptions(options);
+            //filter_evaded.setModifyHeader(true);
+            filter_evaded.setInputFormat(newData);
+
+            Instances newData1 = Filter.useFilter(newData, filter_evaded);
+            RemoveWithValues filter_formado = new RemoveWithValues();
+            String[] options_formado = new String[4];
+            options_formado[0] = "-C";
+            options_formado[1] = "last";
+            options_formado[2] = "-L";
+            options_formado[3] = String.valueOf((newData1.attribute(newData1.numAttributes() - 1).indexOfValue("Formado")+1));
+            filter_formado.setOptions(options_formado);
+            //filter_formado.setModifyHeader(true);
+            filter_formado.setInputFormat(newData1);
+            Instances newData2 = Filter.useFilter(newData1, filter_formado);
+
+            //newData2.renameAttributeValue(newData1.numAttributes() - 1,newData.attribute(newData.numAttributes() - 1).indexOfValue("Não Evadido"),"Formado");
+            //newData2.
+
+            newData2.setClassIndex(newData2.numAttributes() - 1);
+            return newData2;
+        } else if (type == TRAINING) {
+            Instances newData = new Instances(training);
+
+            RemoveWithValues filter_evaded = new RemoveWithValues();
+            String[] options = new String[4];
+            options[0] = "-C";
+            options[1] = "last";
+            options[2] = "-L";
+            options[3] = String.valueOf((newData.attribute(newData.numAttributes() - 1).indexOfValue("Não Evadido")+1));
+            filter_evaded.setOptions(options);
+            //filter_evaded.setModifyHeader(true);
+            filter_evaded.setInputFormat(newData);
+
+            Instances newData2 = Filter.useFilter(newData, filter_evaded);
+            newData2.setClassIndex(newData2.numAttributes() - 1);
+            return newData2;
+        }
+        return null;
     }
 
     /*
