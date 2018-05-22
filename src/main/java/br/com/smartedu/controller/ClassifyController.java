@@ -209,7 +209,12 @@ public class ClassifyController {
             //long segundos = (end_test_classifier.getTime() - start_test_classifier.getTime() - minutos * 3600000) / 60000;
 
             Period periodo = new Period(start_test_classifier.getTime(), end_test_classifier.getTime());
+            int minutos = periodo.getMinutes();
             int segundos = periodo.getSeconds();
+
+            if(minutos > 0){
+                segundos = segundos + (minutos*60);
+            }
 
             TestClassifier test_classifier_after = testClassifierRepository.findByPeriodCalculation(1);
             test_classifier_after.setSuccess((acertoEvadido + acertoNEvadido));
@@ -226,10 +231,10 @@ public class ClassifyController {
             test_classifier_after.setResult(TestClassifier.RESULT_SUCCESS);
 
             //System.out.println("\n\n");
-            System.out.println("-- Sucesso: " + test_classifier_after.getSuccess() + " - " + (float) ((test_classifier_after.getSuccess() * 100.00) / (test_classifier_after.getSuccess() + test_classifier_after.getFailure() + test_classifier_after.getNeuter())) + " %");
-            System.out.println("-- Failuere: " + test_classifier_after.getFailure() + " - " + (float) ((test_classifier_after.getFailure() * 100.00) / (test_classifier_after.getSuccess() + test_classifier_after.getFailure() + test_classifier_after.getNeuter())) + " %");
-            System.out.println("-- Intervalo: " + test_classifier_after.getNeuter() + " - " + (float) ((test_classifier_after.getNeuter() * 100.00) / (test_classifier_after.getSuccess() + test_classifier_after.getFailure() + test_classifier_after.getNeuter())) + " %");
-            System.out.println("-- Tempo: " + test_classifier_after.getTime_seconds());
+            //System.out.println("-- Sucesso: " + test_classifier_after.getSuccess() + " - " + (float) ((test_classifier_after.getSuccess() * 100.00) / (test_classifier_after.getSuccess() + test_classifier_after.getFailure() + test_classifier_after.getNeuter())) + " %");
+            //System.out.println("-- Failuere: " + test_classifier_after.getFailure() + " - " + (float) ((test_classifier_after.getFailure() * 100.00) / (test_classifier_after.getSuccess() + test_classifier_after.getFailure() + test_classifier_after.getNeuter())) + " %");
+            //System.out.println("-- Intervalo: " + test_classifier_after.getNeuter() + " - " + (float) ((test_classifier_after.getNeuter() * 100.00) / (test_classifier_after.getSuccess() + test_classifier_after.getFailure() + test_classifier_after.getNeuter())) + " %");
+            //System.out.println("-- Tempo: " + test_classifier_after.getTime_seconds());
             //System.out.println("-- Sucesso Evadido: " + test_classifier_after.getSuccess_evaded());
             //System.out.println("-- Failuere Evadido: " + test_classifier_after.getFailure_evaded());
             //System.out.println("-- Sucesso Não Evadido: " + test_classifier_after.getSuccess_not_evaded());

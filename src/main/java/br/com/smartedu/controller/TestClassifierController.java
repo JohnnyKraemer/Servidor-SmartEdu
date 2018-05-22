@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import weka.classifiers.Classifier;
 import weka.core.Instances;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -92,6 +94,14 @@ public class TestClassifierController {
         return new ResponseEntity(1, HttpStatus.OK);
     }
 
+    @GetMapping("/after-base")
+    public ResponseEntity classifyAfterBase() throws Exception {
+        setBestBase();
+        classifyBestBase();
+        setPattern();
+        return new ResponseEntity(1, HttpStatus.OK);
+    }
+
     // 1ª PASSO
     // GERA OS TESTES COM TODAS OS CLASSIFICADORES E TODAS AS VARIAVEIS
     @GetMapping("/base")
@@ -109,23 +119,30 @@ public class TestClassifierController {
         Classifier[] classificadores = classifierController.GeraClassificadores(classifiersList);
 
         for (Course course : coursesList) {
+            System.out.println("\n\nCourse " + position_course + " of " + coursesList.size() + " : " + course.getName());
+
             int position_classifier = 1;
             //List<Student> students = studentRepository.findByCourse(course.getId());
 
             for (Classifier classificador : classificadores) {
+                System.out.println("Classifier " + position_classifier + " of " + classificadores.length + " : " + classificador.getClass().getSimpleName());
                 if (classificador != null) {
                     int position_variable = 1;
                     for (Variable variable : variablesList) {
-                        System.out.println("\n\nCourse " + position_course + " of " + coursesList.size() + " : " + course.getName());
-                        System.out.println("Classifier " + position_classifier + " of " + classificadores.length + " : " + classificador.getClass().getSimpleName());
-                        System.out.println("Variable " + position_variable + " of " + variablesList.size() + " : " + variable.getName());
                         List<Variable> variables = new ArrayList<>();
                         variables.add(variable);
 
                         Instances dataSet = dataBaseController.getDataSet(variables, course.getId(), dataBaseController.TRAINING);
                         //System.out.println("Tamanho -- Students: " + students.size() + " -- DataSet: " + dataSet.size());
 
-                        classifyController.ClassifyTraining(classifiersList.get(position_classifier - 1), classificador, dataSet, course, variables, TestClassifier.TEST_BASE, period_calculation + 1, 0);
+                        TestClassifier test_classifier_after = classifyController.ClassifyTraining(classifiersList.get(position_classifier - 1), classificador, dataSet, course, variables, TestClassifier.TEST_BASE, period_calculation + 1, 0);
+
+                        NumberFormat formatarFloat = new DecimalFormat("#.##");
+                        float sucesso = (float) ((test_classifier_after.getSuccess() * 100.00) / (test_classifier_after.getSuccess() + test_classifier_after.getFailure() + test_classifier_after.getNeuter()));
+                        sucesso = Float.parseFloat(formatarFloat.format(sucesso).replace(",", "."));
+
+                        System.out.println(position_variable + " of " + variablesList.size() + "  --- Sucesso: "+ sucesso + " --- Time: "+ test_classifier_after.getTime_seconds() + " ---  " + variable.getName());
+
                         position_variable++;
                     }
                 }
@@ -152,14 +169,14 @@ public class TestClassifierController {
         for (Course course : coursesList) {
             System.out.println("\n\nCourse " + position_course + " of " + coursesList.size() + " : " + course.getName());
             List<Classify> classifys = course.getClassify();
-            List<br.com.smartedu.model.Classifier> best_classifiers = classifierRepository.findTopXClassifiersByCourse(course.getId(), 3);
+            List<br.com.smartedu.model.Classifier> best_classifiers = classifierRepository.findTopXClassifiersByCourse(course.getId(), 5);
             int position_classifier = 1;
 
             for (br.com.smartedu.model.Classifier classifier : best_classifiers) {
                 Classify classify = new Classify();
                 System.out.println("Classifier " + position_classifier + " of " + best_classifiers.size() + " : " + classifier.getName());
 
-                List<Variable> best_variable_by_classifier = variableRepository.findTopXVariableByCourseAndClassifier(course.getId(), classifier.getId(), 7);
+                List<Variable> best_variable_by_classifier = variableRepository.findTopXVariableByCourseAndClassifier(course.getId(), classifier.getId(), 10);
                 System.out.println("Variables: " + best_variable_by_classifier);
 
                 classify.setClassifier(classifier);
@@ -192,12 +209,13 @@ public class TestClassifierController {
         int position_course = 1;
 
         for (Course course : coursesList) {
-
+            System.out.println("\n\nCourse " + position_course + " of " + coursesList.size() + " : " + course.getName());
             List<Classify> classifys = classifyRepository.findByCourseAndMaxPeriodCalcularion(course.getId());
             //List<Student> students = studentRepository.findByCourse(course.getId());
             int position_classifier = 1;
             for (Classify classify : classifys) {
                 Classifier classificador = classifierController.NewClassifier(classify.getClassifier());
+                System.out.println("Classifier " + position_classifier + " of " + classifys.size() + " : " + classificador.getClass().getSimpleName());
                 List combinations = classifyController.Combinations(classify.getVariable(), 3);
                 if (classificador != null) {
                     int position_combination = 1;
@@ -209,37 +227,14 @@ public class TestClassifierController {
                             newVariables.add(variableRepository.findOne(Long.parseLong(s_combinations[t])));
                         }
 
-
-                        System.out.println("\n\nCourse " + position_course + " of " + coursesList.size() + " : " + course.getName());
-                        System.out.println("Classifier " + position_classifier + " of " + classifys.size() + " : " + classificador.getClass().getSimpleName());
-                        System.out.println("Combination " + position_combination + " of " + combinations.size() + " : " + newVariables.toString());
-
-                        /*if (newVariables.size() == 1) {
-                            try {
-                                TestClassifier test = testClassifierRepository.findByCourseAndClassifierAndVariableAndPeriodCalculationAndType(course, classify.getClassifier(), newVariables, period_calculation_base, TestClassifier.TEST_BASE);
-                                if (test != null) {
-                                    test.setId(null);
-                                    test.setPeriodCalculation(period_calculation + 1);
-                                    test.setType(TestClassifier.TEST_PATTERN);
-                                    testClassifierRepository.save(test);
-                                } else {
-                                    Instances dataSet = dataBaseController.getDataSet(newVariables, course.getId(), dataBaseController.TRAINING);
-                                    classifyController.ClassifyTraining(classify.getClassifier(), classificador, dataSet, course, newVariables, TestClassifier.TEST_PATTERN, period_calculation + 1, 0);
-                                }
-                            } catch (Exception e) {
-                                Instances dataSet = dataBaseController.getDataSet(newVariables, course.getId(), dataBaseController.TRAINING);
-                                classifyController.ClassifyTraining(classify.getClassifier(), classificador, dataSet, course, newVariables, TestClassifier.TEST_PATTERN, period_calculation + 1, 0);
-                            }
-                        } else {
-                            Instances dataSet = dataBaseController.getDataSet(newVariables, course.getId(), dataBaseController.TRAINING);
-                            //System.out.println("Tamanho -- Students: "+students.size() + " -- DataSet: "+dataSet.size());
-                            classifyController.ClassifyTraining(classify.getClassifier(), classificador, dataSet, course, newVariables, TestClassifier.TEST_PATTERN, period_calculation + 1, 0);
-                        }*/
-
                         Instances dataSet = dataBaseController.getDataSet(newVariables, course.getId(), dataBaseController.TRAINING);
-                        //System.out.println("Tamanho -- Students: "+students.size() + " -- DataSet: "+dataSet.size());
-                        classifyController.ClassifyTraining(classify.getClassifier(), classificador, dataSet, course, newVariables, TestClassifier.TEST_PATTERN, period_calculation + 1, 0);
+                        TestClassifier test_classifier_after = classifyController.ClassifyTraining(classify.getClassifier(), classificador, dataSet, course, newVariables, TestClassifier.TEST_PATTERN, period_calculation + 1, 0);
 
+                        NumberFormat formatarFloat = new DecimalFormat("#.##");
+                        float sucesso = (float) ((test_classifier_after.getSuccess() * 100.00) / (test_classifier_after.getSuccess() + test_classifier_after.getFailure() + test_classifier_after.getNeuter()));
+                        sucesso = Float.parseFloat(formatarFloat.format(sucesso).replace(",", "."));
+
+                        System.out.println(position_combination + " of " + combinations.size() + " --- Sucesso: "+ sucesso + " --- Time: "+ test_classifier_after.getTime_seconds() + " ---  " + newVariables.toString());
                         position_combination++;
                     }
                 }
