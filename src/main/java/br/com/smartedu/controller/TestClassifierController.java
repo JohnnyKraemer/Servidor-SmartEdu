@@ -169,7 +169,7 @@ public class TestClassifierController {
         for (Course course : coursesList) {
             System.out.println("\n\nCourse " + position_course + " of " + coursesList.size() + " : " + course.getName());
             List<Classify> classifys = course.getClassify();
-            List<br.com.smartedu.model.Classifier> best_classifiers = classifierRepository.findTopXClassifiersByCourse(course.getId(), 5);
+            List<br.com.smartedu.model.Classifier> best_classifiers = classifierRepository.findTopXClassifiersByCourse(course.getId(), 4);
             int position_classifier = 1;
 
             for (br.com.smartedu.model.Classifier classifier : best_classifiers) {
