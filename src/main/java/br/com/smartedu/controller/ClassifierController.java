@@ -33,7 +33,7 @@ public class ClassifierController {
 
    // private int num_Classificadores = 0;
 
-    public weka.classifiers.Classifier[] GeraClassificadores(List<Classifier> selecionados) throws Exception {
+    public weka.classifiers.Classifier[] getWekaClassifiers(List<Classifier> selecionados) throws Exception {
         int num_Classificadores = 0;
 
         weka.classifiers.Classifier[] classificadores = new weka.classifiers.Classifier[selecionados.size()];

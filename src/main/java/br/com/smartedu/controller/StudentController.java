@@ -15,15 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Data
-class AlunoProbabilidade {
-
-    private Long id;
-    private String nome;
-    private String situacao;
-    private Double probabilidade;
-}
-
 @RestController
 @RequestMapping("/student")
 public class StudentController {

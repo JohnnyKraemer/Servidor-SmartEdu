@@ -94,7 +94,7 @@ public class ClassifyController {
         // }
     }
 
-    public TestClassifier ClassifyTraining(br.com.smartedu.model.Classifier classificador, weka.classifiers.Classifier tree, Instances dataSet, Course curso, List<Variable> variaveis, int type, int period_calculation, int period) throws Exception {
+    public TestClassifier ClassifyTraining(br.com.smartedu.model.Classifier classificador, weka.classifiers.Classifier tree, Instances dataSet, Course curso, List<Variable> variaveis, int type, int period_calculation) throws Exception {
         Instances dataSetTeste = new Instances(dataSet);
         dataSetTeste.deleteAttributeAt(0);
 
@@ -133,8 +133,6 @@ public class ClassifyController {
         test_classifier_before.setType(type);
         test_classifier_before.setResult(TestClassifier.RESULT_ERROR);
         testClassifierRepository.save(test_classifier_before);
-
-        //List<Probability> probabilitys = new ArrayList<>();
         try {
             for (int i = 0; i <= (num_instances - 1); i++) {
                 Instances training = new Instances(dataSetTreino);
@@ -148,12 +146,6 @@ public class ClassifyController {
                 String evadir = String.valueOf(eval1.predictions().toArray()[0]);
                 String[] arrayValores = evadir.split(" ");
 
-                //System.out.println("\n"+eval1.getHeader());
-                //System.out.println("Formado: "+arrayValores[4]);
-                //System.out.println("Evadido: "+arrayValores[5]);
-                //System.out.println("Não Evadido: "+arrayValores[6]);
-                //System.out.println("Situação: "+ dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1));
-
                 if ("Evadido".equals(eval1.getHeader().attribute(eval1.getHeader().numAttributes() - 1).value(0))) {
                     probEvasao[i] = Double.parseDouble(arrayValores[4]);
                 } else if ("Evadido".equals(eval1.getHeader().attribute(eval1.getHeader().numAttributes() - 1).value(1)))  {
@@ -161,8 +153,6 @@ public class ClassifyController {
                 }else if ("Evadido".equals(eval1.getHeader().attribute(eval1.getHeader().numAttributes() - 1).value(2)))  {
                     probEvasao[i] = Double.parseDouble(arrayValores[6]);
                 }
-
-                //System.out.println("Prob: "+probEvasao[i]);
 
                 if ("Evadido".equals(String.valueOf(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1)))) {
                     situacao[i] = "Evadido";
@@ -194,20 +184,8 @@ public class ClassifyController {
                 } else if ("Outro".equals(String.valueOf(dataSetTeste.instance(i).toString(dataSetTeste.numAttributes() - 1)))) {
                     situacao[i] = "Outro";
                 }
-               /* Probability probabilidade = new Probability();
-                probabilidade.setProbability_evasion(probEvasao[i]);
-                probabilidade.setSituation(situacao[i]);
-                probabilidade.setTestClassifier(test_classifier_before);
-                probabilidade.setStudent(students.get(i));
-                probabilitys.add(probabilidade);*/
             }
-            //probabilityRepository.save(probabilitys);
-
             Date end_test_classifier = new Date();
-            //long horas = (end_test_classifier.getTime() - start_test_classifier.getTime()) / 3600000;
-            //long minutos = (end_test_classifier.getTime() - start_test_classifier.getTime() - horas * 3600000) / 60000;
-            //long segundos = (end_test_classifier.getTime() - start_test_classifier.getTime() - minutos * 3600000) / 60000;
-
             Period periodo = new Period(start_test_classifier.getTime(), end_test_classifier.getTime());
             int minutos = periodo.getMinutes();
             int segundos = periodo.getSeconds();
@@ -243,21 +221,17 @@ public class ClassifyController {
             //System.out.println("-- Intervalo  Não Evadido: " + test_classifier_after.getNeuter_not_evaded());
             //System.out.println("-- Total: " + (test_classifier_after.getSuccess() + test_classifier_after.getFailure() + test_classifier_after.getNeuter()));
 
-            //System.out.println("\n\n");
-            //System.out.println("Fim: " + end_test_classifier);
-            //System.out.println("Tempo percorrido: " + segundos + " segundos.");
-
-            //Calendar datetime = Calendar.getInstance();
-
             test_classifier_after.setPeriodCalculation(period_calculation);
             return testClassifierRepository.save(test_classifier_after);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-
             Date end_test_classifier = new Date();
-            long horas = (start_test_classifier.getTime() - end_test_classifier.getTime()) / 3600000;
-            long minutos = (start_test_classifier.getTime() - end_test_classifier.getTime() - horas * 3600000) / 60000;
-            long segundos = (start_test_classifier.getTime() - end_test_classifier.getTime() - minutos * 3600000) / 60000;
+            Period periodo = new Period(start_test_classifier.getTime(), end_test_classifier.getTime());
+            int minutos = periodo.getMinutes();
+            int segundos = periodo.getSeconds();
+
+            if(minutos > 0){
+                segundos = segundos + (minutos*60);
+            }
 
             TestClassifier test_classifier_error = testClassifierRepository.findByPeriodCalculation(1);
             test_classifier_error.setPeriodCalculation(0);
@@ -316,26 +290,22 @@ public class ClassifyController {
     }
 
     public List Combinations(List<Variable> variables, int limit) {
-        List<SortedSet<Comparable>> allCombList = new ArrayList<SortedSet<Comparable>>(); //aqui vai ficar a resposta
-
+        List<SortedSet<Comparable>> allCombList = new ArrayList<SortedSet<Comparable>>();
         for (Variable nstatus : variables) {
-            allCombList.add(new TreeSet<Comparable>(Arrays.asList(nstatus.getId()))); //insiro a combinação "1 a 1" de cada item
+            allCombList.add(new TreeSet<Comparable>(Arrays.asList(nstatus.getId())));
         }
-
         for (int nivel = 1; nivel < variables.size(); nivel++) {
-            //for (int nivel = 1; nivel <= 10; nivel++) {
-            List<SortedSet<Comparable>> statusAntes = new ArrayList<SortedSet<Comparable>>(allCombList); //crio uma cópia para poder não iterar sobre o que já foi
+            List<SortedSet<Comparable>> statusAntes = new ArrayList<SortedSet<Comparable>>(allCombList);
 
             for (Set<Comparable> antes : statusAntes) {
-                SortedSet<Comparable> novo = new TreeSet<Comparable>(antes); //para manter ordenado os objetos dentro do set
+                SortedSet<Comparable> novo = new TreeSet<Comparable>(antes);
                 novo.add(variables.get(nivel).getId());
-                if (!allCombList.contains(novo) && novo.size() <= limit) { //testo para ver se não está repetido
+                if (!allCombList.contains(novo) && novo.size() <= limit) {
                     allCombList.add(novo);
                 }
             }
         }
-
-        Collections.sort(allCombList, new Comparator<SortedSet<Comparable>>() { //aqui só para organizar a saída de modo "bonitinho"
+        Collections.sort(allCombList, new Comparator<SortedSet<Comparable>>() {
             @Override
             public int compare(SortedSet<Comparable> o1, SortedSet<Comparable> o2) {
                 int sizeComp = o1.size() - o2.size();
@@ -349,7 +319,6 @@ public class ClassifyController {
                 return sizeComp;
             }
         });
-
         return allCombList;
     }
 

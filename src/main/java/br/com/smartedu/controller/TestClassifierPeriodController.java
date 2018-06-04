@@ -59,7 +59,7 @@ public class TestClassifierPeriodController {
             for (Course course : coursesList) {
                 System.out.println("\n\n-------------------------- NOVA CLASSIFICACAO --------------------------");
                 System.out.println("Curso: " + course.getName());
-                Classifier[] classificadores = classifierController.GeraClassificadores(classifiersList);
+                Classifier[] classificadores = classifierController.getWekaClassifiers(classifiersList);
 
                 for (int period = 1; period <= course.getTotal_periodos(); period++) {
                     List<Student> students = studentRepository.findByCourseAndPeriod(course.getId(), period);

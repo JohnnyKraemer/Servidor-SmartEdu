@@ -2,50 +2,22 @@ package br.com.smartedu.controller;
 
 import br.com.smartedu.model.*;
 import br.com.smartedu.repository.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import weka.classifiers.Classifier;
 import weka.core.Instances;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-@Data
-@ToString
-class Retorno {
-
-    @Getter
-    @Setter
-    private List<Variable> variables;
-
-    @Getter
-    @Setter
-    private List<br.com.smartedu.model.Classifier> classifiers;
-
-    @Getter
-    @Setter
-    private List<Course> courses;
-
-}
 
 @RestController
 @RequestMapping("/test-classifier")
 public class TestClassifierController {
-
-    @Autowired
-    private ProbabilityRepository probabilityRepository;
 
     @Autowired
     private ClassifierRepository classifierRepository;
@@ -110,21 +82,19 @@ public class TestClassifierController {
         System.out.println("------------------------------ TEST BASE --------------------------");
         System.out.println("---------------------------------------------------------------");
 
-        List<br.com.smartedu.model.Classifier> classifiersList = classifierRepository.findByUseClassify(1);
+        List<Classifier> classifiersList = classifierRepository.findByUseClassify(1);
         List<Variable> variablesList = variableRepository.findByUseClassify(1);
         List<Course> coursesList = courseRepository.findByUseClassify(1);
 
         int period_calculation = testClassifierRepository.findMaxPeriodCalculationByType(TestClassifier.TEST_BASE);
         int position_course = 1;
-        Classifier[] classificadores = classifierController.GeraClassificadores(classifiersList);
+        weka.classifiers.Classifier[] classificadores = classifierController.getWekaClassifiers(classifiersList);
 
         for (Course course : coursesList) {
             System.out.println("\n\nCourse " + position_course + " of " + coursesList.size() + " : " + course.getName());
 
             int position_classifier = 1;
-            //List<Student> students = studentRepository.findByCourse(course.getId());
-
-            for (Classifier classificador : classificadores) {
+            for (weka.classifiers.Classifier classificador : classificadores) {
                 System.out.println("Classifier " + position_classifier + " of " + classificadores.length + " : " + classificador.getClass().getSimpleName());
                 if (classificador != null) {
                     int position_variable = 1;
@@ -133,9 +103,10 @@ public class TestClassifierController {
                         variables.add(variable);
 
                         Instances dataSet = dataBaseController.getDataSet(variables, course.getId(), dataBaseController.TRAINING);
-                        //System.out.println("Tamanho -- Students: " + students.size() + " -- DataSet: " + dataSet.size());
 
-                        TestClassifier test_classifier_after = classifyController.ClassifyTraining(classifiersList.get(position_classifier - 1), classificador, dataSet, course, variables, TestClassifier.TEST_BASE, period_calculation + 1, 0);
+                        System.out.println(dataSet);
+
+                        TestClassifier test_classifier_after = classifyController.ClassifyTraining(classifiersList.get(position_classifier - 1), classificador, dataSet, course, variables, TestClassifier.TEST_BASE, period_calculation + 1);
 
                         NumberFormat formatarFloat = new DecimalFormat("#.##");
                         float sucesso = (float) ((test_classifier_after.getSuccess() * 100.00) / (test_classifier_after.getSuccess() + test_classifier_after.getFailure() + test_classifier_after.getNeuter()));
@@ -214,7 +185,7 @@ public class TestClassifierController {
             //List<Student> students = studentRepository.findByCourse(course.getId());
             int position_classifier = 1;
             for (Classify classify : classifys) {
-                Classifier classificador = classifierController.NewClassifier(classify.getClassifier());
+                weka.classifiers.Classifier classificador = classifierController.NewClassifier(classify.getClassifier());
                 System.out.println("Classifier " + position_classifier + " of " + classifys.size() + " : " + classificador.getClass().getSimpleName());
                 List combinations = classifyController.Combinations(classify.getVariable(), 3);
                 if (classificador != null) {
@@ -228,7 +199,7 @@ public class TestClassifierController {
                         }
 
                         Instances dataSet = dataBaseController.getDataSet(newVariables, course.getId(), dataBaseController.TRAINING);
-                        TestClassifier test_classifier_after = classifyController.ClassifyTraining(classify.getClassifier(), classificador, dataSet, course, newVariables, TestClassifier.TEST_PATTERN, period_calculation + 1, 0);
+                        TestClassifier test_classifier_after = classifyController.ClassifyTraining(classify.getClassifier(), classificador, dataSet, course, newVariables, TestClassifier.TEST_PATTERN, period_calculation + 1);
 
                         NumberFormat formatarFloat = new DecimalFormat("#.##");
                         float sucesso = (float) ((test_classifier_after.getSuccess() * 100.00) / (test_classifier_after.getSuccess() + test_classifier_after.getFailure() + test_classifier_after.getNeuter()));
@@ -266,7 +237,7 @@ public class TestClassifierController {
             System.out.println("Sucesso: " + testClassifier.getSuccess());
             System.out.println("Falha: " + testClassifier.getFailure());
 
-            Classifier classificador = classifierController.NewClassifier(testClassifier.getClassifier());
+            weka.classifiers.Classifier classificador = classifierController.NewClassifier(testClassifier.getClassifier());
 
             Instances dataSet = dataBaseController.getDataSet(testClassifier.getVariable(), course.getId(), dataBaseController.TRAINING);
             List<Student> students = studentRepository.findByCourse(course.getId());
@@ -281,7 +252,7 @@ public class TestClassifierController {
             Instances dataSetTraining = dataBaseController.getDataSet(testClassifier.getVariable(), course.getId(), dataBaseController.TRAINING);
             Instances dataSetTest = dataBaseController.getDataSet(testClassifier.getVariable(), course.getId(), dataBaseController.TEST);
             List<Student> students_not_evaded = studentRepository.findByCourseTest(course.getId());
-            Classifier tree = classifierController.NewClassifier(testClassifier.getClassifier());
+            weka.classifiers.Classifier tree = classifierController.NewClassifier(testClassifier.getClassifier());
 
             System.out.println("Tamanho -- students_not_evaded: " + students_not_evaded.size() + " -- DataSetTeste: " + dataSetTest.size() + " -- DataSetTreino: " + dataSetTraining.size());
             classifyController.ClassifyTest(testClassifier, tree, dataSetTraining, dataSetTest, students_not_evaded);
@@ -310,7 +281,7 @@ public class TestClassifierController {
     /*
     @GetMapping("/test-one")
     public ResponseEntity classificarOneTest(@RequestBody Retorno retorno) throws Exception {
-        List<br.com.smartedu.model.Classifier> classifiersList = retorno.getClassifiers();
+        List<br.com.smartedu.model.Classifier> classifiersList = retorno.getWekaClassifiers();
         List<Variable> variablesList = retorno.getVariables();
         List<Course> coursesList = retorno.getCourses();
 
@@ -319,7 +290,7 @@ public class TestClassifierController {
         for (Course course : coursesList) {
             System.out.println("\n\n-------------------------- NOVA CLASSIFICACAO --------------------------");
             System.out.println("Curso: " + course.getName());
-            Classifier[] classificadores = classifierController.GeraClassificadores(classifiersList);
+            Classifier[] classificadores = classifierController.getWekaClassifiers(classifiersList);
             List<Student> students = studentRepository.findByCourse(course.getId());
 
             for (Classifier classificador : classificadores) {
@@ -351,7 +322,7 @@ public class TestClassifierController {
         for (Course course : coursesList) {
             System.out.println("\n\n-------------------------- NOVA CLASSIFICACAO --------------------------");
             System.out.println("Curso: " + course.getName());
-            Classifier[] classificadores = classifierController.GeraClassificadores(classifiersList);
+            Classifier[] classificadores = classifierController.getWekaClassifiers(classifiersList);
             List<Student> students = studentRepository.findByCourse(course.getId());
 
             for (Classifier classificador : classificadores) {
