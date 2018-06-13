@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4d5d6e74-5377-4e14-831e-28bd6d4dfc3b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierController2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseUtils.props" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseUtils.props" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SQL Corretos/smartedu - completo.sql" beforeDir="false" afterPath="$PROJECT_DIR$/SQL Corretos/smartedu - completo.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQL Corretos/smartedu 3 Cursos - Pato e Campo Mourão e Curitiba e ADS - completo 12 classificadores, 7 variaveis, 3 niveis.sql" beforeDir="false" afterPath="$PROJECT_DIR$/SQL Corretos/smartedu 3 Cursos - Pato e Campo Mourão e Curitiba e ADS - completo 12 classificadores, 7 variaveis, 3 niveis.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/ClassifierController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/ClassifierController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/ClassifyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/ClassifyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/DataBaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/DataBaseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/Discretize.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/Discretize.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/StudentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierPeriodController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierPeriodController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/smartedu/controller/TestClassifierController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/smartedu/controller/TestClassifierController.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TestClassifierController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TestClassifierController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="51">
-              <caret line="106" column="52" lean-forward="true" selection-start-line="106" selection-start-column="52" selection-end-line="106" selection-end-column="52" />
+              <caret line="183" column="49" lean-forward="true" selection-start-line="183" selection-start-column="49" selection-end-line="183" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -38,20 +29,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestClassifierController2.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierController2.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="DataBaseController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/DataBaseController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="181" column="49" lean-forward="true" selection-start-line="181" selection-start-column="49" selection-end-line="181" selection-end-column="49" />
+            <state relative-caret-position="2006">
+              <caret line="181" column="49" selection-start-line="181" selection-start-column="49" selection-end-line="181" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -127,8 +109,8 @@
         <option value="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/Discretize.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/ClassifyController.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/DataBaseController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierController.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierController2.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierController.java" />
       </list>
     </option>
   </component>
@@ -164,7 +146,28 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="SmartEdu" type="58d84e3e:PackageViewProjectNode" />
+              <item name="SmartEdu" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="SmartEdu" type="58d84e3e:PackageViewProjectNode" />
+              <item name="SmartEdu" type="616d4139:PackageViewModuleNode" />
+              <item name="br.com.smartedu" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="SmartEdu" type="58d84e3e:PackageViewProjectNode" />
+              <item name="SmartEdu" type="616d4139:PackageViewModuleNode" />
+              <item name="br.com.smartedu" type="1f31426a:PackageElementNode" />
+              <item name="controller" type="1f31426a:PackageElementNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Project Files">
           <expand>
@@ -208,6 +211,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -225,28 +229,6 @@
               <item name="Servidor-SmartEdu" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="SmartEdu" type="58d84e3e:PackageViewProjectNode" />
-              <item name="SmartEdu" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="SmartEdu" type="58d84e3e:PackageViewProjectNode" />
-              <item name="SmartEdu" type="616d4139:PackageViewModuleNode" />
-              <item name="br.com.smartedu" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="SmartEdu" type="58d84e3e:PackageViewProjectNode" />
-              <item name="SmartEdu" type="616d4139:PackageViewModuleNode" />
-              <item name="br.com.smartedu" type="1f31426a:PackageElementNode" />
-              <item name="controller" type="1f31426a:PackageElementNode" />
             </path>
           </expand>
           <select />
@@ -363,11 +345,13 @@
       <workItem from="1527260973274" duration="2940000" />
       <workItem from="1527602785574" duration="3805000" />
       <workItem from="1528152435409" duration="759000" />
+      <workItem from="1528291504782" duration="10241000" />
+      <workItem from="1528656357314" duration="4903000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66767000" />
+    <option name="totallyTimeSpent" value="81911000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -390,10 +374,10 @@
       <window_info anchor="bottom" id="Java Enterprise" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Version Control" order="3" />
-      <window_info anchor="bottom" id="Run" order="9" weight="0.9163987" />
+      <window_info anchor="bottom" id="Run" order="9" weight="0.6784566" />
       <window_info anchor="bottom" id="Spring" order="4" />
       <window_info anchor="bottom" id="Terminal" order="5" />
-      <window_info content_ui="combo" id="Project" order="6" visible="true" weight="0.20347957" />
+      <window_info content_ui="combo" id="Project" order="6" visible="true" weight="0.20953101" />
       <window_info anchor="right" id="Bean Validation" order="5" weight="0.32980332" />
       <window_info id="Web" order="4" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="6" />
@@ -766,27 +750,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierController2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/DataBaseController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="181" column="49" lean-forward="true" selection-start-line="181" selection-start-column="49" selection-end-line="181" selection-end-column="49" />
+        <state relative-caret-position="2006">
+          <caret line="181" column="49" selection-start-line="181" selection-start-column="49" selection-end-line="181" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
-          <caret line="106" column="52" lean-forward="true" selection-start-line="106" selection-start-column="52" selection-end-line="106" selection-end-column="52" />
+          <caret line="183" column="49" lean-forward="true" selection-start-line="183" selection-start-column="49" selection-end-line="183" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierController2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="34" />
         </state>
       </provider>
     </entry>

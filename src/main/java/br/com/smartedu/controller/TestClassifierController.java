@@ -103,9 +103,6 @@ public class TestClassifierController {
                         variables.add(variable);
 
                         Instances dataSet = dataBaseController.getDataSet(variables, course.getId(), dataBaseController.TRAINING);
-
-                        System.out.println(dataSet);
-
                         TestClassifier test_classifier_after = classifyController.ClassifyTraining(classifiersList.get(position_classifier - 1), classificador, dataSet, course, variables, TestClassifier.TEST_BASE, period_calculation + 1);
 
                         NumberFormat formatarFloat = new DecimalFormat("#.##");
@@ -140,14 +137,14 @@ public class TestClassifierController {
         for (Course course : coursesList) {
             System.out.println("\n\nCourse " + position_course + " of " + coursesList.size() + " : " + course.getName());
             List<Classify> classifys = course.getClassify();
-            List<br.com.smartedu.model.Classifier> best_classifiers = classifierRepository.findTopXClassifiersByCourse(course.getId(), 4);
+            List<br.com.smartedu.model.Classifier> best_classifiers = classifierRepository.findTopXClassifiersByCourse(course.getId(), 3);
             int position_classifier = 1;
 
             for (br.com.smartedu.model.Classifier classifier : best_classifiers) {
                 Classify classify = new Classify();
                 System.out.println("Classifier " + position_classifier + " of " + best_classifiers.size() + " : " + classifier.getName());
 
-                List<Variable> best_variable_by_classifier = variableRepository.findTopXVariableByCourseAndClassifier(course.getId(), classifier.getId(), 10);
+                List<Variable> best_variable_by_classifier = variableRepository.findTopXVariableByCourseAndClassifier(course.getId(), classifier.getId(), 7);
                 System.out.println("Variables: " + best_variable_by_classifier);
 
                 classify.setClassifier(classifier);
@@ -187,7 +184,7 @@ public class TestClassifierController {
             for (Classify classify : classifys) {
                 weka.classifiers.Classifier classificador = classifierController.NewClassifier(classify.getClassifier());
                 System.out.println("Classifier " + position_classifier + " of " + classifys.size() + " : " + classificador.getClass().getSimpleName());
-                List combinations = classifyController.Combinations(classify.getVariable(), 3);
+                List combinations = classifyController.Combinations(classify.getVariable(), 7);
                 if (classificador != null) {
                     int position_combination = 1;
                     for (int p = 0; p < combinations.size(); p++) {
