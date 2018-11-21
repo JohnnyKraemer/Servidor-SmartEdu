@@ -11,7 +11,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -142,29 +142,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="SmartEdu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Servidor-SmartEdu" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SmartEdu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Servidor-SmartEdu" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SmartEdu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Servidor-SmartEdu" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="PackagesPane">
         <subPane>
           <expand>
@@ -187,6 +164,29 @@
           <select />
         </subPane>
       </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="SmartEdu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Servidor-SmartEdu" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SmartEdu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Servidor-SmartEdu" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SmartEdu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Servidor-SmartEdu" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -301,11 +301,12 @@
       <workItem from="1528291504782" duration="10241000" />
       <workItem from="1528656357314" duration="4903000" />
       <workItem from="1529426694010" duration="2029000" />
+      <workItem from="1529511582537" duration="1319000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83940000" />
+    <option name="totallyTimeSpent" value="85259000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -330,7 +331,7 @@
       <window_info anchor="bottom" id="Run" order="9" weight="0.6784566" />
       <window_info anchor="bottom" id="Spring" order="4" />
       <window_info anchor="bottom" id="Terminal" order="5" />
-      <window_info active="true" content_ui="combo" id="Project" order="6" visible="true" weight="0.21255673" />
+      <window_info active="true" content_ui="combo" id="Project" order="6" visible="true" weight="0.21558245" />
       <window_info anchor="right" id="Bean Validation" order="5" weight="0.32980332" />
       <window_info id="Web" order="4" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="6" />
@@ -418,9 +419,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3145">
           <caret line="198" column="222" selection-start-line="198" selection-start-column="222" selection-end-line="198" selection-end-column="222" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -470,9 +468,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3145">
           <caret line="198" column="222" selection-start-line="198" selection-start-column="222" selection-end-line="198" selection-end-column="222" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -522,9 +517,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1530">
           <caret line="90" column="44" selection-start-line="90" selection-start-column="44" selection-end-line="90" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -567,9 +559,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2023">
           <caret line="119" column="43" lean-forward="true" selection-start-line="119" selection-start-column="43" selection-end-line="119" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -591,9 +580,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3247">
           <caret line="191" column="30" lean-forward="true" selection-start-line="191" selection-start-column="30" selection-end-line="191" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -605,13 +591,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/ClassifyController.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -621,22 +601,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/controller/TestClassifierController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/smartedu/model/Classify.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -687,9 +655,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="183" column="49" selection-start-line="183" selection-start-column="49" selection-end-line="183" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
